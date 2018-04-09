@@ -342,7 +342,7 @@ function neovim_install_plugins {
 nvim +PlugInstall +qa
 }
 function neovim_install_plug_manager {
-run_command_as_root "curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim";
+run_command "curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim";
 }
 function debian_apt_update {
 run_command_as_root "apt update";
