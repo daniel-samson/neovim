@@ -356,6 +356,23 @@ run_command_as_root "apt-get install -y curl";
 function debian_install_neovim {
 run_command_as_root "apt-get install -y neovim";
 }
+function debian_install_nodejs_env {
+read -p "Would you like to install the nodejs/typescript environment (y/n)?" choice
+case "$choice" in
+  y|Y )
+        run_command "curl -sL https://deb.nodesource.com/setup_8.x -o nodesource_setup.sh";
+        run_command "chmod a+x nodesource_setup.sh";
+        run_command_as_root "./nodesource_setup.sh";
+      ;;
+  n|N )
+      echo "OK, moving on."
+      ;;
+  * )
+      debian_install_nodejs_env
+      ;;
+esac;
+
+}
 function debian_install_on_jessie {
     echo "Preparing to install on Debian Jessie";
     debian_apt_update;
@@ -365,6 +382,7 @@ function debian_install_on_jessie {
     debian_install_clipboard;
     debian_install_php_env;
     debian_install_rust_env;
+    debian_install_nodejs_env;
     build_config;
     neovim_install_plug_manager;
     neovim_install_plugins;
@@ -379,6 +397,7 @@ function debian_install_on_stretch {
     debian_install_clipboard;
     debian_install_php_env;
     debian_install_rust_env;
+    debian_install_nodejs_env;
     build_config;
     neovim_install_plug_manager;
     neovim_install_plugins;
@@ -393,6 +412,7 @@ function debian_install_on_xenial {
     debian_install_clipboard;
     debian_install_php_env;
     debian_install_rust_env;
+    debian_install_nodejs_env;
     build_config;
     neovim_install_plug_manager;
     neovim_install_plugins;
