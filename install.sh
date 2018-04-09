@@ -363,6 +363,7 @@ case "$choice" in
         run_command "curl -sL https://deb.nodesource.com/setup_8.x -o nodesource_setup.sh";
         run_command "chmod a+x nodesource_setup.sh";
         run_command_as_root "./nodesource_setup.sh";
+        run_command_as_root "npm install -g typescript";
       ;;
   n|N )
       echo "OK, moving on."
