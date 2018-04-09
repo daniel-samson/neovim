@@ -22,13 +22,14 @@ set -e
 echo "function build_config {
     mkdir -p ~/.config/nvim/;
     echo \"" >> $BUILD_PATH/$INSTALL_SCRIPT;
-cat $NVIM_CONFIG_PATH/* >> $BUILD_PATH/$INSTALL_SCRIPT;
+cat $NVIM_CONFIG_PATH/* | sed -e 's/"/\\"/g' >> $BUILD_PATH/$INSTALL_SCRIPT;
+
 echo "\" >> ~/.config/nvim/init.vim;" >> $BUILD_PATH/$INSTALL_SCRIPT;
 echo "}" >> $BUILD_PATH/$INSTALL_SCRIPT;
 
 # Build Install functions
 cd $SRC_PATH;
-cat **/* detect_os.sh install.sh >> $BUILD_PATH/$INSTALL_SCRIPT;
+cat utility/*.sh neovim/*.sh debian/*.sh detect_os.sh install.sh >> $BUILD_PATH/$INSTALL_SCRIPT;
 cd $SCRIPTPATH;
 mv $BUILD_PATH/$INSTALL_SCRIPT $INSTALL_SCRIPT;
 chmod a+x $INSTALL_SCRIPT;
