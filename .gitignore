@@ -1,2 +1,4 @@
 tags
+sed
+install_composer.sh
 .build/
