@@ -4,6 +4,7 @@ function debian_install_on_jessie {
     debian_install_python_support;
     debian_install_neovim;
     debian_install_curl;
+    debian_install_clipboard;
     debian_install_php_env;
     debian_install_rust_env;
     build_config;

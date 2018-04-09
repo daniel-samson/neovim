@@ -208,7 +208,7 @@ highlight RedundantSpaces term=standout ctermbg=DarkRed guibg=#aaddcc
 call matchadd('RedundantSpaces', '\(\s\+$\| \+\ze\t\|\t\zs \+\)\(\%#\)\@!')
 
 " Keep undo history across sessions by storing it in a file
-let vimHistoryDir = '/home/daniel/.vimhistory'
+let vimHistoryDir = '~/.vimhistory'
 let &runtimepath.=','.vimHistoryDir
 if has('persistent_undo')
     let myUndoDir = expand(vimHistoryDir . '/undodir')
