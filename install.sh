@@ -38,7 +38,7 @@ echo $COMMAND;
 $COMMAND
 }
 function neovim_install_plugins {
-run_command "nvim +PlugInstall +qa";
+run_command "nvim +PlugInstall +UpdateRemotePlugins +qa";
 }
 function neovim_install_plug_manager {
 h=$HOME;
@@ -54,6 +54,11 @@ function debian_install_curl {
 run_command_as_root "apt-get install -y curl";
 }
 function debian_install_neovim {
+run_command_as_root "apt-get install -y neovim";
+}
+function debian_install_neovim_xenial {
+run_command_as_root "add-apt-repository ppa:neovim-ppa/stable";
+run_command_as_root "apt-get update";
 run_command_as_root "apt-get install -y neovim";
 }
 function debian_install_nodejs_env {
@@ -109,7 +114,7 @@ function debian_install_on_xenial {
     echo "Preparing to install on Ubuntu Xenial";
     debian_apt_update;
     debian_install_python_support;
-    debian_install_neovim;
+    debian_install_neovim_xenial;
     debian_install_curl;
     debian_install_clipboard;
     debian_install_php_env;
