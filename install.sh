@@ -3,8 +3,10 @@ set -e
 
 
 function build_config {
-run_command "mkdir -p ~/.config/nvim/"
-run_command "curl -sS https://raw.githubusercontent.com/daniel-samson/neovim/master/.config/nvim/init.vim -o ~/.config/nvim/init.vim"
+h=$HOME
+run_command "mkdir -p $h/.config/nvim/"
+run_command "curl -sS
+    https://raw.githubusercontent.com/daniel-samson/neovim/master/.config/nvim/init.vim -o $h/.config/nvim/init.vim"
 }
 function finish_install {
 echo "nvim is configured and installed";
@@ -36,10 +38,11 @@ echo $COMMAND;
 $COMMAND
 }
 function neovim_install_plugins {
-run_command "nvim +PlugInstall +qa"
+run_command "nvim +PlugInstall +qa";
 }
 function neovim_install_plug_manager {
-run_command "curl -fLo ~/.local/share/nvim/plugged/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim";
+h=$HOME;
+run_command "curl -fLo $h/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim";
 }
 function debian_apt_update {
 run_command_as_root "apt update";
@@ -154,11 +157,11 @@ case "$choice" in
     run_command "curl -sS https://sh.rustup.rs -o install_rust.sh";
     run_command "chmod a+x install_rust.sh";
     run_command "./install_rust.sh";
-    if grep -q "source $HOME/.cargo/env" ~/.bash_aliases;
-        then
+    if grep -q "source \$HOME/.cargo/env" ~/.bash_aliases;
+    then
             echo "Cargo configured";
         else
-            echo "source $HOME/.cargo/env" >> ~/.bash_aliases;
+            echo "source \$HOME/.cargo/env" >> ~/.bash_aliases;
     fi
     if grep -q "export RUST_SRC_PATH=$(rustc --print sysroot)/lib/rustlib/src/rust/src" ~/.bash_aliases;
         then

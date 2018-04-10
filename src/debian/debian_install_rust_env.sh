@@ -5,11 +5,11 @@ case "$choice" in
     run_command "curl -sS https://sh.rustup.rs -o install_rust.sh";
     run_command "chmod a+x install_rust.sh";
     run_command "./install_rust.sh";
-    if grep -q "source $HOME/.cargo/env" ~/.bash_aliases;
-        then
+    if grep -q "source \$HOME/.cargo/env" ~/.bash_aliases;
+    then
             echo "Cargo configured";
         else
-            echo "source $HOME/.cargo/env" >> ~/.bash_aliases;
+            echo "source \$HOME/.cargo/env" >> ~/.bash_aliases;
     fi
     if grep -q "export RUST_SRC_PATH=$(rustc --print sysroot)/lib/rustlib/src/rust/src" ~/.bash_aliases;
         then

@@ -3,3 +3,5 @@ sed
 install_composer.sh
 nodesource_setup.sh
 .build/
+\$*
+\~*

@@ -20,9 +20,10 @@ set -e
 
 # Build Config
 echo "function build_config {" >> $BUILD_PATH/$INSTALL_SCRIPT;
-
-    echo "run_command \"mkdir -p ~/.config/nvim/\"" >> $BUILD_PATH/$INSTALL_SCRIPT;
-    echo "run_command \"curl -sS https://raw.githubusercontent.com/daniel-samson/neovim/master/.config/nvim/init.vim -o ~/.config/nvim/init.vim\"" >> $BUILD_PATH/$INSTALL_SCRIPT;
+    echo "h=\$HOME" >> $BUILD_PATH/$INSTALL_SCRIPT;
+    echo "run_command \"mkdir -p \$h/.config/nvim/\"" >> $BUILD_PATH/$INSTALL_SCRIPT;
+    echo "run_command \"curl -sS
+    https://raw.githubusercontent.com/daniel-samson/neovim/master/.config/nvim/init.vim -o \$h/.config/nvim/init.vim\"" >> $BUILD_PATH/$INSTALL_SCRIPT;
 echo "}" >> $BUILD_PATH/$INSTALL_SCRIPT;
 
 # Build Install functions
