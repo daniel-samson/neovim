@@ -64,6 +64,7 @@ case "$choice" in
         run_command "chmod a+x nodesource_setup.sh";
         run_command_as_root "./nodesource_setup.sh";
         run_command_as_root "npm install -g typescript";
+        run_command_as_root "apt-get install -y build-essential";
       ;;
   n|N )
       echo "OK, moving on."
@@ -124,7 +125,7 @@ read -p "Would you like to install the php environment (y/n)?" choice
 case "$choice" in
   y|Y )
        run_command_as_root "apt install php-cli";
-        run_command "curl -sS https://getcomposer.org/installer > install_composer.sh";
+        run_command "curl -sS https://getcomposer.org/installer -o install_composer.sh";
         run_command_as_root "php install_composer.sh --install-dir=/usr/local/bin --filename=composer";
         run_command "composer global require friendsofphp/php-cs-fixer";
         run_command "composer global require phpmd/phpmd";
