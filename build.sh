@@ -19,12 +19,10 @@ set -e
 " > $BUILD_PATH/$INSTALL_SCRIPT;
 
 # Build Config
-echo "function build_config {
-    mkdir -p ~/.config/nvim/;
-    echo \"" >> $BUILD_PATH/$INSTALL_SCRIPT;
-cat $NVIM_CONFIG_PATH/* | sed -e 's/"/\\"/g' >> $BUILD_PATH/$INSTALL_SCRIPT;
+echo "function build_config {" >> $BUILD_PATH/$INSTALL_SCRIPT;
 
-echo "\" >> ~/.config/nvim/init.vim;" >> $BUILD_PATH/$INSTALL_SCRIPT;
+    echo "run_command \"mkdir -p ~/.config/nvim/\"" >> $BUILD_PATH/$INSTALL_SCRIPT;
+    echo "run_command \"curl -sS https://raw.githubusercontent.com/daniel-samson/neovim/master/.config/nvim/init.vim -o ~/.config/nvim/init.vim\"" >> $BUILD_PATH/$INSTALL_SCRIPT;
 echo "}" >> $BUILD_PATH/$INSTALL_SCRIPT;
 
 # Build Install functions

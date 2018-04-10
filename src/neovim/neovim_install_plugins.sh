@@ -1,3 +1,3 @@
 function neovim_install_plugins {
-nvim +PlugInstall +qa
+run_command "nvim +PlugInstall +qa";
 }
