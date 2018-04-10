@@ -32,3 +32,4 @@ cat utility/*.sh neovim/*.sh debian/*.sh detect_os.sh install.sh >> $BUILD_PATH/
 cd $SCRIPTPATH;
 mv $BUILD_PATH/$INSTALL_SCRIPT $INSTALL_SCRIPT;
 chmod a+x $INSTALL_SCRIPT;
+bash -n $INSTALL_SCRIPT;

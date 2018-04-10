@@ -1,6 +1,7 @@
 function debian_install_on_stretch {
     echo "Preparing to install on Debian Stretch";
     debian_apt_update;
+    debian_install_exuberant_ctags;
     debian_install_git;
     debian_install_python_support;
     debian_install_neovim;

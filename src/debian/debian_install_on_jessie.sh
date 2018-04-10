@@ -2,6 +2,7 @@ function debian_install_on_jessie {
     echo "Preparing to install on Debian Jessie";
     debian_apt_update;
     debian_install_git;
+    debian_install_exuberant_ctags;
     debian_install_python_support;
     debian_install_neovim;
     debian_install_curl;
