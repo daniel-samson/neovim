@@ -47,6 +47,32 @@ run_command "curl -fLo $h/.local/share/nvim/site/autoload/plug.vim --create-dirs
 function debian_apt_update {
 run_command_as_root "apt update";
 }
+function debian_extract_hack_font {
+    sudo unzip Hack-v3.000-ttf.zip -d /usr/share/fonts
+    fc-cache
+}
+
+function debian_install_airline_fonts {
+if [ -f /usr/share/fonts/ttf/Hack-Regular.ttf ]
+then
+    echo "Found hack font"
+else
+    echo "Installing hack font"
+    HACK_FONT_URL="https://github.com/source-foundry/Hack/releases/download/v3.000/Hack-v3.000-ttf.zip"
+
+    if command -v curl
+    then
+        curl -L -O ${HACK_FONT_URL}
+        extract_hack_font_debian
+    elif command -v wget
+    then
+        wget ${HACK_FONT_URL}
+        extract_hack_font_debian
+    else
+        echo "cannot download hack font"
+    fi
+fi
+}
 function debian_install_clipboard {
     run_command_as_root "apt-get install xsel";
 }
@@ -98,6 +124,7 @@ function debian_install_on_jessie {
     debian_install_php_env;
     debian_install_rust_env;
     debian_install_nodejs_env;
+    debian_install_airline_fonts;
     build_config;
     neovim_install_plug_manager;
     neovim_install_plugins;
@@ -115,6 +142,7 @@ function debian_install_on_stretch {
     debian_install_php_env;
     debian_install_rust_env;
     debian_install_nodejs_env;
+    debian_install_airline_fonts;
     build_config;
     neovim_install_plug_manager;
     neovim_install_plugins;
@@ -132,6 +160,7 @@ function debian_install_on_xenial {
     debian_install_php_env;
     debian_install_rust_env;
     debian_install_nodejs_env;
+    debian_install_airline_fonts;
     build_config;
     neovim_install_plug_manager;
     neovim_install_plugins;
