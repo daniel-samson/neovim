@@ -53,6 +53,9 @@ function debian_install_clipboard {
 function debian_install_curl {
 run_command_as_root "apt-get install -y curl";
 }
+function debian_install_git {
+run_command_as_root "apt install -y git";
+}
 function debian_install_neovim {
 run_command_as_root "apt-get install -y neovim";
 }
@@ -83,6 +86,7 @@ esac;
 function debian_install_on_jessie {
     echo "Preparing to install on Debian Jessie";
     debian_apt_update;
+    debian_install_git;
     debian_install_python_support;
     debian_install_neovim;
     debian_install_curl;
@@ -98,6 +102,7 @@ function debian_install_on_jessie {
 function debian_install_on_stretch {
     echo "Preparing to install on Debian Stretch";
     debian_apt_update;
+    debian_install_git;
     debian_install_python_support;
     debian_install_neovim;
     debian_install_curl;
@@ -113,6 +118,7 @@ function debian_install_on_stretch {
 function debian_install_on_xenial {
     echo "Preparing to install on Ubuntu Xenial";
     debian_apt_update;
+    debian_install_git;
     debian_install_python_support;
     debian_install_neovim_xenial;
     debian_install_curl;
