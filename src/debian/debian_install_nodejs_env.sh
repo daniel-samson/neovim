@@ -6,6 +6,7 @@ case "$choice" in
         run_command "chmod a+x nodesource_setup.sh";
         run_command_as_root "./nodesource_setup.sh";
         run_command_as_root "npm install -g typescript";
+        run_command_as_root "apt-get install -y build-essential";
       ;;
   n|N )
       echo "OK, moving on."

@@ -111,9 +111,12 @@ Plug 'roxma/LanguageServer-php-neovim',  {'do': 'composer install && composer ru
 
 if executable('npm')
     Plug 'roxma/nvim-cm-tern',  {'do': 'npm install'}
-    Plug 'mhartington/nvim-typescript', {'do': 'nvim +UpdateRemotePlugins'}
 endif
-
+if executable('tsc')
+    Plug 'mhartington/nvim-typescript', {'do': 'nvim +UpdateRemotePlugins'}
+    Plug 'Shougo/vimproc.vim', {'do' : 'make'}
+    Plug 'Quramy/tsuquyomi/' 
+endif
 if executable('php')
 Plug 'phpactor/phpactor' ,  {'do': 'composer install'}
 Plug 'roxma/ncm-phpactor'
@@ -226,10 +229,11 @@ let g:auto_save_silent = 1
 " Syntax checking
 let g:syntastic_always_populate_loc_list = 0
 let g:syntastic_auto_loc_list = 0
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 0
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 1
 let g:syntastic_php_checkers = ['php']
-
+let g:tsuquyomi_disable_quickfix = 1
+let g:syntastic_typescript_checkers = ['tsuquyomi']
 " Auto reload
 :autocmd FileChangedShell * :e!
 
