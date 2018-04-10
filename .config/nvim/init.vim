@@ -107,7 +107,6 @@ Plug 'autozimu/LanguageClient-neovim', {
     \ 'branch': 'next',
     \ 'do': 'bash install.sh',
     \ }
-Plug 'roxma/LanguageServer-php-neovim',  {'do': 'composer install && composer run-script parse-stubs'}
 
 if executable('npm')
     Plug 'roxma/nvim-cm-tern',  {'do': 'npm install'}
@@ -118,6 +117,7 @@ if executable('tsc')
     Plug 'Quramy/tsuquyomi/' 
 endif
 if executable('php')
+Plug 'roxma/LanguageServer-php-neovim',  {'do': 'composer install && composer run-script parse-stubs'}
 Plug 'phpactor/phpactor' ,  {'do': 'composer install'}
 Plug 'roxma/ncm-phpactor'
 Plug 'alvan/vim-php-manual'
