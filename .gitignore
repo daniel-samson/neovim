@@ -1,6 +1,6 @@
 tags
 sed
-install_composer.sh
+install_*
 nodesource_setup.sh
 .build/
 \$*
