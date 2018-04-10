@@ -111,7 +111,7 @@ Plug 'roxma/LanguageServer-php-neovim',  {'do': 'composer install && composer ru
 
 if executable('npm')
     Plug 'roxma/nvim-cm-tern',  {'do': 'npm install'}
-    Plug 'mhartington/nvim-typescript'
+    Plug 'mhartington/nvim-typescript', {'do': 'nvim +UpdateRemotePlugins'}
 endif
 
 if executable('php')
