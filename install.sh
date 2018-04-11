@@ -79,7 +79,7 @@ function debian_install_clipboard {
 function debian_install_curl {
 run_command_as_root "apt-get install -y curl";
 }
-function debian_install_exuberant_ctags.sh {
+function debian_install_exuberant_ctags {
 run_command_as_root "apt-get install -y exuberant-ctags";
 }
 function debian_install_git {
