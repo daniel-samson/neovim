@@ -167,13 +167,7 @@ let g:airline_symbols.readonly = ''
 let g:airline_symbols.linenr = ''
 
 " Theme
-" {rtp}/autoload/has.vim
-function! HasPlugin(name)
-    let pat = '/'.a:name
-    return !empty(globpath(&rtp, pat))
-endfunction
-
-if HasPlugin('gruvbox')
+if &rtp =~ 'gruvbox'
     colorscheme gruvbox
     set background=dark
 endif
