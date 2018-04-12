@@ -328,3 +328,10 @@ let g:vdebug_keymap = {
     \    "eval_under_cursor" : "<F12>",
     \    "eval_visual" : "<Leader>e",
     \}
+
+if &rtp =~ 'phpactor'
+    nmap <Leader>] :call phpactor#GotoDefinition()<CR>
+    nmap <Leader>fr :call phpactor#FindReferences()<CR><CR>
+    vmap <silent><Leader>em :<C-U>call phpactor#ExtractMethod()<CR>
+    autocmd FileType php setlocal omnifunc=phpactor#Complete
+endif
