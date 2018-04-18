@@ -216,11 +216,15 @@ set encoding=utf-8
 " Allow plugin based indentation
 filetype plugin indent on
 
-" Indentation
-autocmd FileType php setlocal expandtab shiftwidth=4 softtabstop=4
+" Set soft limit
+set textwidth=80
+set colorcolumn=+1
+
+" Indentation and soft limit
+autocmd FileType php setlocal expandtab shiftwidth=4 softtabstop=4 textwidth=120
 autocmd FileType json setlocal expandtab shiftwidth=2 softtabstop=2
 autocmd FileType js setlocal expandtab shiftwidth=2 softtabstop=2
-autocmd FileType html setlocal expandtab shiftwidth=2 softtabstop=2
+autocmd FileType html setlocal expandtab shiftwidth=2 softtabstop=2 textwidth=120
 autocmd FileType css setlocal expandtab shiftwidth=2 softtabstop=2
 autocmd FileType sass setlocal expandtab shiftwidth=2 softtabstop=2
 autocmd FileType scss setlocal expandtab shiftwidth=2 softtabstop=2
@@ -287,8 +291,6 @@ nmap <Enter> i<Enter>
 " Delete current line
 nmap <BS> i<BS>
 
-set textwidth=80
-set colorcolumn=+1
 
 " Autocompletion
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS noci
@@ -314,8 +316,8 @@ nnoremap <A-l> <C-w>l
 
 " Start terminal
 "split term://bash
-inoremap <leader>t :split term://bash <cr>
-noremap <leader>t :split term://bash <cr>
+vnoremap <leader>t <esc>:split term://bash <cr>
+nnoremap <leader>t :split term://bash <cr>
 
 " Debugging
 let g:vdebug_keymap = {
@@ -340,4 +342,5 @@ if &rtp =~ 'phpactor'
 endif
 
 " Nerd Tree
-nmap <Leader>n :NERDTreeToggle
+nmap <Leader>n :NERDTreeToggle<cr>
+let NERDTreeShowHidden=1
