@@ -40,7 +40,7 @@ chmod u+x ./install.sh
 
 **Using curl:**
 <pre>
-curl -si https://raw.githubusercontent.com/daniel-samson/neovim/master/install.sh| bash -s
+curl -si https://raw.githubusercontent.com/daniel-samson/neovim/master/install.sh | bash -s
 </pre>
 
 **Using wget:**
