@@ -61,7 +61,7 @@ Press &lt; Esc &gt; &lt; : &gt; &lt; q &gt; &lt;enter&gt;
 The key bindings start with the leader key, which is used to activate most plugins from normal mode. The leader key is currently bound to &lt; \ &gt;. Vim IDE follows the vim tradition of binding the first letter of the operation as a shortcut like eg. press &lt;LEADER&gt; p for **p**roject view.
 
 #### Leader key
-The leader key is curently the backslash ( \ ). You can easily change it in your .vim.user.settings
+The leader key is curently the backslash ( \ ). You can easily change it in your .config/nvim/init.vim start up file.
 <pre>
 " &lt;Leader&gt; key
 let mapleader=','
@@ -149,7 +149,7 @@ The themes have two modes a light and dark. To change the mode
 :set background=dark
 </pre>
 
-To make it permanent you can add one of these commands to your ~/.vimrc start up file.
+To make it permanent you can add one of these commands to your ~/.config/nvim/init.vim start up file.
 
 ### Commands
 - **MakeIndex** -  Runs ctags -R for autocompletion
