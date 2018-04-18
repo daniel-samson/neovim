@@ -178,6 +178,7 @@ case "$choice" in
         run_command "composer global require leafo/scssphp";
         run_command "composer global require codeception/codeception";
         run_command "composer global require sebastian/phpcpd";
+        run_command "composer global require phpbench/phpbench";
         # Install Composer Path
         COMPOSER=$(composer global config bin-dir --absolute);
         if grep -q "export PATH=\$PATH:$COMPOSER" ~/.bash_aliases;
