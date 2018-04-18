@@ -40,7 +40,7 @@ chmod u+x ./install.sh
 
 ## Usage:
 - cd /path/to/project/
-- vim # or gvim
+- nvim 
 
 ### Quiting VIM IDE
 Press &lt; Esc &gt; &lt; : &gt; &lt; q &gt; &lt;enter&gt;
