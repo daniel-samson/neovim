@@ -134,6 +134,9 @@ Plug 'roxma/nvim-cm-racer'
 endif
 
 Plug 'roxma/nvim-completion-manager'
+
+" Nerd Tree
+Plug 'scrooloose/nerdtree'
 call plug#end()
 
 "Airline
@@ -335,3 +338,6 @@ if &rtp =~ 'phpactor'
     vmap <silent><Leader>em :<C-U>call phpactor#ExtractMethod()<CR>
     autocmd FileType php setlocal omnifunc=phpactor#Complete
 endif
+
+" Nerd Tree
+nmap <Leader>n :NERDTreeToggle
