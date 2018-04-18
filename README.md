@@ -28,7 +28,7 @@ Support OS means that I have tested this script on the following OS:
 
 
 ### Installation:
-Installs the latest version of Vim and configures Vim to used as an IDE. You can install using either git, curl, or wget. Simply copy the following into your terminal.
+Installs the latest version of NeoVim and configures NeoVim to used as an IDE. You can install using either git, curl, or wget. Simply copy the following into your terminal.
 
 **Using git:**
 <pre>
