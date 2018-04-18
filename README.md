@@ -91,7 +91,7 @@ Using the standard vim keys to manage your system clipboard, in all modes except
 
 ### More editing
 - Jump to definition &lt;CTRL&gt; + &lt;]&gt;
-- - Show Tags (Insert Mode) &lt;CTRL&gt; + &lt;P&gt; or &lt;CTRL&gt; + &lt;N&gt;
+- Show Tags (Insert Mode) &lt;CTRL&gt; + &lt;P&gt; or &lt;CTRL&gt; + &lt;N&gt;
 - Move line up (Insert Mode) &lt;CTRL&gt; + &lt;K&gt;
 - Move line down (Insert Mode) &lt;CTRL&gt; + &lt;J&gt;
 
