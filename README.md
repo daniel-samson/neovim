@@ -28,7 +28,7 @@ Support OS means that I have tested this script on the following OS:
 
 
 ### Installation:
-Installs the latest version of NeoVim and configures NeoVim to used as an IDE. You can install using either git, curl, or wget. Simply copy the following into your terminal.
+Installs the latest version of NeoVim and configures NeoVim to used as an IDE. You can install using git. Simply copy the following into your terminal.
 
 **Using git:**
 <pre>
@@ -37,18 +37,6 @@ cd neovim
 chmod u+x ./install.sh
 ./install.sh
 </pre>
-
-**Using curl:**
-<pre>
-curl -si https://raw.githubusercontent.com/daniel-samson/neovim/master/install.sh | bash -s
-</pre>
-
-**Using wget:**
-<pre>
-wget -O - https://raw.githubusercontent.com/daniel-samson/vim/install.sh | bash
-</pre>
-
-
 
 ## Usage:
 - cd /path/to/project/
