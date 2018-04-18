@@ -45,7 +45,7 @@ curl -si https://raw.githubusercontent.com/daniel-samson/neovim/master/install.s
 
 **Using wget:**
 <pre>
-wget -O - https://raw.githubusercontent.com/daniel-samson/vim/finstall-vim-ide.sh | bash
+wget -O - https://raw.githubusercontent.com/daniel-samson/vim/install.sh | bash
 </pre>
 
 
