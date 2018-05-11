@@ -12,7 +12,7 @@ jobs:
         script: ./build.sh
       - stage: test
         python: nightly
-        script: ./install.sh
+        script: ./build.sh; ./install.sh
 addons:
     apt:
       update: true
