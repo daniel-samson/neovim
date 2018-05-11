@@ -3,6 +3,10 @@
 
 A distribution of nvim, configured as an "Integrated" Development Environment (IDE).
 
+### Status
+[![Build Status](https://travis-ci.org/daniel-samson/neovim.png)](https://travis-ci.org/daniel-samson/neovim)
+
+
 ### Features:
 
 - Project Tree view
