@@ -1,4 +1,5 @@
 language: python
+python: nightly
 sudo: false
 dist: trusty
 matrix:
@@ -6,7 +7,12 @@ matrix:
 jobs:
   include:
       - stage: build
+	python: nightly
         script: ./bash
       - stage: test
+	python: nightly
         script: ./install.sh
+addons:
+    apt:
+      update: true
 
