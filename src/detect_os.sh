@@ -22,7 +22,7 @@ case $(lsb_release -cs) in
         debian_install_on_xenial;
         ;;
     *) echo "Unsupported distribution version/codename";
-        echo $(lsb_release -cs);
+        lsb_release -a;
         exit 1;
         ;;
 esac
