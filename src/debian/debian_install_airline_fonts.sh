@@ -14,11 +14,11 @@ else
     if command -v curl
     then
         run_command "curl -L -O ${HACK_FONT_URL}";
-        extract_hack_font_debian;
+        debian_extract_hack_font;
     elif command -v wget
     then
         run_command "wget ${HACK_FONT_URL}";
-        extract_hack_font_debian;
+        debian_extract_hack_font;
     else
         echo "cannot download hack font";
     fi

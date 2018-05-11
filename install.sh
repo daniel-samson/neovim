@@ -63,11 +63,11 @@ else
     if command -v curl
     then
         run_command "curl -L -O ${HACK_FONT_URL}";
-        extract_hack_font_debian;
+        debian_extract_hack_font;
     elif command -v wget
     then
         run_command "wget ${HACK_FONT_URL}";
-        extract_hack_font_debian;
+        debian_extract_hack_font;
     else
         echo "cannot download hack font";
     fi
@@ -86,6 +86,11 @@ function debian_install_git {
 run_command_as_root "apt install -y git";
 }
 function debian_install_neovim {
+run_command_as_root "apt-get install -y neovim";
+}
+function debian_install_neovim_trusty {
+run_command_as_root "add-apt-repository ppa:neovim-ppa/stable";
+run_command_as_root "apt-get update";
 run_command_as_root "apt-get install -y neovim";
 }
 function debian_install_neovim_xenial {
@@ -137,6 +142,24 @@ function debian_install_on_stretch {
     debian_install_git;
     debian_install_python_support;
     debian_install_neovim;
+    debian_install_curl;
+    debian_install_clipboard;
+    debian_install_php_env;
+    debian_install_rust_env;
+    debian_install_nodejs_env;
+    debian_install_airline_fonts;
+    build_config;
+    neovim_install_plug_manager;
+    neovim_install_plugins;
+    debian_replace_vim;
+}
+function debian_install_on_trusty {
+    echo "Preparing to install on Ubuntu Trusty";
+    debian_apt_update;
+    debian_install_git;
+    debian_install_exuberant_ctags;
+    debian_install_python_support;
+    debian_install_neovim_trusty;
     debian_install_curl;
     debian_install_clipboard;
     debian_install_php_env;
@@ -245,6 +268,51 @@ case "$choice" in
   * ) debian_replace_vim;;
 esac;
 }
+function deepin_install_on_unstable {
+    echo "Preparing to install on Ubuntu Xenial";
+    debian_apt_update;
+    debian_install_exuberant_ctags;
+    debian_install_git;
+    debian_install_python_support;
+    debian_install_neovim;
+    debian_install_curl;
+    debian_install_clipboard;
+    debian_install_php_env;
+    debian_install_rust_env;
+    debian_install_nodejs_env;
+    debian_install_airline_fonts;
+    build_config;
+    neovim_install_plug_manager;
+    neovim_install_plugins;
+    debian_replace_vim;
+}
+function throw_unsupported_distrobution() {
+echo "Unsupported distribution version/codename";
+echo $(lsb_release -a);
+exit 1;
+}
+
+
+function detect_ubuntu_release() {
+case $(lsb_release -cs) in
+    xenial) echo "Found Xenial (Ubuntu 16.04)"; debian_install_on_xenial;;
+    trusty) echo "Found trusty (Ubuntu 14.04)"; debian_install_on_trusty;;
+esac
+}
+
+function detect_debian_release() {
+case $(lsb_release -cs) in
+    stretch) echo "Found Debian Stretch"; debian_install_on_stretch;;
+    jessie) echo "Found Debian Jessie"; debian_install_on_jessie;;
+esac
+}
+
+function detect_deepin_release() {
+case $(lsb_release -cs) in
+    unstable) echo "Found Deepin Unstable"; deepin_install_on_unstable;;
+esac
+}
+
 
 function detect_os {
 echo "
@@ -258,21 +326,12 @@ else
     echo "lsb_release is not installed";
 fi;
 
-case $(lsb_release -cs) in
-    stretch) echo "Found Debian Stretch";
-        debian_install_on_stretch;
-        ;;
-    jessie) echo "Found Debian Jessie";
-        debian_install_on_jessie;
-        ;;
-    xenial) echo "Found Xenial (Ubuntu 16.04)";
-        debian_install_on_xenial;
-        ;;
-    *) echo "Unsupported distribution version/codename"; 
-        exit;
-        ;;
+case $( lsb_release -is) in
+    Ubuntu) detect_ubuntu_release;;
+    Debian) detect_debian_release;;
+    Deepin) detect_deepin_release;;
+    *) throw_unsupported_distrobution;;
 esac
-
 }
 detect_os;
 finish_install

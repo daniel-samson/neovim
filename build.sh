@@ -28,7 +28,7 @@ echo "}" >> $BUILD_PATH/$INSTALL_SCRIPT;
 
 # Build Install functions
 cd $SRC_PATH;
-cat utility/*.sh neovim/*.sh debian/*.sh detect_os.sh install.sh >> $BUILD_PATH/$INSTALL_SCRIPT;
+cat utility/*.sh neovim/*.sh debian/*.sh deepin/*.sh detect_os.sh install.sh >> $BUILD_PATH/$INSTALL_SCRIPT;
 cd $SCRIPTPATH;
 mv $BUILD_PATH/$INSTALL_SCRIPT $INSTALL_SCRIPT;
 chmod a+x $INSTALL_SCRIPT;
