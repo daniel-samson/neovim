@@ -7,10 +7,10 @@ matrix:
 jobs:
   include:
       - stage: build
-	python: nightly
+        python: nightly
         script: ./bash
       - stage: test
-	python: nightly
+        python: nightly
         script: ./install.sh
 addons:
     apt:
