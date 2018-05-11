@@ -23,7 +23,7 @@ case $(lsb_release -cs) in
         ;;
     *) echo "Unsupported distribution version/codename";
         echo $(lsb_release -cs);
-        exit;
+        exit 1;
         ;;
 esac
 
