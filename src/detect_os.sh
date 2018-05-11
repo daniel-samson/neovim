@@ -21,7 +21,8 @@ case $(lsb_release -cs) in
     xenial) echo "Found Xenial (Ubuntu 16.04)";
         debian_install_on_xenial;
         ;;
-    *) echo "Unsupported distribution version/codename"; 
+    *) echo "Unsupported distribution version/codename";
+        echo $(lsb_release -cs);
         exit;
         ;;
 esac
