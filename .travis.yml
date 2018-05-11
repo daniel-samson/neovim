@@ -8,7 +8,7 @@ jobs:
   include:
       - stage: build
         python: nightly
-        script: ./bash
+        script: ./build.sh
       - stage: test
         python: nightly
         script: ./install.sh
