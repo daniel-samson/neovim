@@ -2,7 +2,7 @@
 set -e
 SCRIPT=$(readlink -f $0)
 SCRIPTPATH=`dirname $SCRIPT`
-BUILD_PATH=$(realpath ./.build);
+BUILD_PATH=$(realpath .)/.build;
 INSTALL_SCRIPT=install.sh;
 SRC_PATH=$(realpath ./src);
 NVIM_CONFIG_PATH=$(realpath .config/nvim);
