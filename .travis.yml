@@ -1,0 +1,12 @@
+language: python
+sudo: false
+dist: trusty
+matrix:
+  fast_finish: true
+jobs:
+  include:
+      - stage: build
+        script: ./bash
+      - stage: test
+        script: ./install.sh
+
