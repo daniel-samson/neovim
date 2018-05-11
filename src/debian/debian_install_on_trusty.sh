@@ -1,4 +1,4 @@
-function debian_install_neovim_trusty {
+function debian_install_on_trusty {
     echo "Preparing to install on Ubuntu Trusty";
     debian_apt_update;
     debian_install_git;
