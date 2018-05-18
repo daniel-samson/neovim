@@ -9,8 +9,7 @@ jobs:
       - stage: test
         python: nightly
         install: sudo apt-get update; sudo apt-get install coreutils realpath
-        before_script: ./build.sh
-        script: ./install.sh
+        script: ./build.sh
 addons:
     apt:
       update: true

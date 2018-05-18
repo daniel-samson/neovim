@@ -5,3 +5,4 @@ nodesource_setup.sh
 .build/
 \$*
 \~*
+*.zip
