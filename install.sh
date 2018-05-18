@@ -85,6 +85,22 @@ run_command_as_root "apt-get install -y exuberant-ctags";
 function debian_install_git {
 run_command_as_root "apt install -y git";
 }
+function debian_install_haskell_env {
+read -p "Would you like to install the haskell environment (y/n)?" choice
+case "$choice" in
+  y|Y )
+    run_command "curl -sS https://get.haskellstack.org/ -o install_haskell.sh";
+    run_command "chmod a+x install_haskell.sh";
+    run_command "./install_haskell.sh -f";
+    ;;
+  n|N )
+    echo "OK, moving on.";
+    ;;
+  * )
+      debian_install_haskell_env;
+      ;;
+esac;
+}
 function debian_install_neovim {
 run_command_as_root "apt-get install -y neovim";
 }
@@ -129,6 +145,7 @@ function debian_install_on_jessie {
     debian_install_php_env;
     debian_install_rust_env;
     debian_install_nodejs_env;
+    debian_install_haskell_env;
     debian_install_airline_fonts;
     build_config;
     neovim_install_plug_manager;
@@ -147,6 +164,7 @@ function debian_install_on_stretch {
     debian_install_php_env;
     debian_install_rust_env;
     debian_install_nodejs_env;
+    debian_install_haskell_env;
     debian_install_airline_fonts;
     build_config;
     neovim_install_plug_manager;
@@ -165,6 +183,7 @@ function debian_install_on_trusty {
     debian_install_php_env;
     debian_install_rust_env;
     debian_install_nodejs_env;
+    debian_install_haskell_env;
     debian_install_airline_fonts;
     build_config;
     neovim_install_plug_manager;
@@ -183,6 +202,7 @@ function debian_install_on_xenial {
     debian_install_php_env;
     debian_install_rust_env;
     debian_install_nodejs_env;
+    debian_install_haskell_env;
     debian_install_airline_fonts;
     build_config;
     neovim_install_plug_manager;
@@ -280,6 +300,7 @@ function deepin_install_on_unstable {
     debian_install_php_env;
     debian_install_rust_env;
     debian_install_nodejs_env;
+    debian_install_haskell_env;
     debian_install_airline_fonts;
     build_config;
     neovim_install_plug_manager;
