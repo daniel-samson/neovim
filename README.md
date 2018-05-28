@@ -150,7 +150,7 @@ To make it permanent you can add one of these commands to your ~/.config/nvim/in
 
 ### Debugging: 
 
-With the [vdebug](https://github.com/joonty/vdebug) plugin, You can set up any DBGP protocol debugger, e.g. Xdebug. (See :help VdebugSetUp). Start Vdebug with `<F5>`, which will make it wait for an incoming connection. Run the script you want to debug, with the debugging engine enabled. A new tab will open with the debugging interface.
+With the [vdebug](https://github.com/joonty/vdebug) plugin, You can set up any DBGP protocol debugger, e.g. PHP (Xdebug), Python, Ruby, Perl, and Tcl. (See :help VdebugSetUp). Start Vdebug with `<F5>`, which will make it wait for an incoming connection. Run the script you want to debug, with the debugging engine enabled. A new tab will open with the debugging interface.
 
 Once in debugging mode, the following default mappings are available:
 
@@ -173,7 +173,7 @@ To stop debugging, press `<F4>`. Press it again to close the debugger interface.
 If you can't get a connection, you will set up your environment. Type `:help Vdebug` for more information.
 
 
-### Troubleshoot XDebug
+### Setup PHP XDebug
 Ensure you have xdebug installed
 <pre>
 sudo apt get install php-xdebug or php5-xdebug
@@ -195,3 +195,9 @@ add to the end of the file:
 <pre>
 export XDEBUG_CONFIG="remote_enable=1 remote_mode=req remote_port=9000 remote_host=127.0.0.1 remote_connect_back=0"
 </pre>
+
+### Set up Python debugging
+- Download pydbgp from http://code.activestate.com/komodo/remotedebugging/
+- extract it
+- To debug a script called "myscript.py", run the following:
+    <pre>python -S path/to/pydbgp -d localhost:9000 myscript.py</pre>
