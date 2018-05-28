@@ -134,6 +134,9 @@ Plug 'racer-rust/vim-racer'
 Plug 'roxma/nvim-cm-racer'
 endif
 
+" python
+Plug "davidhalter/jedi-vim"
+
 Plug 'roxma/nvim-completion-manager'
 
 " Nerd Tree
