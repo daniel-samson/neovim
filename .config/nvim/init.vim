@@ -320,8 +320,8 @@ nnoremap <A-l> <C-w>l
 
 " Start terminal
 "split term://bash
-vnoremap <leader>t <esc>:split term://bash <cr>
-nnoremap <leader>t :split term://bash <cr>
+vnoremap <leader>t <esc>:belowright split term://bash <cr>
+nnoremap <leader>t :belowright split term://bash <cr>
 
 " Debugging
 let g:vdebug_keymap = {
