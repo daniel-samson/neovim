@@ -36,6 +36,7 @@ then
     echo "Found lsb_release";
 else
     echo "lsb_release is not installed";
+    throw_unsupported_distrobution;
 fi;
 
 case $( lsb_release -is) in
