@@ -135,7 +135,7 @@ Plug 'roxma/nvim-cm-racer'
 endif
 
 " python
-" Plug "davidhalter/jedi-vim"
+Plug 'davidhalter/jedi-vim'
 
 Plug 'roxma/nvim-completion-manager'
 
