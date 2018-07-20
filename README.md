@@ -205,3 +205,7 @@ export XDEBUG_CONFIG="remote_enable=1 remote_mode=req remote_port=9000 remote_ho
 - extract it
 - To debug a script called "myscript.py", run the following:
     <pre>python -S path/to/pydbgp -d localhost:9000 myscript.py</pre>
+
+
+### Get PHP manual
+- `<CTRL> + <H>`
