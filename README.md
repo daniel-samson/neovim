@@ -23,12 +23,14 @@ A distribution of nvim, configured as an "Integrated" Development Environment (I
 - Supported OS
 
 ### Supported OS
-Support OS means that I have tested this script on the following OS:
 
 - Debian Stretch
 - Debian Jessie
 - Ubuntu 16.04
 - KDE Neon 16.04
+- Deepin
+
+Support OS means that the install script will only let you install these distribution of linux use premade recipes.
 
 
 ### Installation:
