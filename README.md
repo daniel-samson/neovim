@@ -149,7 +149,7 @@ To make it permanent you can add one of these commands to your ~/.config/nvim/in
 - **MakeIndex** -  Runs ctags -R for autocompletion
 - **IdeVersion** - displays the version of this script
 - ! &lt;terminal command&gt; runs a terminal command so you don't need to leave vim
-- <LEADER> <T> Open terminal inside vim. Use <I> to activate the terminal and <Esc> to deactivate the terminal
+- `<LEADER> + <T>` Open terminal inside vim. Use `<I>` to activate the terminal and `<Esc>` to deactivate the terminal
 
 ### Debugging: 
 
