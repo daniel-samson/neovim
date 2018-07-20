@@ -28,6 +28,7 @@ A distribution of nvim, configured as an "Integrated" Development Environment (I
 - Debian Jessie
 - Ubuntu 16.04
 - KDE Neon 16.04
+- KDE Neon 14.04
 - Deepin
 
 Support OS means that the install script will only let you install on these distribution of linux using premade recipes.
