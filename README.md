@@ -30,7 +30,7 @@ A distribution of nvim, configured as an "Integrated" Development Environment (I
 - KDE Neon 16.04
 - Deepin
 
-Support OS means that the install script will only let you install these distribution of linux use premade recipes.
+Support OS means that the install script will only let you install on these distribution of linux using premade recipes.
 
 
 ### Installation:
