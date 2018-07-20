@@ -104,8 +104,8 @@ Using the standard vim keys to manage your system clipboard, in all modes except
 **PHP Actor Only:**
 
 - (Normal Mode) Jump to definition &lt;LEADER&gt; + &lt;]&gt;
-- (Normal Mode) Find Reference &lt;LEADER&gt; + &lt;FR&gt;
-- (Visual Mode) Extract Method &lt;LEADER&gt; + &lt;EM&gt;
+- (Normal Mode) **F**ind **R**eference &lt;LEADER&gt; + &lt;FR&gt;
+- (Visual Mode) **E**xtract **M**ethod &lt;LEADER&gt; + &lt;EM&gt;
 
 ### Window Navigation
 - Switch to window below &lt;ALT&gt; + &lt;J&gt;
