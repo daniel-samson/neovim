@@ -101,7 +101,7 @@ Using the standard vim keys to manage your system clipboard, in all modes except
 - Move line up (Insert Mode) &lt;CTRL&gt; + &lt;K&gt;
 - Move line down (Insert Mode) &lt;CTRL&gt; + &lt;J&gt;
 
-** PHP Actor Only: **
+**PHP Actor Only:**
 
 - (Normal Mode) Jump to definition &lt;LEADER&gt; + &lt;]&gt;
 - (Normal Mode) Find Reference &lt;LEADER&gt; + &lt;FR&gt;
