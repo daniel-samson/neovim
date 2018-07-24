@@ -348,3 +348,12 @@ endif
 " Nerd Tree
 nmap <Leader>n :NERDTreeToggle<cr>
 let NERDTreeShowHidden=1
+
+" Duplicate Line
+inoremap <C-d> <Esc>yypi
+nnoremap <C-d> <Esc>yyp
+
+" Comment in/out
+imap <C-c> <Esc>gcci
+nmap <C-c> <Esc>gcc<Esc>
+vmap <C-c> gcc<Esc>

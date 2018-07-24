@@ -98,7 +98,8 @@ Using the standard vim keys to manage your system clipboard, in all modes except
 - Show Tags (Insert Mode) &lt;CTRL&gt; + &lt;P&gt; or &lt;CTRL&gt; + &lt;N&gt;
 - Move line up (Insert Mode) &lt;CTRL&gt; + &lt;K&gt;
 - Move line down (Insert Mode) &lt;CTRL&gt; + &lt;J&gt;
-
+- Duplicate Line &lt;Alt&gt; + &lt;D&gt;
+- Comment Line &lt;Alt&gt; + &lt;C&gt;
 ** PHP Actor Only: **
 
 - (Normal Mode) Jump to definition &lt;LEADER&gt; + &lt;]&gt;
