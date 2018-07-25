@@ -350,10 +350,10 @@ nmap <Leader>n :NERDTreeToggle<cr>
 let NERDTreeShowHidden=1
 
 " Duplicate Line
-inoremap <C-d> <Esc>yypi
-nnoremap <C-d> <Esc>yyp
+inoremap <A-d> <Esc>yypi
+nnoremap <A-d> <Esc>yyp
 
 " Comment in/out
-imap <C-c> <Esc>gcci
-nmap <C-c> <Esc>gcc<Esc>
-vmap <C-c> gcc<Esc>
+imap <A-c> <Esc>gcci
+nmap <A-c> <Esc>gcc<Esc>
+vmap <A-c> gcc<Esc>
