@@ -322,6 +322,7 @@ nnoremap <A-l> <C-w>l
 "split term://bash
 vnoremap <leader>t <esc>:belowright split term://bash <cr>
 nnoremap <leader>t :belowright split term://bash <cr>
+autocmd TermOpen * setlocal scrollback=100000
 
 " Debugging
 let g:vdebug_keymap = {
