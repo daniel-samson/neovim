@@ -47,6 +47,17 @@ run_command "curl -fLo $h/.local/share/nvim/site/autoload/plug.vim --create-dirs
 function debian_apt_update {
 run_command_as_root "apt update";
 }
+function debian_replace_vim {
+read -p "Would you like to replace vim with nvim (y/n)?" choice
+case "$choice" in
+  y|Y )
+      run_command_as_root "rm -f /usr/local/bin/vim";
+      run_command_as_root "ln -s /usr/bin/nvim /usr/local/bin/vim";
+      ;;
+  n|N ) echo "OK, You will need to run nvim instead of vim.";;
+  * ) debian_replace_vim;;
+esac;
+}
 function debian_extract_hack_font {
     run_command_as_root "unzip Hack-v3.000-ttf.zip -d /usr/share/fonts"
     run_command "fc-cache"
@@ -85,6 +96,26 @@ run_command_as_root "apt-get install -y exuberant-ctags";
 function debian_install_git {
 run_command_as_root "apt install -y git";
 }
+function debian_install_neovim {
+run_command_as_root "apt-get install -y neovim";
+}
+function debian_install_python_support {
+run_command_as_root "apt-get install -y python-pip python3-pip";
+run_command_as_root "apt-get install -y build-essential libssl-dev libffi-dev";
+run_command_as_root "apt-get install -y python-dev python3-venv";
+run_command_as_root "pip install neovim";
+run_command_as_root "pip3 install neovim";
+PYENV="$HOME/.python_env";
+run_command "mkdir $PYENV";
+run_command "cd $PYENV";
+run_command "python3 -m venv test_env";
+if grep -q "source $PYENV/test_env" ~/.bash_aliases;
+then
+    echo "Python connfigured";
+else
+    echo "source $PYENV/test_env" >> ~/.bash_aliases;
+fi
+}
 function debian_install_haskell_env {
 read -p "Would you like to install the haskell environment (y/n)?" choice
 case "$choice" in
@@ -100,19 +131,6 @@ case "$choice" in
       debian_install_haskell_env;
       ;;
 esac;
-}
-function debian_install_neovim {
-run_command_as_root "apt-get install -y neovim";
-}
-function debian_install_neovim_trusty {
-run_command_as_root "add-apt-repository -y ppa:neovim-ppa/stable";
-run_command_as_root "apt-get update";
-run_command_as_root "apt-get install -y neovim";
-}
-function debian_install_neovim_xenial {
-run_command_as_root "add-apt-repository -y ppa:neovim-ppa/stable";
-run_command_as_root "apt-get update";
-run_command_as_root "apt-get install -y neovim";
 }
 function debian_install_nodejs_env {
 read -p "Would you like to install the nodejs/typescript environment (y/n)?" choice
@@ -132,6 +150,79 @@ case "$choice" in
       ;;
 esac;
 
+}
+function debian_install_php_env {
+read -p "Would you like to install the php environment (y/n)?" choice
+case "$choice" in
+  y|Y )
+       run_command_as_root "apt install php-cli";
+        run_command "curl -sS https://getcomposer.org/installer -o install_composer.sh";
+        run_command_as_root "php install_composer.sh --install-dir=/usr/local/bin --filename=composer";
+        run_command "composer global require friendsofphp/php-cs-fixer";
+        run_command "composer global require phpmd/phpmd";
+        run_command "composer global require leafo/scssphp";
+        run_command "composer global require codeception/codeception";
+        run_command "composer global require sebastian/phpcpd";
+        run_command "composer global require phpbench/phpbench";
+        # Install Composer Path
+        COMPOSER=$(composer global config bin-dir --absolute);
+        if grep -q "export PATH=\$PATH:$COMPOSER" ~/.bash_aliases;
+        then 
+            echo "Composer bin already configured";
+        else 
+            echo "export PATH=\$PATH:$COMPOSER" >> ~/.bash_aliases;
+    fi
+      ;;
+  n|N ) echo "OK, moving on.";;
+  * ) debian_install_php_env;;
+esac;
+}
+
+function debian_install_rust_env {
+read -p "Would you like to install the rust environment (y/n)?" choice
+case "$choice" in
+  y|Y )
+    run_command "curl -sS https://sh.rustup.rs -o install_rust.sh";
+    run_command "chmod a+x install_rust.sh";
+    run_command "./install_rust.sh";
+    if grep -q "source \$HOME/.cargo/env" ~/.bash_aliases;
+    then
+            echo "Cargo configured";
+        else
+            echo "source \$HOME/.cargo/env" >> ~/.bash_aliases;
+    fi
+    if grep -q "export RUST_SRC_PATH=$(rustc --print sysroot)/lib/rustlib/src/rust/src" ~/.bash_aliases;
+        then
+            echo "RUST_SRC_PATH configured";
+        else
+            echo "export RUST_SRC_PATH=$(rustc --print sysroot)/lib/rustlib/src/rust/src" >> ~/.bash_aliases;
+    fi
+
+    run_command "rustup update";
+    run_command "export RUST_SRC_PATH=$(rustc --print sysroot)/lib/rustlib/src/rust/src";
+    run_command "rustup install nightly";
+    run_command "rustup component add rls-preview --toolchain nightly";
+    run_command "rustup component add rust-analysis --toolchain nightly";
+    run_command "rustup component add rust-src --toolchain nightly";
+    run_command "cargo install racer --force";
+    ;;
+  n|N )
+    echo "OK, moving on.";
+    ;;
+  * )
+      debian_install_rust_env;
+      ;;
+esac;
+}
+function debian_install_neovim_trusty {
+run_command_as_root "add-apt-repository -y ppa:neovim-ppa/stable";
+run_command_as_root "apt-get update";
+run_command_as_root "apt-get install -y neovim";
+}
+function debian_install_neovim_xenial {
+run_command_as_root "add-apt-repository -y ppa:neovim-ppa/stable";
+run_command_as_root "apt-get update";
+run_command_as_root "apt-get install -y neovim";
 }
 function debian_install_on_jessie {
     echo "Preparing to install on Debian Jessie";
@@ -208,97 +299,6 @@ function debian_install_on_xenial {
     neovim_install_plug_manager;
     neovim_install_plugins;
     debian_replace_vim;
-}
-function debian_install_php_env {
-read -p "Would you like to install the php environment (y/n)?" choice
-case "$choice" in
-  y|Y )
-       run_command_as_root "apt install php-cli";
-        run_command "curl -sS https://getcomposer.org/installer -o install_composer.sh";
-        run_command_as_root "php install_composer.sh --install-dir=/usr/local/bin --filename=composer";
-        run_command "composer global require friendsofphp/php-cs-fixer";
-        run_command "composer global require phpmd/phpmd";
-        run_command "composer global require leafo/scssphp";
-        run_command "composer global require codeception/codeception";
-        run_command "composer global require sebastian/phpcpd";
-        run_command "composer global require phpbench/phpbench";
-        # Install Composer Path
-        COMPOSER=$(composer global config bin-dir --absolute);
-        if grep -q "export PATH=\$PATH:$COMPOSER" ~/.bash_aliases;
-        then 
-            echo "Composer bin already configured";
-        else 
-            echo "export PATH=\$PATH:$COMPOSER" >> ~/.bash_aliases;
-    fi
-      ;;
-  n|N ) echo "OK, moving on.";;
-  * ) debian_install_php_env;;
-esac;
-}
-
-function debian_install_python_support {
-run_command_as_root "apt-get install -y python-pip python3-pip";
-run_command_as_root "apt-get install -y build-essential libssl-dev libffi-dev";
-run_command_as_root "apt-get install -y python-dev python3-venv";
-run_command_as_root "pip install neovim";
-run_command_as_root "pip3 install neovim";
-PYENV="$HOME/.python_env";
-run_command "mkdir $PYENV";
-run_command "cd $PYENV";
-run_command "python3 -m venv test_env";
-if grep -q "source $PYENV/test_env" ~/.bash_aliases;
-then
-    echo "Python connfigured";
-else
-    echo "source $PYENV/test_env" >> ~/.bash_aliases;
-fi
-}
-function debian_install_rust_env {
-read -p "Would you like to install the rust environment (y/n)?" choice
-case "$choice" in
-  y|Y )
-    run_command "curl -sS https://sh.rustup.rs -o install_rust.sh";
-    run_command "chmod a+x install_rust.sh";
-    run_command "./install_rust.sh";
-    if grep -q "source \$HOME/.cargo/env" ~/.bash_aliases;
-    then
-            echo "Cargo configured";
-        else
-            echo "source \$HOME/.cargo/env" >> ~/.bash_aliases;
-    fi
-    if grep -q "export RUST_SRC_PATH=$(rustc --print sysroot)/lib/rustlib/src/rust/src" ~/.bash_aliases;
-        then
-            echo "RUST_SRC_PATH configured";
-        else
-            echo "export RUST_SRC_PATH=$(rustc --print sysroot)/lib/rustlib/src/rust/src" >> ~/.bash_aliases;
-    fi
-
-    run_command "rustup update";
-    run_command "export RUST_SRC_PATH=$(rustc --print sysroot)/lib/rustlib/src/rust/src";
-    run_command "rustup install nightly";
-    run_command "rustup component add rls-preview --toolchain nightly";
-    run_command "rustup component add rust-analysis --toolchain nightly";
-    run_command "rustup component add rust-src --toolchain nightly";
-    run_command "cargo install racer --force";
-    ;;
-  n|N )
-    echo "OK, moving on.";
-    ;;
-  * )
-      debian_install_rust_env;
-      ;;
-esac;
-}
-function debian_replace_vim {
-read -p "Would you like to replace vim with nvim (y/n)?" choice
-case "$choice" in
-  y|Y )
-      run_command_as_root "rm -f /usr/local/bin/vim";
-      run_command_as_root "ln -s /usr/bin/nvim /usr/local/bin/vim";
-      ;;
-  n|N ) echo "OK, You will need to run nvim instead of vim.";;
-  * ) debian_replace_vim;;
-esac;
 }
 function deepin_install_on_unstable {
     echo "Preparing to install on Ubuntu Xenial";

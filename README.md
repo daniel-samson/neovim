@@ -23,12 +23,15 @@ A distribution of nvim, configured as an "Integrated" Development Environment (I
 - Supported OS
 
 ### Supported OS
-Support OS means that I have tested this script on the following OS:
 
 - Debian Stretch
 - Debian Jessie
 - Ubuntu 16.04
 - KDE Neon 16.04
+- KDE Neon 14.04
+- Deepin
+
+Support OS means that the install script will only let you install on these distribution of linux using premade recipes.
 
 
 ### Installation:
@@ -98,13 +101,12 @@ Using the standard vim keys to manage your system clipboard, in all modes except
 - Show Tags (Insert Mode) &lt;CTRL&gt; + &lt;P&gt; or &lt;CTRL&gt; + &lt;N&gt;
 - Move line up (Insert Mode) &lt;CTRL&gt; + &lt;K&gt;
 - Move line down (Insert Mode) &lt;CTRL&gt; + &lt;J&gt;
-- Duplicate Line &lt;Alt&gt; + &lt;D&gt;
-- Comment Line &lt;Alt&gt; + &lt;C&gt;
+
 ** PHP Actor Only: **
 
 - (Normal Mode) Jump to definition &lt;LEADER&gt; + &lt;]&gt;
-- (Normal Mode) Find Reference &lt;LEADER&gt; + &lt;FR&gt;
-- (Visual Mode) Extract Method &lt;LEADER&gt; + &lt;EM&gt;
+- (Normal Mode) **F**ind **R**eference &lt;LEADER&gt; + &lt;FR&gt;
+- (Visual Mode) **E**xtract **M**ethod &lt;LEADER&gt; + &lt;EM&gt;
 
 ### Window Navigation
 - Switch to window below &lt;ALT&gt; + &lt;J&gt;
@@ -148,6 +150,7 @@ To make it permanent you can add one of these commands to your ~/.config/nvim/in
 - **MakeIndex** -  Runs ctags -R for autocompletion
 - **IdeVersion** - displays the version of this script
 - ! &lt;terminal command&gt; runs a terminal command so you don't need to leave vim
+- `<LEADER> + <T>` Open terminal inside vim. Use `<I>` to activate the terminal and `<Esc>` to deactivate the terminal
 
 ### Debugging: 
 
@@ -202,3 +205,7 @@ export XDEBUG_CONFIG="remote_enable=1 remote_mode=req remote_port=9000 remote_ho
 - extract it
 - To debug a script called "myscript.py", run the following:
     <pre>python -S path/to/pydbgp -d localhost:9000 myscript.py</pre>
+
+
+### Get PHP manual
+- `<CTRL> + <H>`
