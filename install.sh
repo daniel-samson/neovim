@@ -106,7 +106,7 @@ run_command_as_root "apt-get install -y python-dev python3-venv";
 run_command_as_root "pip install neovim";
 run_command_as_root "pip3 install neovim";
 PYENV="$HOME/.python_env";
-run_command "mkdir $PYENV";
+run_command "mkdir -p $PYENV";
 run_command "cd $PYENV";
 run_command "python3 -m venv test_env";
 if grep -q "source $PYENV/test_env" ~/.bash_aliases;
@@ -233,13 +233,14 @@ function debian_install_on_jessie {
     debian_install_neovim;
     debian_install_curl;
     debian_install_clipboard;
+    debian_install_airline_fonts;
+    build_config;
+    neovim_install_plug_manager;
+    neovim_install_plugins;
     debian_install_php_env;
     debian_install_rust_env;
     debian_install_nodejs_env;
     debian_install_haskell_env;
-    debian_install_airline_fonts;
-    build_config;
-    neovim_install_plug_manager;
     neovim_install_plugins;
     debian_replace_vim;
 }
@@ -252,15 +253,16 @@ function debian_install_on_stretch {
     debian_install_neovim;
     debian_install_curl;
     debian_install_clipboard;
-    debian_install_php_env;
-    debian_install_rust_env;
-    debian_install_nodejs_env;
-    debian_install_haskell_env;
     debian_install_airline_fonts;
     build_config;
     neovim_install_plug_manager;
     neovim_install_plugins;
+    debian_install_php_env;
+    debian_install_rust_env;
+    debian_install_nodejs_env;
+    debian_install_haskell_env;
     debian_replace_vim;
+    neovim_install_plugins;
 }
 function debian_install_on_trusty {
     echo "Preparing to install on Ubuntu Trusty";
@@ -271,13 +273,14 @@ function debian_install_on_trusty {
     debian_install_neovim_trusty;
     debian_install_curl;
     debian_install_clipboard;
+    debian_install_airline_fonts;
+    build_config;
+    neovim_install_plug_manager;
+    neovim_install_plugins;
     debian_install_php_env;
     debian_install_rust_env;
     debian_install_nodejs_env;
     debian_install_haskell_env;
-    debian_install_airline_fonts;
-    build_config;
-    neovim_install_plug_manager;
     neovim_install_plugins;
     debian_replace_vim;
 }
@@ -290,15 +293,16 @@ function debian_install_on_xenial {
     debian_install_neovim_xenial;
     debian_install_curl;
     debian_install_clipboard;
-    debian_install_php_env;
-    debian_install_rust_env;
-    debian_install_nodejs_env;
-    debian_install_haskell_env;
     debian_install_airline_fonts;
     build_config;
     neovim_install_plug_manager;
     neovim_install_plugins;
     debian_replace_vim;
+    debian_install_php_env;
+    debian_install_rust_env;
+    debian_install_nodejs_env;
+    debian_install_haskell_env;
+    neovim_install_plugins;
 }
 function deepin_install_on_unstable {
     echo "Preparing to install on Ubuntu Xenial";
@@ -328,8 +332,10 @@ exit 1;
 
 function detect_ubuntu_release() {
 case $(lsb_release -cs) in
+    bionic) echo "Found Bionic (Ubuntu 18.04)"; debian_install_on_xenial;;
     xenial) echo "Found Xenial (Ubuntu 16.04)"; debian_install_on_xenial;;
     trusty) echo "Found trusty (Ubuntu 14.04)"; debian_install_on_trusty;;
+    *) throw_unsupported_distrobution;;
 esac
 }
 
@@ -337,6 +343,7 @@ function detect_debian_release() {
 case $(lsb_release -cs) in
     stretch) echo "Found Debian Stretch"; debian_install_on_stretch;;
     jessie) echo "Found Debian Jessie"; debian_install_on_jessie;;
+    *) throw_unsupported_distrobution;;
 esac
 }
 

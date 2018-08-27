@@ -7,13 +7,14 @@ function debian_install_on_trusty {
     debian_install_neovim_trusty;
     debian_install_curl;
     debian_install_clipboard;
+    debian_install_airline_fonts;
+    build_config;
+    neovim_install_plug_manager;
+    neovim_install_plugins;
     debian_install_php_env;
     debian_install_rust_env;
     debian_install_nodejs_env;
     debian_install_haskell_env;
-    debian_install_airline_fonts;
-    build_config;
-    neovim_install_plug_manager;
     neovim_install_plugins;
     debian_replace_vim;
 }
