@@ -27,6 +27,7 @@ A distribution of nvim, configured as an "Integrated" Development Environment (I
 - Debian Stretch
 - Debian Jessie
 - Ubuntu 16.04
+- Ubuntu 18.04
 - KDE Neon 16.04
 - KDE Neon 14.04
 - Deepin
