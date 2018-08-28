@@ -151,11 +151,40 @@ case "$choice" in
 esac;
 
 }
+function debian_install_php_env_bionic {
+read -p "Would you like to install the php environment (y/n)?" choice
+case "$choice" in
+  y|Y )
+        run_command_as_root "apt install php-cli php-dom php-mbstring php-gd";
+        run_command_as_root "apt install php-curl";
+        run_command "curl -sS https://getcomposer.org/installer -o install_composer.sh";
+        run_command_as_root "php install_composer.sh --install-dir=/usr/local/bin --filename=composer";
+        run_command_as_root "chown -R $USER $HOME/.composer"
+        run_command "composer global require friendsofphp/php-cs-fixer";
+        run_command "composer global require phpmd/phpmd";
+        run_command "composer global require leafo/scssphp";
+        run_command "composer global require codeception/codeception";
+        run_command "composer global require sebastian/phpcpd";
+        run_command "composer global require phpbench/phpbench";
+        # Install Composer Path
+        COMPOSER=$(composer global config bin-dir --absolute);
+        if grep -q "export PATH=\$PATH:$COMPOSER" ~/.bash_aliases;
+        then 
+            echo "Composer bin already configured";
+        else 
+            echo "export PATH=\$PATH:$COMPOSER" >> ~/.bash_aliases;
+    fi
+      ;;
+  n|N ) echo "OK, moving on.";;
+  * ) debian_install_php_env;;
+esac;
+}
+
 function debian_install_php_env {
 read -p "Would you like to install the php environment (y/n)?" choice
 case "$choice" in
   y|Y )
-       run_command_as_root "apt install php-cli";
+        run_command_as_root "apt install php-cli php-dom php-gd php-json php-openssl";
         run_command "curl -sS https://getcomposer.org/installer -o install_composer.sh";
         run_command_as_root "php install_composer.sh --install-dir=/usr/local/bin --filename=composer";
         run_command "composer global require friendsofphp/php-cs-fixer";
@@ -223,6 +252,26 @@ function debian_install_neovim_xenial {
 run_command_as_root "add-apt-repository -y ppa:neovim-ppa/stable";
 run_command_as_root "apt-get update";
 run_command_as_root "apt-get install -y neovim";
+}
+function debian_install_on_bionic {
+    echo "Preparing to install on Ubuntu Xenial";
+    debian_apt_update;
+    debian_install_exuberant_ctags;
+    debian_install_git;
+    debian_install_python_support;
+    debian_install_neovim_xenial;
+    debian_install_curl;
+    debian_install_clipboard;
+    debian_install_airline_fonts;
+    build_config;
+    neovim_install_plug_manager;
+    neovim_install_plugins;
+    debian_replace_vim;
+    debian_install_php_env_bionic;
+    debian_install_rust_env;
+    debian_install_nodejs_env;
+    debian_install_haskell_env;
+    neovim_install_plugins;
 }
 function debian_install_on_jessie {
     echo "Preparing to install on Debian Jessie";
@@ -332,7 +381,7 @@ exit 1;
 
 function detect_ubuntu_release() {
 case $(lsb_release -cs) in
-    bionic) echo "Found Bionic (Ubuntu 18.04)"; debian_install_on_xenial;;
+    bionic) echo "Found Bionic (Ubuntu 18.04)"; debian_install_on_bionic;;
     xenial) echo "Found Xenial (Ubuntu 16.04)"; debian_install_on_xenial;;
     trusty) echo "Found trusty (Ubuntu 14.04)"; debian_install_on_trusty;;
     *) throw_unsupported_distrobution;;

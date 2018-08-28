@@ -7,7 +7,7 @@ exit 1;
 
 function detect_ubuntu_release() {
 case $(lsb_release -cs) in
-    bionic) echo "Found Bionic (Ubuntu 18.04)"; debian_install_on_xenial;;
+    bionic) echo "Found Bionic (Ubuntu 18.04)"; debian_install_on_bionic;;
     xenial) echo "Found Xenial (Ubuntu 16.04)"; debian_install_on_xenial;;
     trusty) echo "Found trusty (Ubuntu 14.04)"; debian_install_on_trusty;;
     *) throw_unsupported_distrobution;;

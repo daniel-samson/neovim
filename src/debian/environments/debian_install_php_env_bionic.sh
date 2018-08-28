@@ -1,10 +1,12 @@
-function debian_install_php_env {
+function debian_install_php_env_bionic {
 read -p "Would you like to install the php environment (y/n)?" choice
 case "$choice" in
   y|Y )
-        run_command_as_root "apt install php-cli php-dom php-gd php-json php-openssl";
+        run_command_as_root "apt install -y php-cli php-dom php-mbstring php-gd";
+        run_command_as_root "apt install -y php-curl";
         run_command "curl -sS https://getcomposer.org/installer -o install_composer.sh";
         run_command_as_root "php install_composer.sh --install-dir=/usr/local/bin --filename=composer";
+        run_command_as_root "chown -R $USER $HOME/.composer"
         run_command "composer global require friendsofphp/php-cs-fixer";
         run_command "composer global require phpmd/phpmd";
         run_command "composer global require leafo/scssphp";
