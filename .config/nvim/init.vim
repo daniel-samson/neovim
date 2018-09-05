@@ -18,6 +18,9 @@ Plug 'tpope/vim-fugitive'
 " Theming:
 Plug 'morhetz/gruvbox'
 
+" Hex highlighting
+" Plug 'chrisbra/Colorizer'
+
 " Fast Searching
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
@@ -177,6 +180,23 @@ let g:airline_symbols.linenr = ''
 if &rtp =~ 'gruvbox'
     colorscheme gruvbox
     set background=dark
+    " Fixes
+    hi! link phpType GruvboxOrangeBold
+    hi! link phpInclude GruvboxOrangeBold
+    hi! link phpIdentifier GruvboxPurpleBold
+    hi! link phpVarSelector GruvboxPurpleBold
+    hi! link phpDocComment GruvboxGreen
+    hi! link phpDocTags GruvboxGreenBold
+    hi! link phpDocIdentifier GruvboxGreenBold
+    hi! link phpDocParam GruvboxGreen
+    hi! link phpCommentStar GruvboxGreen
+    hi! link phpCommentTitle GruvboxGreen
+    hi! link phpFunction GruvboxYellowBold
+    hi! link phpMethodsVar GruvboxPurple
+    hi! link phpMethod GruvboxYellow
+    hi! link phpKeyword GruvboxOrangeBold
+    hi! link phpBoolean GruvboxOrangeBold
+    hi! link phpNumber GruvboxBlue
 endif
 
 " Turn off swap files
@@ -358,3 +378,11 @@ nnoremap <A-d> <Esc>yyp
 imap <A-c> <Esc>gcci
 nmap <A-c> <Esc>gcc<Esc>
 vmap <A-c> gcc<Esc>
+
+nmap <C-S-P> :call <SID>SynStack()<CR>
+function! <SID>SynStack()
+  if !exists("*synstack")
+    return
+  endif
+  echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+endfunc
