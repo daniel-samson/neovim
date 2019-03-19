@@ -118,7 +118,7 @@ Using the standard vim keys to manage your system clipboard, in all modes except
 - Switch to right window &lt;ALT&gt; + &lt;L&gt;
 
 ### Terminal
-- Open terminal &lt;LEADER&gt; &lt;Tgt
+- Open terminal &lt;LEADER&gt; &lt;T&gt;
 - Loose focus &lt;ESC&gt; 
 - Gain focus focus &lt;Enter&gt;
 
