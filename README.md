@@ -102,6 +102,8 @@ Using the standard vim keys to manage your system clipboard, in all modes except
 - Show Tags (Insert Mode) &lt;CTRL&gt; + &lt;P&gt; or &lt;CTRL&gt; + &lt;N&gt;
 - Move line up (Insert Mode) &lt;CTRL&gt; + &lt;K&gt;
 - Move line down (Insert Mode) &lt;CTRL&gt; + &lt;J&gt;
+- Duplicate Line &lt;ALT&gt; + &lt;D&gt;
+- Toggle Comment In/Out &lt;ALT&gt; + &lt;C&gt;
 
 ** PHP Actor Only: **
 
@@ -114,6 +116,11 @@ Using the standard vim keys to manage your system clipboard, in all modes except
 - Switch to window above &lt;ALT&gt; + &lt;K&gt;
 - Switch to left window  &lt;ALT&gt; + &lt;H&gt;
 - Switch to right window &lt;ALT&gt; + &lt;L&gt;
+
+### Terminal
+- Open terminal &lt;LEADER&gt; &lt;Tgt
+- Loose focus &lt;ESC&gt; 
+- Gain focus focus &lt;Enter&gt;
 
 ### Git
 With projects which use git, vim ide will display the changes in the gutter and in the airline bar.
