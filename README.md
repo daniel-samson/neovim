@@ -24,6 +24,8 @@ A distribution of nvim, configured as an "Integrated" Development Environment (I
 
 ### Supported OS
 
+The install script will only let you install on these distribution of linux using premade recipes.
+
 - Debian Stretch
 - Debian Jessie
 - Ubuntu 16.04
@@ -33,7 +35,6 @@ A distribution of nvim, configured as an "Integrated" Development Environment (I
 - KDE Neon 14.04
 - Deepin
 
-Support OS means that the install script will only let you install on these distribution of linux using premade recipes.
 
 
 ### Installation:
