@@ -1,4 +1,4 @@
-command! IDEversion echom "IDE Version: 0.1.0"
+command! IDEversion echom "IDE Version: 0.1.3"
 call plug#begin('~/.local/share/nvim/plugged')
 " Sensible defaults
 Plug 'tpope/vim-sensible'
