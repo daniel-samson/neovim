@@ -1,5 +1,5 @@
-function debian_install_on_bionic {
-    echo "Preparing to install on Ubuntu Xenial";
+function debian_install_on_disco {
+    echo "Preparing to install on Ubuntu Disco";
     debian_apt_update;
     debian_install_exuberant_ctags;
     debian_install_git;
