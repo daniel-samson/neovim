@@ -82,14 +82,34 @@ set path^=**
 " Displays all files when we press tab
 set wildmenu
 
-"Set gutter
-set foldcolumn=1
-
+"" File Editing
+""
 " Toggle Comment
 nmap <A-/>  gcc
 vmap <A-/>  gcc
 imap <A-/>  <ESC>gcc
+" Duplicate Line
+vnoremap <A-d> Yp
+inoremap <A-d> <Esc>yypi
+nnoremap <A-d> <Esc>yyp
+" MakeInstall
+map <A-m> :!ctags -R .<cr>
+" Move line up
+imap <C-A-k> <Esc>ddkkpi
+" Move line down
+imap <C-A-j> <Esc>ddpi
+" Create new line
+nmap <Enter> i<Enter>
+" Delete current line
+nmap <BS> i<BS>
+""
+" Remap indentation to Tab
+nnoremap <TAB> >>
+nnoremap <S-TAB> <<
+vnoremap <TAB> >gv
+vnoremap <S-TAB> <gv
 
+""
 " Fast Fuzzy Find
 set rtp+=~/.fzf
 "" Lines
@@ -113,6 +133,8 @@ nmap <A-o> :Buffers<CR>
 vmap <A-o> <ESC>:Buffers<CR>
 imap <A-o> <ESC>:Buffers<CR>
 
+""
+""
 " Default File Encoding
 set encoding=utf-8
 
@@ -166,25 +188,6 @@ let g:auto_save_silent = 1
 " Undo tree navigation
 nmap <A-u> :GundoToggle<cr>
 
-" MakeInstall
-map <A-m> :!ctags -R .<cr>
-
-" Move line up
-imap <C-A-k> <Esc>ddkkpi
-
-" Move line down
-imap <C-A-j> <Esc>ddpi
-
-" Create new line
-nmap <Enter> i<Enter>
-
-" Delete current line
-nmap <BS> i<BS>
-
-" Terminal Emulator Settings
-autocmd BufWinEnter,WinEnter term://* startinsert
-
-tnoremap <Esc> <C-\><C-n>
 
 " Window Navigation
 tnoremap <A-h> <C-\><C-N><C-w>h
@@ -214,27 +217,13 @@ nnoremap <A-p> :Explore!<cr>
 inoremap <A-p> <Esc>:Explore!<cr>
 vnoremap <A-p> <Esc>:Explore!<cr>
 
-
-" Remap indentation to Tab
-nnoremap <TAB> >>
-nnoremap <S-TAB> <<
-vnoremap <TAB> >gv
-vnoremap <S-TAB> <gv
-
 " Start terminal
-" split term://bash
+inoremap <A-t> <esc>:belowright split term://bash <cr>
 vnoremap <A-t> <esc>:belowright split term://bash <cr>
 nnoremap <A-t> :belowright split term://bash <cr>
 autocmd TermOpen * setlocal scrollback=100000
 
-" Duplicate Line
-inoremap <A-d> <Esc>yypi
-nnoremap <A-d> <Esc>yyp
-
-" Comment in/out
-imap <A-c> <Esc>gcci
-nmap <A-c> <Esc>gcc<Esc>
-vmap <A-c> gcc<Esc>
-
-
+" Terminal Emulator Settings
+autocmd BufWinEnter,WinEnter term://* startinsert
+tnoremap <Esc> <C-\><C-n>:q<cr>
 
