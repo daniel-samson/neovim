@@ -1,5 +1,8 @@
+" Commands
 command! IDEversion echom "IDE Version: 0.2.0"
+" Plugins
 call plug#begin('~/.local/share/nvim/plugged')
+"
 " Sensible defaults
 Plug 'tpope/vim-sensible'
 
@@ -27,9 +30,9 @@ Plug 'sheerun/vim-polyglot'
 " Fast Fuzzy Find
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
-
+"
 call plug#end()
-
+"
 " Theme
 if &rtp =~ 'gruvbox'
     colorscheme gruvbox
@@ -72,6 +75,7 @@ set number
 if has('clipboard')
     set clipboard^=unnamedplus
 endif
+
 " Set path to recusively search all directories for :find
 set path^=**
 
@@ -81,14 +85,33 @@ set wildmenu
 "Set gutter
 set foldcolumn=1
 
+" Toggle Comment
+nmap <A-/>  gcc
+vmap <A-/>  gcc
+imap <A-/>  <ESC>gcc
+
 " Fast Fuzzy Find
 set rtp+=~/.fzf
-" nmap <leader>ff :Files<CR>
-" nmap <leader>fw :Tags<CR>
-nmap <leader>fg :Commits<CR>
-nmap <leader>fb :Buffers<CR>
-" add preview
-nmap <A-f> :call fzf#run({'sink': 'e', 'options': '-m --preview "bat --color always {}"','down': '90%' })<cr>
+"" Lines
+nmap <A-f> :Lines<cr>
+imap <A-f> <ESC>:Lines<cr>
+vmap <A-f> <ESC>:Lines<cr>
+"" Files
+nmap <A-e> :call fzf#run({'sink': 'e', 'options': '-m --preview "bat --color always {}"','down': '90%' })<cr>
+imap <A-e> <ESC>:call fzf#run({'sink': 'e', 'options': '-m --preview "bat --color always {}"','down': '90%' })<cr>
+vmap <A-e> <ESC>:call fzf#run({'sink': 'e', 'options': '-m --preview "bat --color always {}"','down': '90%' })<cr>
+"" Words / tags
+nmap <A-F> :Tags<CR>
+vmap <A-F> <ESC>:Tags<CR>
+imap <A-F> <ESC>:Tags<CR>
+"" Git commits
+nmap <A-g> :Commits<CR>
+vmap <A-g> <ESC>:Commits<CR>
+imap <A-g> <ESC>:Commits<CR>
+"" Opened files
+nmap <A-o> :Buffers<CR>
+vmap <A-o> <ESC>:Buffers<CR>
+imap <A-o> <ESC>:Buffers<CR>
 
 " Default File Encoding
 set encoding=utf-8
@@ -182,8 +205,15 @@ inoremap <A-n> <Esc><Esc><Esc>
 vnoremap <A-n> <Esc><Esc><Esc>
 
 " Project Browsing
-nnoremap <A-p> :e .<cr>
-inoremap <A-p> <Esc>:e .<cr>
+nnoremap <A-P> :e .<cr>
+inoremap <A-P> <Esc>:e .<cr>
+vnoremap <A-P> <Esc>:e .<cr>
+
+" Project Browsing (Folder of current file)
+nnoremap <A-p> :Explore!<cr>
+inoremap <A-p> <Esc>:Explore!<cr>
+vnoremap <A-p> <Esc>:Explore!<cr>
+
 
 " Remap indentation to Tab
 nnoremap <TAB> >>
@@ -192,9 +222,9 @@ vnoremap <TAB> >gv
 vnoremap <S-TAB> <gv
 
 " Start terminal
-"split term://bash
-vnoremap <leader>t <esc>:belowright split term://bash <cr>
-nnoremap <leader>t :belowright split term://bash <cr>
+" split term://bash
+vnoremap <A-t> <esc>:belowright split term://bash <cr>
+nnoremap <A-t> :belowright split term://bash <cr>
 autocmd TermOpen * setlocal scrollback=100000
 
 " Duplicate Line
