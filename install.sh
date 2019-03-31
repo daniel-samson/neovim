@@ -84,6 +84,26 @@ else
     fi
 fi
 }
+function install_bat_download {
+run_command_as_root "pgkg -i bat-musl_0.10.0_amd64.deb";
+}
+
+function debian_install_bat {
+echo "Installing bat";
+HACK_FONT_URL="https://github.com/sharkdp/bat/releases/download/v0.10.0/bat-musl_0.10.0_amd64.deb";
+
+if command -v curl
+then
+    run_command "curl -L -O ${HACK_FONT_URL}";
+    debian_extract_hack_font;
+elif command -v wget
+then
+    run_command "wget ${HACK_FONT_URL}";
+    debian_extract_hack_font;
+else
+    echo "cannot download bat";
+fi
+}
 function debian_install_clipboard {
     run_command_as_root "apt-get install xsel";
 }
@@ -263,6 +283,7 @@ function debian_install_on_bionic {
     debian_install_curl;
     debian_install_clipboard;
     debian_install_airline_fonts;
+    debian_install_bat;
     build_config;
     neovim_install_plug_manager;
     neovim_install_plugins;
@@ -273,8 +294,8 @@ function debian_install_on_bionic {
     debian_install_haskell_env;
     neovim_install_plugins;
 }
-function debian_install_on_bionic {
-    echo "Preparing to install on Ubuntu Xenial";
+function debian_install_on_disco {
+    echo "Preparing to install on Ubuntu Disco";
     debian_apt_update;
     debian_install_exuberant_ctags;
     debian_install_git;
@@ -283,6 +304,7 @@ function debian_install_on_bionic {
     debian_install_curl;
     debian_install_clipboard;
     debian_install_airline_fonts;
+    debian_install_bat;
     build_config;
     neovim_install_plug_manager;
     neovim_install_plugins;
@@ -303,6 +325,7 @@ function debian_install_on_jessie {
     debian_install_curl;
     debian_install_clipboard;
     debian_install_airline_fonts;
+    debian_install_bat;
     build_config;
     neovim_install_plug_manager;
     neovim_install_plugins;
@@ -323,6 +346,7 @@ function debian_install_on_stretch {
     debian_install_curl;
     debian_install_clipboard;
     debian_install_airline_fonts;
+    debian_install_bat;
     build_config;
     neovim_install_plug_manager;
     neovim_install_plugins;
@@ -343,6 +367,7 @@ function debian_install_on_trusty {
     debian_install_curl;
     debian_install_clipboard;
     debian_install_airline_fonts;
+    debian_install_bat;
     build_config;
     neovim_install_plug_manager;
     neovim_install_plugins;
@@ -363,6 +388,7 @@ function debian_install_on_xenial {
     debian_install_curl;
     debian_install_clipboard;
     debian_install_airline_fonts;
+    debian_install_bat;
     build_config;
     neovim_install_plug_manager;
     neovim_install_plugins;
@@ -387,6 +413,7 @@ function deepin_install_on_unstable {
     debian_install_nodejs_env;
     debian_install_haskell_env;
     debian_install_airline_fonts;
+    debian_install_bat;
     build_config;
     neovim_install_plug_manager;
     neovim_install_plugins;

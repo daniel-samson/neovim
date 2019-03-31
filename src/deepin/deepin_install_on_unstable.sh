@@ -12,6 +12,7 @@ function deepin_install_on_unstable {
     debian_install_nodejs_env;
     debian_install_haskell_env;
     debian_install_airline_fonts;
+    debian_install_bat;
     build_config;
     neovim_install_plug_manager;
     neovim_install_plugins;
