@@ -118,7 +118,7 @@ endif
 if executable('tsc')
     Plug 'mhartington/nvim-typescript', {'do': 'nvim +UpdateRemotePlugins'}
     Plug 'Shougo/vimproc.vim', {'do' : 'make'}
-    Plug 'Quramy/tsuquyomi/' 
+    Plug 'Quramy/tsuquyomi/'
 endif
 if executable('php')
 Plug 'roxma/LanguageServer-php-neovim',  {'do': 'composer install && composer run-script parse-stubs'}

@@ -99,6 +99,16 @@ run_command_as_root "apt install -y git";
 function debian_install_neovim {
 run_command_as_root "apt-get install -y neovim";
 }
+function debian_install_neovim_trusty {
+run_command_as_root "add-apt-repository -y ppa:neovim-ppa/stable";
+run_command_as_root "apt-get update";
+run_command_as_root "apt-get install -y neovim";
+}
+function debian_install_neovim_xenial {
+run_command_as_root "add-apt-repository -y ppa:neovim-ppa/stable";
+run_command_as_root "apt-get update";
+run_command_as_root "apt-get install -y neovim";
+}
 function debian_install_python_support {
 run_command_as_root "apt-get install -y python-pip python3-pip";
 run_command_as_root "apt-get install -y build-essential libssl-dev libffi-dev";
@@ -136,7 +146,7 @@ function debian_install_nodejs_env {
 read -p "Would you like to install the nodejs/typescript environment (y/n)?" choice
 case "$choice" in
   y|Y )
-        run_command "curl -sL https://deb.nodesource.com/setup_8.x -o nodesource_setup.sh";
+        run_command "curl -sL https://deb.nodesource.com/setup_10.x -o nodesource_setup.sh";
         run_command "chmod a+x nodesource_setup.sh";
         run_command_as_root "./nodesource_setup.sh";
         run_command_as_root "npm install -g typescript";
@@ -155,8 +165,8 @@ function debian_install_php_env_bionic {
 read -p "Would you like to install the php environment (y/n)?" choice
 case "$choice" in
   y|Y )
-        run_command_as_root "apt install php-cli php-dom php-mbstring php-gd";
-        run_command_as_root "apt install php-curl";
+        run_command_as_root "apt install -y php-cli php-dom php-mbstring php-gd";
+        run_command_as_root "apt install -y php-curl";
         run_command "curl -sS https://getcomposer.org/installer -o install_composer.sh";
         run_command_as_root "php install_composer.sh --install-dir=/usr/local/bin --filename=composer";
         run_command_as_root "chown -R $USER $HOME/.composer"
@@ -243,15 +253,25 @@ case "$choice" in
       ;;
 esac;
 }
-function debian_install_neovim_trusty {
-run_command_as_root "add-apt-repository -y ppa:neovim-ppa/stable";
-run_command_as_root "apt-get update";
-run_command_as_root "apt-get install -y neovim";
-}
-function debian_install_neovim_xenial {
-run_command_as_root "add-apt-repository -y ppa:neovim-ppa/stable";
-run_command_as_root "apt-get update";
-run_command_as_root "apt-get install -y neovim";
+function debian_install_on_bionic {
+    echo "Preparing to install on Ubuntu Xenial";
+    debian_apt_update;
+    debian_install_exuberant_ctags;
+    debian_install_git;
+    debian_install_python_support;
+    debian_install_neovim_xenial;
+    debian_install_curl;
+    debian_install_clipboard;
+    debian_install_airline_fonts;
+    build_config;
+    neovim_install_plug_manager;
+    neovim_install_plugins;
+    debian_replace_vim;
+    debian_install_php_env_bionic;
+    debian_install_rust_env;
+    debian_install_nodejs_env;
+    debian_install_haskell_env;
+    neovim_install_plugins;
 }
 function debian_install_on_bionic {
     echo "Preparing to install on Ubuntu Xenial";
@@ -381,6 +401,7 @@ exit 1;
 
 function detect_ubuntu_release() {
 case $(lsb_release -cs) in
+    disco) echo "Found Disco (Ubuntu 19.04)"; debian_install_on_disco;;
     bionic) echo "Found Bionic (Ubuntu 18.04)"; debian_install_on_bionic;;
     xenial) echo "Found Xenial (Ubuntu 16.04)"; debian_install_on_xenial;;
     trusty) echo "Found trusty (Ubuntu 14.04)"; debian_install_on_trusty;;
