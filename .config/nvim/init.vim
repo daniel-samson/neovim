@@ -1,4 +1,4 @@
-" Commands
+":Commands
 command! IDEversion echom "IDE Version: 0.2.0"
 " Plugins
 call plug#begin('~/.local/share/nvim/plugged')
@@ -69,7 +69,7 @@ endif
 let mapleader='\'
 
 " Show Line Numbers
-set number
+" set number
 
 " Use System Clipboard as the default register
 if has('clipboard')
@@ -121,6 +121,7 @@ nmap <A-e> :call fzf#run({'sink': 'e', 'options': '-m --preview "bat --color alw
 imap <A-e> <ESC>:call fzf#run({'sink': 'e', 'options': '-m --preview "bat --color always {}"','down': '90%' })<cr>
 vmap <A-e> <ESC>:call fzf#run({'sink': 'e', 'options': '-m --preview "bat --color always {}"','down': '90%' })<cr>
 "" Words / tags
+" TODO: add preview window
 nmap <A-F> :Tags<CR>
 vmap <A-F> <ESC>:Tags<CR>
 imap <A-F> <ESC>:Tags<CR>
@@ -142,17 +143,24 @@ set encoding=utf-8
 filetype plugin indent on
 
 " Set soft limit
-set textwidth=80
+set textwidth=79
 set colorcolumn=+1
 
-" Indentation and soft limit
-autocmd FileType php setlocal expandtab shiftwidth=4 softtabstop=4 textwidth=120
-autocmd FileType json setlocal expandtab shiftwidth=2 softtabstop=2
-autocmd FileType js setlocal expandtab shiftwidth=2 softtabstop=2
-autocmd FileType html setlocal expandtab shiftwidth=2 softtabstop=2 textwidth=120
-autocmd FileType css setlocal expandtab shiftwidth=2 softtabstop=2
-autocmd FileType sass setlocal expandtab shiftwidth=2 softtabstop=2
-autocmd FileType scss setlocal expandtab shiftwidth=2 softtabstop=2
+""File types
+autocmd FileType php setlocal expandtab shiftwidth=4 softtabstop=4 textwidth=119 number
+autocmd FileType json setlocal expandtab shiftwidth=2 softtabstop=2 number
+autocmd FileType js setlocal expandtab shiftwidth=2 softtabstop=2 number
+autocmd FileType html setlocal expandtab shiftwidth=2 softtabstop=2 textwidth=119 number
+autocmd FileType css setlocal expandtab shiftwidth=2 softtabstop=2 number
+autocmd FileType sass setlocal expandtab shiftwidth=2 softtabstop=2 number
+autocmd FileType scss setlocal expandtab shiftwidth=2 softtabstop=2 number
+autocmd FileType csv setlocal number
+autocmd FileType sql setlocal number
+autocmd FileType py setlocal number
+autocmd FileType rb setlocal number
+autocmd FileType xml setlocal number
+autocmd FileType vim setlocal number
+autocmd FileType sh setlocal number
 
 " Default Indentation
 set expandtab
@@ -205,6 +213,7 @@ nnoremap <A-l> <C-w>l
 
 " Jump to normal mode
 inoremap <A-n> <Esc><Esc><Esc>
+vnoremap <A-n> <Esc><Esc><Esc>
 vnoremap <A-n> <Esc><Esc><Esc>
 
 " Project Browsing
