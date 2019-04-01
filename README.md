@@ -4,7 +4,7 @@
 A distribution of nvim, configured as an "Integrated" Development Environment (IDE).
 
 ### Status
-[![Build Status](https://travis-ci.org/daniel-samson/neovim.png)](https://travis-ci.org/daniel-samson/neovim)
+[![Build Status](https://travis-ci.org/daniel-samson/neovim.svg?branch=master)](https://travis-ci.org/daniel-samson/neovim)
 
 
 ### Features:
