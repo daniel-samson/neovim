@@ -109,7 +109,7 @@ nnoremap <S-TAB> <<
 vnoremap <TAB> >gv
 vnoremap <S-TAB> <gv
 
-" Emulate Shift Selction
+" Emulate Shift Selection
 nnoremap <S-Up> <S-v>k
 inoremap <S-Up> <S-v>k
 vnoremap <S-Up> k
@@ -119,10 +119,15 @@ vnoremap <S-Down> j
 nnoremap <S-Left> <C-v>h
 inoremap <S-Left> <C-v>h
 vnoremap <S-Left> h
+nnoremap <C-S-Left> <C-v>b
+inoremap <C-S-Left> <C-v>b
+vnoremap <C-S-Left> b
 nnoremap <S-Right> <C-v>l
 inoremap <S-Right> <C-v>l
 vnoremap <S-Right> l
-
+nnoremap <C-S-Right> <C-v>e
+inoremap <C-S-Right> <C-v>e
+vnoremap <C-S-Right> e
 ""
 " Fast Fuzzy Find
 set rtp+=~/.fzf
