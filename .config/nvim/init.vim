@@ -34,27 +34,10 @@ Plug 'junegunn/fzf.vim'
 call plug#end()
 "
 " Theme
-if &rtp =~ 'gruvbox'
-    colorscheme gruvbox
-    set background=dark
-    " Fixes
-    hi! link phpType GruvboxOrangeBold
-    hi! link phpInclude GruvboxOrangeBold
-    hi! link phpIdentifier GruvboxPurpleBold
-    hi! link phpVarSelector GruvboxPurpleBold
-    hi! link phpDocComment GruvboxGreen
-    hi! link phpDocTags GruvboxGreenBold
-    hi! link phpDocIdentifier GruvboxGreenBold
-    hi! link phpDocParam GruvboxGreen
-    hi! link phpCommentStar GruvboxGreen
-    hi! link phpCommentTitle GruvboxGreen
-    hi! link phpFunction GruvboxYellowBold
-    hi! link phpMethodsVar GruvboxPurple
-    hi! link phpMethod GruvboxYellow
-    hi! link phpKeyword GruvboxOrangeBold
-    hi! link phpBoolean GruvboxOrangeBold
-    hi! link phpNumber GruvboxBlue
-endif
+" if &rtp =~ 'gruvbox'
+"     colorscheme gruvbox
+"     set background=dark 
+" endif
 
 " Turn off swap files
 set noswapfile
@@ -128,9 +111,14 @@ vnoremap <S-Right> l
 nnoremap <C-S-Right> <C-v>e
 inoremap <C-S-Right> <C-v>e
 vnoremap <C-S-Right> e
+
 ""
 " Fast Fuzzy Find
 set rtp+=~/.fzf
+
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1, fzf#vim#with_preview('right:60%'))
 "" Lines
 nmap <A-f> :Lines<cr>
 imap <A-f> <ESC>:Lines<cr>
@@ -140,10 +128,9 @@ nmap <A-e> :call fzf#run({'sink': 'e', 'options': '-m --preview "bat --color alw
 imap <A-e> <ESC>:call fzf#run({'sink': 'e', 'options': '-m --preview "bat --color always {}"','down': '90%' })<cr>
 vmap <A-e> <ESC>:call fzf#run({'sink': 'e', 'options': '-m --preview "bat --color always {}"','down': '90%' })<cr>
 "" Words / tags
-" TODO: add preview window
-nmap <A-F> :Tags<CR>
-vmap <A-F> <ESC>:Tags<CR>
-imap <A-F> <ESC>:Tags<CR>
+nmap <A-F> :Rg<CR>
+vmap <A-F> <ESC>:Rg<CR>
+imap <A-F> <ESC>:Rg<CR>
 "" Git commits
 nmap <A-g> :Commits<CR>
 vmap <A-g> <ESC>:Commits<CR>
@@ -193,17 +180,29 @@ highlight SpecialKey term=standout ctermbg=DarkRed guibg=#aaddcc
 highlight RedundantSpaces term=standout ctermbg=DarkRed guibg=#aaddcc    
 call matchadd('RedundantSpaces', '\(\s\+$\| \+\ze\t\|\t\zs \+\)\(\%#\)\@!')
 
+let vim_dir = getcwd()
+let &runtimepath.=','. vim_dir
+
+" Project File
+let my_project_dir = expand(vim_dir . '/.vim')
+call system('mkdir ' . my_project_dir)
+let g:fzf_tags_command = 'ctags -R  -f - .vim/tags'
+call system('touch '. my_project_dir . '/tags')
+call system('mkdir '. my_project_dir . '/fzf-history')
+let g:fzf_history_dir = my_project_dir.'/fzf-history'
+
 " Keep undo history across sessions by storing it in a file
-let vimHistoryDir = '~/.vimhistory'
-let &runtimepath.=','.vimHistoryDir
 if has('persistent_undo')
-    let myUndoDir = expand(vimHistoryDir . '/undodir')
     " Create dirs
-    call system('mkdir ' . vimHistoryDir)
-    call system('mkdir ' . myUndoDir)
-    let &undodir = myUndoDir
+    call system('mkdir ' . my_project_dir)
+    let undo_dir = expand(my_project_dir . '/undodir')
+    call system('mkdir ' . undo_dir)
+    let &undodir = undo_dir
     set undofile
 endif
+
+
+
 
 " Auto saving
 let g:auto_save = 1
