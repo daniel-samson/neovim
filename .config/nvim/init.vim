@@ -76,7 +76,7 @@ vnoremap <A-d> Yp
 inoremap <A-d> <Esc>yypi
 nnoremap <A-d> <Esc>yyp
 " MakeInstall
-map <A-m> :!ctags -R .<cr>
+map <A-m> :!ctags -R  -f - .vim/tags .<cr>
 " Move line up
 imap <C-A-k> <Esc>ddkkpi
 " Move line down
@@ -186,7 +186,7 @@ let &runtimepath.=','. vim_dir
 " Project File
 let my_project_dir = expand(vim_dir . '/.vim')
 call system('mkdir ' . my_project_dir)
-let g:fzf_tags_command = 'ctags -R  -f - .vim/tags'
+let g:fzf_tags_command = 'ctags -R  -f - .vim/tags .'
 call system('touch '. my_project_dir . '/tags')
 call system('mkdir '. my_project_dir . '/fzf-history')
 let g:fzf_history_dir = my_project_dir.'/fzf-history'
