@@ -8,6 +8,11 @@ run_command "mkdir -p $h/.config/nvim/"
 run_command "curl -sS
     https://raw.githubusercontent.com/daniel-samson/neovim/master/.config/nvim/init.vim -o $h/.config/nvim/init.vim"
 }
+function config_global_gitignore {
+    run_command "touch ~/.gitignore_global";
+    run_command "git config --global core.excludesfile ~/.gitignore_global";
+    run_command 'echo ".vim_project" >> ~/.gitignore_global';
+}
 function finish_install {
 echo "nvim is configured and installed";
 }
