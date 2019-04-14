@@ -188,8 +188,7 @@ let &runtimepath.=','. vim_dir
 " Project File
 let my_project_dir = expand(vim_dir . '/.vim')
 call system('mkdir ' . my_project_dir)
-let g:fzf_tags_command = 'ctags -R  -f - .vim/tags .'
-call system('touch '. my_project_dir . '/tags')
+let g:fzf_tags_command = 'ctags -R .'
 call system('mkdir '. my_project_dir . '/fzf-history')
 let g:fzf_history_dir = my_project_dir.'/fzf-history'
 
