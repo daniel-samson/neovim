@@ -30,8 +30,13 @@ Plug 'sheerun/vim-polyglot'
 " Fast Fuzzy Find
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
+
 " Configure vim per project
 Plug 'daniel-samson/dirvimrc'
+
+" Database Client
+Plug 'tpope/vim-dadbod'
+
 "
 call plug#end()
 "
