@@ -11,7 +11,10 @@ run_command "curl -sS
 function config_global_gitignore {
     run_command "touch ~/.gitignore_global";
     run_command "git config --global core.excludesfile ~/.gitignore_global";
-    run_command 'echo ".vim_project" >> ~/.gitignore_global';
+    run_command 'echo ".vim/
+    tags
+    *.vimrc
+    " >> ~/.gitignore_global';
 }
 function finish_install {
 echo "nvim is configured and installed";
@@ -119,6 +122,10 @@ run_command_as_root "apt-get install -y exuberant-ctags";
 }
 function debian_install_git {
 run_command_as_root "apt install -y git";
+}
+function debian_install_neovim_disco {
+run_command_as_root "apt-get update";
+run_command_as_root "apt-get install -y neovim";
 }
 function debian_install_neovim {
 run_command_as_root "apt-get install -y neovim";
@@ -304,7 +311,7 @@ function debian_install_on_disco {
     debian_install_exuberant_ctags;
     debian_install_git;
     debian_install_python_support;
-    debian_install_neovim_xenial;
+    debian_install_neovim_disco;
     debian_install_curl;
     debian_install_clipboard;
     debian_install_airline_fonts;
