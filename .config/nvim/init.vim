@@ -33,10 +33,10 @@ Plug 'junegunn/fzf.vim'
 
 " Configure vim per project
 Plug 'daniel-samson/dirvimrc'
-
 " Database Client
 Plug 'tpope/vim-dadbod'
-
+"
+Plug 'blueshirts/darcula'
 "
 call plug#end()
 "
@@ -45,6 +45,7 @@ call plug#end()
 "     colorscheme gruvbox
 "     set background=dark 
 " endif
+colorscheme darcula
 
 " Turn off swap files
 set noswapfile
@@ -83,7 +84,7 @@ vnoremap <A-d> Yp
 inoremap <A-d> <Esc>yypi
 nnoremap <A-d> <Esc>yyp
 " MakeInstall
-map <A-m> :!ctags -R  -f - .vim/tags .<cr>
+map <A-m> :!ctags -R .<cr>
 " Move line up
 imap <C-A-k> <Esc>ddkkpi
 " Move line down
@@ -126,6 +127,8 @@ set rtp+=~/.fzf
 command! -bang -nargs=* Rg
   \ call fzf#vim#grep(
   \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1, fzf#vim#with_preview('right:60%'))
+  " \   'echo '.shellescape(<q-args>), 1, fzf#vim#with_preview('right:60%'))
+  " \   'rgtags '.shellescape(<q-args>), 1, fzf#vim#with_preview('right:60%'))
 "" Lines
 nmap <A-f> :Lines<cr>
 imap <A-f> <ESC>:Lines<cr>
