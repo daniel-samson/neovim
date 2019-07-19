@@ -8,6 +8,7 @@ function debian_install_on_jessie {
     debian_install_curl;
     debian_install_clipboard;
     debian_install_airline_fonts;
+    debian_install_bat;
     build_config;
     neovim_install_plug_manager;
     neovim_install_plugins;

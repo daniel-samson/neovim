@@ -8,6 +8,14 @@ run_command "mkdir -p $h/.config/nvim/"
 run_command "curl -sS
     https://raw.githubusercontent.com/daniel-samson/neovim/master/.config/nvim/init.vim -o $h/.config/nvim/init.vim"
 }
+function config_global_gitignore {
+    run_command "touch ~/.gitignore_global";
+    run_command "git config --global core.excludesfile ~/.gitignore_global";
+    run_command 'echo ".vim/
+    tags
+    *.vimrc
+    " >> ~/.gitignore_global';
+}
 function finish_install {
 echo "nvim is configured and installed";
 }
@@ -84,6 +92,25 @@ else
     fi
 fi
 }
+function install_bat_download {
+run_command_as_root "pgkg -i bat-musl_0.10.0_amd64.deb";
+}
+
+function debian_install_bat {
+echo "Installing bat";
+BAT_URL="https://github.com/sharkdp/bat/releases/download/v0.10.0/bat-musl_0.10.0_amd64.deb";
+if command -v curl
+then
+    run_command "curl -L -O ${BAT_URL}";
+    debian_extract_hack_font;
+elif command -v wget
+then
+    run_command "wget ${BAT_URL}";
+    debian_extract_hack_font;
+else
+    echo "cannot download bat";
+fi
+}
 function debian_install_clipboard {
     run_command_as_root "apt-get install xsel";
 }
@@ -95,6 +122,10 @@ run_command_as_root "apt-get install -y exuberant-ctags";
 }
 function debian_install_git {
 run_command_as_root "apt install -y git";
+}
+function debian_install_neovim_disco {
+run_command_as_root "apt-get update";
+run_command_as_root "apt-get install -y neovim";
 }
 function debian_install_neovim {
 run_command_as_root "apt-get install -y neovim";
@@ -263,6 +294,7 @@ function debian_install_on_bionic {
     debian_install_curl;
     debian_install_clipboard;
     debian_install_airline_fonts;
+    debian_install_bat;
     build_config;
     neovim_install_plug_manager;
     neovim_install_plugins;
@@ -273,16 +305,17 @@ function debian_install_on_bionic {
     debian_install_haskell_env;
     neovim_install_plugins;
 }
-function debian_install_on_bionic {
-    echo "Preparing to install on Ubuntu Xenial";
+function debian_install_on_disco {
+    echo "Preparing to install on Ubuntu Disco";
     debian_apt_update;
     debian_install_exuberant_ctags;
     debian_install_git;
     debian_install_python_support;
-    debian_install_neovim_xenial;
+    debian_install_neovim_disco;
     debian_install_curl;
     debian_install_clipboard;
     debian_install_airline_fonts;
+    debian_install_bat;
     build_config;
     neovim_install_plug_manager;
     neovim_install_plugins;
@@ -303,6 +336,7 @@ function debian_install_on_jessie {
     debian_install_curl;
     debian_install_clipboard;
     debian_install_airline_fonts;
+    debian_install_bat;
     build_config;
     neovim_install_plug_manager;
     neovim_install_plugins;
@@ -323,6 +357,7 @@ function debian_install_on_stretch {
     debian_install_curl;
     debian_install_clipboard;
     debian_install_airline_fonts;
+    debian_install_bat;
     build_config;
     neovim_install_plug_manager;
     neovim_install_plugins;
@@ -343,6 +378,7 @@ function debian_install_on_trusty {
     debian_install_curl;
     debian_install_clipboard;
     debian_install_airline_fonts;
+    debian_install_bat;
     build_config;
     neovim_install_plug_manager;
     neovim_install_plugins;
@@ -363,6 +399,7 @@ function debian_install_on_xenial {
     debian_install_curl;
     debian_install_clipboard;
     debian_install_airline_fonts;
+    debian_install_bat;
     build_config;
     neovim_install_plug_manager;
     neovim_install_plugins;
@@ -387,6 +424,7 @@ function deepin_install_on_unstable {
     debian_install_nodejs_env;
     debian_install_haskell_env;
     debian_install_airline_fonts;
+    debian_install_bat;
     build_config;
     neovim_install_plug_manager;
     neovim_install_plugins;
