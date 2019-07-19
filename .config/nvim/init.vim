@@ -37,6 +37,8 @@ Plug 'daniel-samson/dirvimrc'
 Plug 'tpope/vim-dadbod'
 "
 Plug 'blueshirts/darcula'
+" rest client
+Plug 'diepm/vim-rest-console'
 "
 call plug#end()
 "
