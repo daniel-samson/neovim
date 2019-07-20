@@ -26,6 +26,8 @@ esac
 function detect_deepin_release() {
 case $(lsb_release -cs) in
     unstable) echo "Found Deepin Unstable"; deepin_install_on_unstable;;
+    stable) echo "Found Deepin Stable"; deepin_install_on_stable;;
+    *) throw_unsupported_distrobution;;
 esac
 }
 

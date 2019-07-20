@@ -410,8 +410,26 @@ function debian_install_on_xenial {
     debian_install_haskell_env;
     neovim_install_plugins;
 }
+function deepin_install_on_stable {
+    echo "Preparing to install on Deepin Stable";
+    debian_apt_update;
+    debian_install_exuberant_ctags;
+    debian_install_git;
+    debian_install_python_support;
+    debian_install_neovim;
+    debian_install_curl;
+    debian_install_clipboard;
+    debian_install_php_env;
+    debian_install_rust_env;
+    debian_install_nodejs_env;
+    debian_install_haskell_env;
+    build_config;
+    neovim_install_plug_manager;
+    neovim_install_plugins;
+    deepin_replace_vim;
+}
 function deepin_install_on_unstable {
-    echo "Preparing to install on Ubuntu Xenial";
+    echo "Preparing to install on Deepin Unstable";
     debian_apt_update;
     debian_install_exuberant_ctags;
     debian_install_git;
@@ -429,6 +447,17 @@ function deepin_install_on_unstable {
     neovim_install_plug_manager;
     neovim_install_plugins;
     debian_replace_vim;
+}
+function deepin_replace_vim {
+read -p "Would you like to replace vim with nvim (y/n)?" choice
+case "$choice" in
+  y|Y )
+      run_command_as_root "rm -f /usr/bin/vim";
+      run_command_as_root "ln -s /usr/bin/nvim /usr/bin/vim";
+      ;;
+  n|N ) echo "OK, You will need to run nvim instead of vim.";;
+  * ) deepin_replace_vim;;
+esac;
 }
 function throw_unsupported_distrobution() {
 echo "Unsupported distribution version/codename";
@@ -458,6 +487,8 @@ esac
 function detect_deepin_release() {
 case $(lsb_release -cs) in
     unstable) echo "Found Deepin Unstable"; deepin_install_on_unstable;;
+    stable) echo "Found Deepin Stable"; deepin_install_on_stable;;
+    *) throw_unsupported_distrobution;;
 esac
 }
 
