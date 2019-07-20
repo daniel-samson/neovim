@@ -39,8 +39,10 @@ fi
 #!/bin/bash
 function run_command(){
 COMMAND=$1;
-echo $COMMAND;
+echo " "
+echo "Running command: $COMMAND";
 $COMMAND
+echo " "
 }
 function neovim_install_plugins {
 run_command "nvim +PlugInstall +UpdateRemotePlugins +qa";
