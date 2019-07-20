@@ -1,6 +1,10 @@
 function config_global_gitignore {
     h=$HOME
-    run_command "touch $h/.gitignore_global";
-    run_command "git config --global core.excludesfile $h/.gitignore_global";
-    run_command "printf \".vim/\ntags\n*.vimrc\" >> $h/.gitignore_global";
+    gifile=".gitignore_global"
+    run_command "touch $h/$gifile";
+    run_command "git config --global core.excludesfile $h/$gifile";
+    echo .vim/ >> $h/$gifile
+    echo .vimrc >> $h/$gifile
+    echo .vimrc/ >> $h/$gifile
+    echo tags >> $h/$gifile
 }
