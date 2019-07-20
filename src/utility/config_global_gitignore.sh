@@ -1,8 +1,6 @@
 function config_global_gitignore {
-    run_command "touch ~/.gitignore_global";
-    run_command "git config --global core.excludesfile ~/.gitignore_global";
-    run_command 'echo ".vim/
-    tags
-    *.vimrc
-    " >> ~/.gitignore_global';
+    h=$HOME
+    run_command "touch $h/.gitignore_global";
+    run_command "git config --global core.excludesfile $h/.gitignore_global";
+    run_command "printf \".vim/\ntags\n*.vimrc\" >> $h/.gitignore_global";
 }

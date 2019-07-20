@@ -9,12 +9,10 @@ run_command "curl -sS
     https://raw.githubusercontent.com/daniel-samson/neovim/master/.config/nvim/init.vim -o $h/.config/nvim/init.vim"
 }
 function config_global_gitignore {
-    run_command "touch ~/.gitignore_global";
-    run_command "git config --global core.excludesfile ~/.gitignore_global";
-    run_command 'echo ".vim/
-    tags
-    *.vimrc
-    " >> ~/.gitignore_global';
+    h=$HOME
+    run_command "touch $h/.gitignore_global";
+    run_command "git config --global core.excludesfile $h/.gitignore_global";
+    run_command "printf \".vim/\ntags\n*.vimrc\" >> $h/.gitignore_global";
 }
 function finish_install {
 echo "nvim is configured and installed";
@@ -121,6 +119,7 @@ run_command_as_root "apt-get install -y exuberant-ctags";
 }
 function debian_install_git {
 run_command_as_root "apt install -y git";
+config_global_gitignore
 }
 function debian_install_neovim_disco {
 run_command_as_root "apt-get update";
