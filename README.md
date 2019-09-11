@@ -82,7 +82,7 @@ With the [fzf](https://github.com/junegunn/fzf.vim) plugin you can:
 - **F**ind **F**ile Name (&lt;Alt&gt; &lt;E&gt;)
 - **F**ind in **F**ile (&lt;ALT&gt; &lt;F&gt;)
 - **F**ind in **F**iles (&lt;Alt&gt; &lt;Shift&gt; &lt;F&gt;)
-- **F**ind **Git** History  (&lt;Alt&gt; &lt;FG&gt;)
+- **F**ind **Git** History  (&lt;Alt&gt; &lt;G&gt;)
 
 You can use &lt;CTRL&gt; + &lt;T&gt; to open in a new tab (buffer), press &lt;ENTER&gt; to open, or &lt;CTRL&gt; + &lt;Q&gt; to quit.
 
