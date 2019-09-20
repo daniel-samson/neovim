@@ -259,7 +259,8 @@ vnoremap <A-p> <Esc>:Explore!<cr>
 inoremap <A-t> <esc>:belowright split term://bash <cr>
 vnoremap <A-t> <esc>:belowright split term://bash <cr>
 nnoremap <A-t> :belowright split term://bash <cr>
-autocmd TermOpen * setlocal scrollback=100000
+let g:terminal_scrollback_buffer_size = 100000
+
 
 " Terminal Emulator Settings
 autocmd BufWinEnter,WinEnter term://* startinsert
