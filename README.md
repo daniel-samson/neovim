@@ -99,7 +99,7 @@ VIM IDE will create a .vim directory each time you run it. It also may create a 
 touch ~/.gitignore_global
 ```
 
-add append the file with the following lines
+append the file with the following lines
 ```bash
 *.vim/
 tags
