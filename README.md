@@ -194,7 +194,7 @@ If you can't get a connection, you will set up your environment. Type `:help Vde
 ### Setup PHP XDebug
 Ensure you have xdebug installed
 <pre>
-sudo apt get install php-xdebug or php5-xdebug
+sudo apt get install php-xdebug # or php5-xdebug
 </pre>
 
 Ensure that you have configured xdebig php.ini or in the x-debug config file:
