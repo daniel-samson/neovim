@@ -91,7 +91,7 @@ You can use &lt;CTRL&gt; + &lt;T&gt; to open in a new tab (buffer), press &lt;EN
 Vim uses buffers to store each file which is opened. Use recently **Opened** files/buffers (&lt;Alt&gt; &lt;O&gt;) to view and search your recently opened files. 
 
 ### Saving Files in VIM IDE
-Vim IDE will auto save all your work. It also keeps the history of all the changes you have create in your ~/.vimhistory folder.
+Vim IDE will auto save all your work. It also keeps the history of all the changes you have create in a .vimrc folder or ~/.vimhistory.
 
 ### Cut, Copy and Paste
 Using the standard vim keys to manage your system clipboard, in all modes except insert you can:
