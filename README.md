@@ -91,7 +91,20 @@ You can use &lt;CTRL&gt; + &lt;T&gt; to open in a new tab (buffer), press &lt;EN
 Vim uses buffers to store each file which is opened. Use recently **Opened** files/buffers (&lt;Alt&gt; &lt;O&gt;) to view and search your recently opened files. 
 
 ### Saving Files in VIM IDE
-Vim IDE will auto save all your work. It also keeps the history of all the changes you have create in a .vimrc folder or ~/.vimhistory.
+Vim IDE will auto save all your work. It also keeps the history of all the changes you have create in the .vim/undo folder of your current working directory.
+
+### Global Git Ignore
+VIM IDE will create a .vim directory each time you run it. It also may create a tags file. It can be a pain to add theses files to the git ignore file for each project. In order to remedy this, create a .gitigore_globnal file in your home directory:
+```bash
+touch ~/.gitignore_global
+```
+
+add append the file with the following lines
+```bash
+*.vim/
+tags
+```
+
 
 ### Cut, Copy and Paste
 Using the standard vim keys to manage your system clipboard, in all modes except insert you can:
