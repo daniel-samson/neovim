@@ -75,9 +75,6 @@ While the project tree is open
 - Press &lt;V&gt; to  open in a new split window.
 - Press &lt;F1&gt; for more commands
 
-The [Nerd Tree](https://github.com/scrooloose/nerdtree) plugin also displays the
-project tree, even after you have selected a file. Toggle the **N**erd Tree with (&lt;Alt&gt; &lt;N&gt;) .
-
 With the [fzf](https://github.com/junegunn/fzf.vim) plugin you can:
 - **F**ind **F**ile Name (&lt;Alt&gt; &lt;E&gt;)
 - **F**ind in **F**ile (&lt;ALT&gt; &lt;F&gt;)
