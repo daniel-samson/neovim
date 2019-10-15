@@ -30,12 +30,14 @@ The install script will only let you install on these distribution of linux usin
 
 - Debian Stretch
 - Debian Jessie
-- Ubuntu 16.04
+- Ubuntu 19.04
 - Ubuntu 18.04
+- Ubuntu 16.04
 - Ubuntu 14.04
 - KDE Neon 16.04
 - KDE Neon 14.04
-- Deepin
+- Deepin (Unstable)
+- Deepin (Stable)
 
 
 
