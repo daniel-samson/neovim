@@ -7,6 +7,7 @@ exit 1;
 
 function detect_ubuntu_release() {
 case $(lsb_release -cs) in
+    focal) echo "Found Disco (Ubuntu 20.04)"; debian_install_on_focal;;
     disco) echo "Found Disco (Ubuntu 19.04)"; debian_install_on_disco;;
     bionic) echo "Found Bionic (Ubuntu 18.04)"; debian_install_on_bionic;;
     xenial) echo "Found Xenial (Ubuntu 16.04)"; debian_install_on_xenial;;

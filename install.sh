@@ -94,20 +94,20 @@ else
 fi
 }
 function install_bat_download {
-run_command_as_root "pgkg -i bat-musl_0.10.0_amd64.deb";
+run_command_as_root "dpkg -i bat-musl_0.14.0_amd64.deb";
 }
 
 function debian_install_bat {
 echo "Installing bat";
-BAT_URL="https://github.com/sharkdp/bat/releases/download/v0.10.0/bat-musl_0.10.0_amd64.deb";
+BAT_URL="https://github.com/sharkdp/bat/releases/download/v0.14.0/bat-musl_0.14.0_amd64.deb";
 if command -v curl
 then
     run_command "curl -L -O ${BAT_URL}";
-    debian_extract_hack_font;
+    install_bat_download;
 elif command -v wget
 then
     run_command "wget ${BAT_URL}";
-    debian_extract_hack_font;
+    install_bat_download;
 else
     echo "cannot download bat";
 fi
@@ -147,6 +147,22 @@ run_command_as_root "apt-get install -y python-pip python3-pip";
 run_command_as_root "apt-get install -y build-essential libssl-dev libffi-dev";
 run_command_as_root "apt-get install -y python-dev python3-venv";
 run_command_as_root "pip install neovim";
+run_command_as_root "pip3 install neovim";
+PYENV="$HOME/.python_env";
+run_command "mkdir -p $PYENV";
+run_command "cd $PYENV";
+run_command "python3 -m venv test_env";
+if grep -q "source $PYENV/test_env" ~/.bash_aliases;
+then
+    echo "Python connfigured";
+else
+    echo "source $PYENV/test_env" >> ~/.bash_aliases;
+fi
+}
+function focal_install_python_support {
+run_command_as_root "apt install -y python3-pip";
+run_command_as_root "apt install -y build-essential libssl-dev libffi-dev";
+run_command_as_root "apt install -y python-dev python3-venv";
 run_command_as_root "pip3 install neovim";
 PYENV="$HOME/.python_env";
 run_command "mkdir -p $PYENV";
@@ -328,6 +344,27 @@ function debian_install_on_disco {
     debian_install_haskell_env;
     neovim_install_plugins;
 }
+function debian_install_on_focal {
+    echo "Preparing to install on Ubuntu Focal";
+    debian_apt_update;
+    debian_install_exuberant_ctags;
+    debian_install_git;
+    focal_install_python_support;
+    debian_install_neovim_disco;
+    debian_install_curl;
+    debian_install_clipboard;
+    debian_install_airline_fonts;
+    debian_install_bat;
+    build_config;
+    neovim_install_plug_manager;
+    neovim_install_plugins;
+    debian_replace_vim;
+    debian_install_php_env_bionic;
+    debian_install_rust_env;
+    debian_install_nodejs_env;
+    debian_install_haskell_env;
+    neovim_install_plugins;
+}
 function debian_install_on_jessie {
     echo "Preparing to install on Debian Jessie";
     debian_apt_update;
@@ -470,6 +507,7 @@ exit 1;
 
 function detect_ubuntu_release() {
 case $(lsb_release -cs) in
+    focal) echo "Found Disco (Ubuntu 20.04)"; debian_install_on_focal;;
     disco) echo "Found Disco (Ubuntu 19.04)"; debian_install_on_disco;;
     bionic) echo "Found Bionic (Ubuntu 18.04)"; debian_install_on_bionic;;
     xenial) echo "Found Xenial (Ubuntu 16.04)"; debian_install_on_xenial;;

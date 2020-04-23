@@ -1,5 +1,5 @@
 
-# NeoVim IDE (Version 0.2.0)
+# NeoVim IDE (Version 0.2.1)
 
 A distribution of nvim, configured as an "Integrated" Development Environment (IDE).
 
@@ -30,6 +30,7 @@ The install script will only let you install on these distribution of linux usin
 
 - Debian Stretch
 - Debian Jessie
+- Ubuntu 20.04
 - Ubuntu 19.04
 - Ubuntu 18.04
 - Ubuntu 16.04
