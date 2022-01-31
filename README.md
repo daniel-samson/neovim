@@ -56,10 +56,8 @@ chmod u+x ./install.sh
 - cd /path/to/project/
 - nvim 
 
-## Quiting VIM IDE
+### Quiting VIM IDE
 Press &lt; Esc &gt; &lt; : &gt; &lt; q &gt; &lt;enter&gt;
-
-## Usage
 
 ### Key bindings
 The key bindings start with the leader key, which is used to activate most plugins from normal mode. The leader key is currently bound to &lt; \ &gt;. Vim IDE follows the vim tradition of binding the first letter of the operation as a shortcut like eg. press &lt;Alt&gt; p for **p**roject view.
