@@ -3,10 +3,10 @@
 
 A distribution of nvim, configured as an "Integrated" Development Environment (IDE).
 
-### Project Status
+## Project Status
 [![build](https://github.com/daniel-samson/neovim/actions/workflows/build.yml/badge.svg)](https://github.com/daniel-samson/neovim/actions/workflows/build.yml)
 
-### Features:
+## Features:
 
 - Project Tree view
 - Syntax Highting
@@ -17,13 +17,13 @@ A distribution of nvim, configured as an "Integrated" Development Environment (I
 - Database client
 - REST Console
 
-### Requirements
+## Requirements
 - Stable internet connection
 - Bash
 - Sudo
 - Supported OS
 
-### Supported OS
+## Supported OS
 
 The install script will only let you install on these distribution of linux using premade recipes.
 
@@ -41,7 +41,7 @@ The install script will only let you install on these distribution of linux usin
 
 
 
-### Installation:
+## Installation:
 Installs the latest version of NeoVim and configures NeoVim to used as an IDE. You can install using git. Simply copy the following into your terminal.
 
 **Using git:**
@@ -56,8 +56,10 @@ chmod u+x ./install.sh
 - cd /path/to/project/
 - nvim 
 
-### Quiting VIM IDE
+## Quiting VIM IDE
 Press &lt; Esc &gt; &lt; : &gt; &lt; q &gt; &lt;enter&gt;
+
+## Usage
 
 ### Key bindings
 The key bindings start with the leader key, which is used to activate most plugins from normal mode. The leader key is currently bound to &lt; \ &gt;. Vim IDE follows the vim tradition of binding the first letter of the operation as a shortcut like eg. press &lt;Alt&gt; p for **p**roject view.
