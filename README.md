@@ -3,7 +3,7 @@
 
 A distribution of nvim, configured as an "Integrated" Development Environment (IDE).
 
-### Status
+### Project Status
 [![build](https://github.com/daniel-samson/neovim/actions/workflows/build.yml/badge.svg)](https://github.com/daniel-samson/neovim/actions/workflows/build.yml)
 
 ### Features:
