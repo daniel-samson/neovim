@@ -7,5 +7,6 @@ function arch_install_on_arch() {
     neovim_install_plug_manager;
     neovim_install_plugins;
     arch_install_rust_env;
-    arch_install_nodejs_env; 
+    arch_install_nodejs_env;
+    config_global_gitignore;
 }

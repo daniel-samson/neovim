@@ -8,5 +8,6 @@ function install_on_macos() {
     neovim_install_plug_manager;
     neovim_install_plugins;
     macos_install_rust_env;
-    macos_install_nodejs_env;   
+    macos_install_nodejs_env;
+    config_global_gitignore;
 }
