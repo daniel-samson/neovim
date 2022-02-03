@@ -27,8 +27,10 @@ A distribution of nvim, configured as an "Integrated" Development Environment (I
 
 The install script will only let you install on these distribution of linux using premade recipes.
 
+- Arch Linux
 - Debian Stretch
 - Debian Jessie
+- Mac OS
 - Ubuntu 20.04
 - Ubuntu 19.04
 - Ubuntu 18.04
