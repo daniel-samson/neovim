@@ -1,7 +1,9 @@
 #!/bin/bash
 set -e
-SCRIPT=$(readlink -f $0)
-SCRIPTPATH=`dirname $SCRIPT`
+set -x
+
+SCRIPT=$(realpath $0);
+SCRIPTPATH=`dirname $SCRIPT`;
 BUILD_PATH=$(realpath .)/.build;
 INSTALL_SCRIPT=install.sh;
 SRC_PATH=$(realpath ./src);
@@ -28,7 +30,7 @@ echo "}" >> $BUILD_PATH/$INSTALL_SCRIPT;
 
 # Build Install functions
 cd $SRC_PATH;
-cat utility/*.sh neovim/*.sh debian/utility/*.sh debian/packages/*sh debian/environments/*.sh debian/*.sh deepin/*.sh detect_os.sh install.sh >> $BUILD_PATH/$INSTALL_SCRIPT;
+cat utility/*.sh neovim/*.sh debian/utility/*.sh debian/packages/*sh debian/environments/*.sh debian/*.sh deepin/*.sh macos/packages/*.sh macos/environments/*.sh  macos/*.sh arch/packages/*.sh arch/environments/*.sh  arch/*.sh detect_linux_distribution.sh detect_os.sh install.sh >> $BUILD_PATH/$INSTALL_SCRIPT;
 cd $SCRIPTPATH;
 mv $BUILD_PATH/$INSTALL_SCRIPT $INSTALL_SCRIPT;
 chmod a+x $INSTALL_SCRIPT;

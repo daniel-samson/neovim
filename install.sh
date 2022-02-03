@@ -130,7 +130,7 @@ run_command_as_root "apt-get update";
 run_command_as_root "apt-get install -y neovim";
 }
 function debian_install_neovim {
-run_command_as_root "apt-get install -y neovim";
+    run_command_as_root "apt-get install -y neovim";
 }
 function debian_install_neovim_trusty {
 run_command_as_root "add-apt-repository -y ppa:neovim-ppa/stable";
@@ -498,10 +498,139 @@ case "$choice" in
   * ) deepin_replace_vim;;
 esac;
 }
-function throw_unsupported_distrobution() {
+function macos_install_bat() {
+    run_command "brew install bat";
+}
+function macos_install_git {
+    run_command "brew install git";
+}
+function macos_install_homebrew() {
+    if command -v brew;
+    then
+        echo "homebrew is installed";
+    else
+        run_command "curl -fsSL -o install.sh https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh";
+    fi;
+}
+function macos_install_neovim() {
+    run_command "brew install neovim";
+}
+function macos_install_ripgrep() {
+    run_command "brew install ripgrep";
+}
+function macos_install_xcode() {
+    if command -v brew;
+    then
+        echo "Assuming xcode is installed";
+    else
+        run_command "xcode-select --install";
+    fi;
+}
+function macos_install_nodejs_env () {
+    read -p "Would you like to install the nodejs environment (y/n)?" choice
+    case "$choice" in
+    y|Y)
+        run_command "curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash"
+        run_command "nvm install node"
+        run_command "nvm use node"
+        run_command "nvm alias default node"
+        ;;
+    n|N )
+        echo "OK, moving on.";
+        ;;
+    *)
+        macos_install_nodejs_env;
+        ;;
+    esac;
+}
+function macos_install_rust_env() {
+      read -p "Would you like to install the rust environment (y/n)?" choice
+    case "$choice" in
+    y|Y)
+        run_command "curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh";
+        ;;
+    n|N)
+        echo "OK, moving on.";
+        ;;
+    *)
+        macos_install_nodejs_env;
+        ;;
+    esac;   
+}
+function install_on_macos() {
+    macos_install_xcode;
+    macos_install_homebrew;
+    macos_install_ripgrep;
+    macos_install_bat;
+    macos_install_neovim;
+    build_config;
+    neovim_install_plug_manager;
+    neovim_install_plugins;
+    macos_install_rust_env;
+    macos_install_nodejs_env;   
+}
+function arch_install_bat() {
+    run_command_as_root "pacman -S --noconfirm bat"
+}
+function arch_install_curl() {
+    run_command_as_root "pacman -S --noconfirm curl"
+}
+function arch_install_neovim() {
+    run_command_as_root "pacman -S --noconfirm neovim"
+}
+function arch_install_ripgrep() {
+    run_command_as_root "pacman -S --noconfirm ripgrep"
+}
+function arch_install_nodejs_env () {
+    read -p "Would you like to install the nodejs environment (y/n)?" choice
+    case "$choice" in
+    y|Y)
+        run_command "curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash"
+        run_command "nvm install node"
+        run_command "nvm use node"
+        run_command "nvm alias default node"
+        ;;
+    n|N )
+        echo "OK, moving on.";
+        ;;
+    *)
+        arch_install_nodejs_env;
+        ;;
+    esac;
+}
+function arch_install_rust_env() {
+      read -p "Would you like to install the rust environment (y/n)?" choice
+    case "$choice" in
+    y|Y)
+        run_command "curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh";
+        ;;
+    n|N)
+        echo "OK, moving on.";
+        ;;
+    *)
+        arch_install_rust_env;
+        ;;
+    esac;   
+}
+function arch_install_on_arch() {
+    run_command_as_root "pacman -Sy";
+    arch_install_ripgrep;
+    arch_install_bat;
+    arch_install_neovim;
+    build_config;
+    neovim_install_plug_manager;
+    neovim_install_plugins;
+    arch_install_rust_env;
+    arch_install_nodejs_env; 
+}
+function throw_unsupported_distribution() {
 echo "Unsupported distribution version/codename";
 echo $(lsb_release -a);
 exit 1;
+}
+
+function detect_arch_release() {
+    arch_install_on_arch
 }
 
 
@@ -528,12 +657,12 @@ function detect_deepin_release() {
 case $(lsb_release -cs) in
     unstable) echo "Found Deepin Unstable"; deepin_install_on_unstable;;
     stable) echo "Found Deepin Stable"; deepin_install_on_stable;;
-    *) throw_unsupported_distrobution;;
+    *) throw_unsupported_distribution;;
 esac
 }
 
 
-function detect_os {
+function detect_linux_distribution {
 echo "
 Detecting OS
 ";
@@ -543,15 +672,41 @@ then
     echo "Found lsb_release";
 else
     echo "lsb_release is not installed";
-    throw_unsupported_distrobution;
+    throw_unsupported_distribution;
 fi;
 
 case $( lsb_release -is) in
+    Arch) detect_arch_release;;
     Ubuntu) detect_ubuntu_release;;
     Debian) detect_debian_release;;
     Deepin) detect_deepin_release;;
-    *) throw_unsupported_distrobution;;
+    *) throw_unsupported_distribution;;
 esac
 }
+function throw_unsupported_os() {
+    echo "Unsupported distribution version/codename";
+    echo $1;
+    exit 1;
+}
+
+function detect_os {
+    echo "
+    Detecting OS
+    ";
+
+    OS=$( uname -s);
+    case $OS in 
+        Darwin) echo "Found MacOS"; OS="MacOs";;
+        Linux) echo "Found Linux"; OS="Linux";;
+        GNU/Linux) echo "GNU/Linux"; OS="Linux";;
+        *) throw_unsupported_os $OS;;
+    esac
+}
 detect_os;
+
+case $OS in 
+    Linux) detect_linux_distribution ;;
+    MacOs) install_on_macos ;;
+esac
+
 finish_install
