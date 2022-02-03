@@ -498,17 +498,33 @@ case "$choice" in
   * ) deepin_replace_vim;;
 esac;
 }
-function install_on_macos() {
-    macos_install_xcode;
-    macos_install_homebrew;
-    macos_install_ripgrep;
-    macos_install_bat;
-    macos_install_neovim;
-    build_config;
-    neovim_install_plug_manager;
-    neovim_install_plugins;
-    macos_install_rust_env;
-    macos_install_nodejs_env;   
+function macos_install_bat() {
+    run_command "brew install bat";
+}
+function macos_install_git {
+    run_command "brew install git";
+}
+function macos_install_homebrew() {
+    if command -v brew;
+    then
+        echo "homebrew is installed";
+    else
+        run_command "curl -fsSL -o install.sh https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh";
+    fi;
+}
+function macos_install_neovim() {
+    run_command "brew install neovim";
+}
+function macos_install_ripgrep() {
+    run_command "brew install ripgrep";
+}
+function macos_install_xcode() {
+    if command -v brew;
+    then
+        echo "Assuming xcode is installed";
+    else
+        run_command "xcode-select --install";
+    fi;
 }
 function macos_install_nodejs_env () {
     read -p "Would you like to install the nodejs environment (y/n)?" choice
@@ -541,33 +557,72 @@ function macos_install_rust_env() {
         ;;
     esac;   
 }
-function macos_install_bat() {
-    run_command "brew install bat";
+function install_on_macos() {
+    macos_install_xcode;
+    macos_install_homebrew;
+    macos_install_ripgrep;
+    macos_install_bat;
+    macos_install_neovim;
+    build_config;
+    neovim_install_plug_manager;
+    neovim_install_plugins;
+    macos_install_rust_env;
+    macos_install_nodejs_env;   
 }
-function macos_install_git {
-    run_command "brew install git";
+function throw_unsupported_distribution() {
+echo "Unsupported distribution version/codename";
+echo $(lsb_release -a);
+exit 1;
 }
-function macos_install_homebrew() {
-    if command -v brew;
-    then
-        echo "homebrew is installed";
-    else
-        run_command "curl -fsSL -o install.sh https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh";
-    fi;
+
+
+function detect_ubuntu_release() {
+case $(lsb_release -cs) in
+    focal) echo "Found Disco (Ubuntu 20.04)"; debian_install_on_focal;;
+    disco) echo "Found Disco (Ubuntu 19.04)"; debian_install_on_disco;;
+    bionic) echo "Found Bionic (Ubuntu 18.04)"; debian_install_on_bionic;;
+    xenial) echo "Found Xenial (Ubuntu 16.04)"; debian_install_on_xenial;;
+    trusty) echo "Found trusty (Ubuntu 14.04)"; debian_install_on_trusty;;
+    *) throw_unsupported_distrobution;;
+esac
 }
-function macos_install_neovim() {
-    run_command "brew install neovim";
+
+function detect_debian_release() {
+case $(lsb_release -cs) in
+    stretch) echo "Found Debian Stretch"; debian_install_on_stretch;;
+    jessie) echo "Found Debian Jessie"; debian_install_on_jessie;;
+    *) throw_unsupported_distrobution;;
+esac
 }
-function macos_install_ripgrep() {
-    run_command "brew install ripgrep";
+
+function detect_deepin_release() {
+case $(lsb_release -cs) in
+    unstable) echo "Found Deepin Unstable"; deepin_install_on_unstable;;
+    stable) echo "Found Deepin Stable"; deepin_install_on_stable;;
+    *) throw_unsupported_distribution;;
+esac
 }
-function macos_install_xcode() {
-    if command -v brew;
-    then
-        echo "Assuming xcode is installed";
-    else
-        run_command "xcode-select --install";
-    fi;
+
+
+function detect_linux_distribution {
+echo "
+Detecting OS
+";
+
+if command -v lsb_release;
+then
+    echo "Found lsb_release";
+else
+    echo "lsb_release is not installed";
+    throw_unsupported_distribution;
+fi;
+
+case $( lsb_release -is) in
+    Ubuntu) detect_ubuntu_release;;
+    Debian) detect_debian_release;;
+    Deepin) detect_deepin_release;;
+    *) throw_unsupported_distribution;;
+esac
 }
 function throw_unsupported_os() {
     echo "Unsupported distribution version/codename";

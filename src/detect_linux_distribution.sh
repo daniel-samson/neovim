@@ -43,13 +43,13 @@ then
     echo "Found lsb_release";
 else
     echo "lsb_release is not installed";
-    throw_unsupported_distrobution;
+    throw_unsupported_distribution;
 fi;
 
 case $( lsb_release -is) in
     Ubuntu) detect_ubuntu_release;;
     Debian) detect_debian_release;;
     Deepin) detect_deepin_release;;
-    *) throw_unsupported_distrobution;;
+    *) throw_unsupported_distribution;;
 esac
 }
