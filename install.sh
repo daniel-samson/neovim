@@ -22,14 +22,6 @@ function finish_install {
 echo "nvim is configured and installed";
 }
 #!/bin/bash
-function run_command(){
-COMMAND=$1;
-echo " "
-echo "Running command: $COMMAND";
-$COMMAND
-echo " "
-}
-#!/bin/bash
 function run_command_as_root(){
 COMMAND=$1;
 if [[ $(id -u) -eq 0 ]];
@@ -46,12 +38,20 @@ else
     exit 1;
 fi
 }
-function neovim_install_plug_manager {
-h=$HOME;
-run_command "curl -fLo $h/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim";
+#!/bin/bash
+function run_command(){
+COMMAND=$1;
+echo " "
+echo "Running command: $COMMAND";
+$COMMAND
+echo " "
 }
 function neovim_install_plugins {
 run_command "nvim +PlugInstall +UpdateRemotePlugins +qa";
+}
+function neovim_install_plug_manager {
+h=$HOME;
+run_command "curl -fLo $h/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim";
 }
 function debian_apt_update {
 run_command_as_root "apt update";
@@ -125,11 +125,11 @@ function debian_install_git {
 run_command_as_root "apt install -y git";
 config_global_gitignore
 }
-function debian_install_neovim {
-run_command_as_root "apt-get install -y neovim";
-}
 function debian_install_neovim_disco {
 run_command_as_root "apt-get update";
+run_command_as_root "apt-get install -y neovim";
+}
+function debian_install_neovim {
 run_command_as_root "apt-get install -y neovim";
 }
 function debian_install_neovim_trusty {
@@ -210,13 +210,15 @@ case "$choice" in
 esac;
 
 }
-function debian_install_php_env {
+function debian_install_php_env_bionic {
 read -p "Would you like to install the php environment (y/n)?" choice
 case "$choice" in
   y|Y )
-        run_command_as_root "apt install php-cli php-dom php-gd php-json php-openssl";
+        run_command_as_root "apt install -y php-cli php-dom php-mbstring php-gd";
+        run_command_as_root "apt install -y php-curl";
         run_command "curl -sS https://getcomposer.org/installer -o install_composer.sh";
         run_command_as_root "php install_composer.sh --install-dir=/usr/local/bin --filename=composer";
+        run_command_as_root "chown -R $USER $HOME/.composer"
         run_command "composer global require friendsofphp/php-cs-fixer";
         run_command "composer global require phpmd/phpmd";
         run_command "composer global require leafo/scssphp";
@@ -237,15 +239,13 @@ case "$choice" in
 esac;
 }
 
-function debian_install_php_env_bionic {
+function debian_install_php_env {
 read -p "Would you like to install the php environment (y/n)?" choice
 case "$choice" in
   y|Y )
-        run_command_as_root "apt install -y php-cli php-dom php-mbstring php-gd";
-        run_command_as_root "apt install -y php-curl";
+        run_command_as_root "apt install php-cli php-dom php-gd php-json php-openssl";
         run_command "curl -sS https://getcomposer.org/installer -o install_composer.sh";
         run_command_as_root "php install_composer.sh --install-dir=/usr/local/bin --filename=composer";
-        run_command_as_root "chown -R $USER $HOME/.composer"
         run_command "composer global require friendsofphp/php-cs-fixer";
         run_command "composer global require phpmd/phpmd";
         run_command "composer global require leafo/scssphp";
