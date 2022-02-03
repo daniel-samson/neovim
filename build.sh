@@ -1,6 +1,6 @@
 #!/bin/bash
 set -e
-SCRIPT=$(readlink -f $0)
+SCRIPT=$(readlink $0)
 SCRIPTPATH=`dirname $SCRIPT`
 BUILD_PATH=$(realpath .)/.build;
 INSTALL_SCRIPT=install.sh;
