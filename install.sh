@@ -130,7 +130,7 @@ run_command_as_root "apt-get update";
 run_command_as_root "apt-get install -y neovim";
 }
 function debian_install_neovim {
-run_command_as_root "apt-get install -y neovim";
+    run_command_as_root "apt-get install -y neovim";
 }
 function debian_install_neovim_trusty {
 run_command_as_root "add-apt-repository -y ppa:neovim-ppa/stable";
@@ -569,10 +569,68 @@ function install_on_macos() {
     macos_install_rust_env;
     macos_install_nodejs_env;   
 }
+function arch_install_bat() {
+    run_command_as_root "pacman -S --noconfirm bat"
+}
+function arch_install_curl() {
+    run_command_as_root "pacman -S --noconfirm curl"
+}
+function arch_install_neovim() {
+    run_command_as_root "pacman -S --noconfirm neovim"
+}
+function arch_install_ripgrep() {
+    run_command_as_root "pacman -S --noconfirm ripgrep"
+}
+function arch_install_nodejs_env () {
+    read -p "Would you like to install the nodejs environment (y/n)?" choice
+    case "$choice" in
+    y|Y)
+        run_command "curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash"
+        run_command "nvm install node"
+        run_command "nvm use node"
+        run_command "nvm alias default node"
+        ;;
+    n|N )
+        echo "OK, moving on.";
+        ;;
+    *)
+        arch_install_nodejs_env;
+        ;;
+    esac;
+}
+function arch_install_rust_env() {
+      read -p "Would you like to install the rust environment (y/n)?" choice
+    case "$choice" in
+    y|Y)
+        run_command "curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh";
+        ;;
+    n|N)
+        echo "OK, moving on.";
+        ;;
+    *)
+        arch_install_rust_env;
+        ;;
+    esac;   
+}
+function arch_install_on_arch() {
+    run_command_as_root "pacman -Sy";
+    arch_install_ripgrep;
+    arch_install_bat;
+    arch_install_neovim;
+    build_config;
+    neovim_install_plug_manager;
+    neovim_install_plugins;
+    arch_install_rust_env;
+    arch_install_nodejs_env; 
+}
 function throw_unsupported_distribution() {
 echo "Unsupported distribution version/codename";
 echo $(lsb_release -a);
 exit 1;
+}
+
+function detect_arch_release() {
+    arch_install_on_arch
 }
 
 
@@ -618,6 +676,7 @@ else
 fi;
 
 case $( lsb_release -is) in
+    Arch) detect_arch_release;;
     Ubuntu) detect_ubuntu_release;;
     Debian) detect_debian_release;;
     Deepin) detect_deepin_release;;

@@ -4,6 +4,10 @@ echo $(lsb_release -a);
 exit 1;
 }
 
+function detect_arch_release() {
+    arch_install_on_arch
+}
+
 
 function detect_ubuntu_release() {
 case $(lsb_release -cs) in
@@ -47,6 +51,7 @@ else
 fi;
 
 case $( lsb_release -is) in
+    Arch) detect_arch_release;;
     Ubuntu) detect_ubuntu_release;;
     Debian) detect_debian_release;;
     Deepin) detect_deepin_release;;
