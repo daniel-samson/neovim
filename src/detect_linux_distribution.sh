@@ -1,4 +1,4 @@
-function throw_unsupported_distrobution() {
+function throw_unsupported_distribution() {
 echo "Unsupported distribution version/codename";
 echo $(lsb_release -a);
 exit 1;
@@ -28,12 +28,12 @@ function detect_deepin_release() {
 case $(lsb_release -cs) in
     unstable) echo "Found Deepin Unstable"; deepin_install_on_unstable;;
     stable) echo "Found Deepin Stable"; deepin_install_on_stable;;
-    *) throw_unsupported_distrobution;;
+    *) throw_unsupported_distribution;;
 esac
 }
 
 
-function detect_os {
+function detect_linux_distribution {
 echo "
 Detecting OS
 ";
