@@ -12,7 +12,7 @@ function deepin_install_on_stable {
     debian_install_nodejs_env;
     debian_install_haskell_env;
     build_config;
-    neovim_install_plug_manager;
+    neovim_install_paq_manager;
     neovim_install_plugins;
     deepin_replace_vim;
 }

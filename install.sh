@@ -5,21 +5,39 @@ set -e
 function build_config {
 h=$HOME
 run_command "mkdir -p $h/.config/nvim/"
-run_command "curl -sS
-    https://raw.githubusercontent.com/daniel-samson/neovim/master/.config/nvim/init.vim -o $h/.config/nvim/init.vim"
+run_command "cp -r .config/nvim/ $HOME/.config/nvim/"
 }
 function config_global_gitignore {
-    h=$HOME
-    gifile=".gitignore_global"
-    run_command "touch $h/$gifile";
-    run_command "git config --global core.excludesfile $h/$gifile";
-    echo .vim/ >> $h/$gifile
-    echo .vimrc >> $h/$gifile
-    echo .vimrc/ >> $h/$gifile
-    echo tags >> $h/$gifile
+    read -p "Would you like to setup global git ignore (y/n)?" choice
+    case "$choice" in
+    y|Y)
+        h=$HOME
+        gifile=".gitignore_global"
+        run_command "touch $h/$gifile";
+        run_command "git config --global core.excludesfile $h/$gifile";
+        echo .vim/ >> $h/$gifile
+        echo .vimrc >> $h/$gifile
+        echo .vimrc/ >> $h/$gifile
+        echo tags >> $h/$gifile
+        ;;
+    n|N )
+        echo "OK, moving on.";
+        ;;
+    *)
+        macos_install_nodejs_env;
+        ;;
+    esac;
 }
 function finish_install {
 echo "nvim is configured and installed";
+}
+#!/bin/bash
+function run_command(){
+COMMAND=$1;
+echo " "
+echo "Running command: $COMMAND";
+$COMMAND
+echo " "
 }
 #!/bin/bash
 function run_command_as_root(){
@@ -38,20 +56,16 @@ else
     exit 1;
 fi
 }
-#!/bin/bash
-function run_command(){
-COMMAND=$1;
-echo " "
-echo "Running command: $COMMAND";
-$COMMAND
-echo " "
-}
-function neovim_install_plugins {
-run_command "nvim +PlugInstall +UpdateRemotePlugins +qa";
+function neovim_install_paq_manager {
+h=$HOME;
+run_command "git clone --depth=1 https://github.com/savq/paq-nvim.git $h/.local/share/nvim/site/pack/paqs/start/paq-nvim";
 }
 function neovim_install_plug_manager {
 h=$HOME;
 run_command "curl -fLo $h/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim";
+}
+function neovim_install_plugins {
+run_command "nvim +PaqInstall +qa";
 }
 function debian_apt_update {
 run_command_as_root "apt update";
@@ -125,12 +139,12 @@ function debian_install_git {
 run_command_as_root "apt install -y git";
 config_global_gitignore
 }
+function debian_install_neovim {
+    run_command_as_root "apt-get install -y neovim";
+}
 function debian_install_neovim_disco {
 run_command_as_root "apt-get update";
 run_command_as_root "apt-get install -y neovim";
-}
-function debian_install_neovim {
-    run_command_as_root "apt-get install -y neovim";
 }
 function debian_install_neovim_trusty {
 run_command_as_root "add-apt-repository -y ppa:neovim-ppa/stable";
@@ -210,15 +224,13 @@ case "$choice" in
 esac;
 
 }
-function debian_install_php_env_bionic {
+function debian_install_php_env {
 read -p "Would you like to install the php environment (y/n)?" choice
 case "$choice" in
   y|Y )
-        run_command_as_root "apt install -y php-cli php-dom php-mbstring php-gd";
-        run_command_as_root "apt install -y php-curl";
+        run_command_as_root "apt install php-cli php-dom php-gd php-json php-openssl";
         run_command "curl -sS https://getcomposer.org/installer -o install_composer.sh";
         run_command_as_root "php install_composer.sh --install-dir=/usr/local/bin --filename=composer";
-        run_command_as_root "chown -R $USER $HOME/.composer"
         run_command "composer global require friendsofphp/php-cs-fixer";
         run_command "composer global require phpmd/phpmd";
         run_command "composer global require leafo/scssphp";
@@ -239,13 +251,15 @@ case "$choice" in
 esac;
 }
 
-function debian_install_php_env {
+function debian_install_php_env_bionic {
 read -p "Would you like to install the php environment (y/n)?" choice
 case "$choice" in
   y|Y )
-        run_command_as_root "apt install php-cli php-dom php-gd php-json php-openssl";
+        run_command_as_root "apt install -y php-cli php-dom php-mbstring php-gd";
+        run_command_as_root "apt install -y php-curl";
         run_command "curl -sS https://getcomposer.org/installer -o install_composer.sh";
         run_command_as_root "php install_composer.sh --install-dir=/usr/local/bin --filename=composer";
+        run_command_as_root "chown -R $USER $HOME/.composer"
         run_command "composer global require friendsofphp/php-cs-fixer";
         run_command "composer global require phpmd/phpmd";
         run_command "composer global require leafo/scssphp";
@@ -314,7 +328,7 @@ function debian_install_on_bionic {
     debian_install_airline_fonts;
     debian_install_bat;
     build_config;
-    neovim_install_plug_manager;
+    neovim_install_paq_manager;
     neovim_install_plugins;
     debian_replace_vim;
     debian_install_php_env_bionic;
@@ -335,7 +349,7 @@ function debian_install_on_disco {
     debian_install_airline_fonts;
     debian_install_bat;
     build_config;
-    neovim_install_plug_manager;
+    neovim_install_paq_manager;
     neovim_install_plugins;
     debian_replace_vim;
     debian_install_php_env_bionic;
@@ -356,7 +370,7 @@ function debian_install_on_focal {
     debian_install_airline_fonts;
     debian_install_bat;
     build_config;
-    neovim_install_plug_manager;
+    neovim_install_paq_manager;
     neovim_install_plugins;
     debian_replace_vim;
     debian_install_php_env_bionic;
@@ -377,7 +391,7 @@ function debian_install_on_jessie {
     debian_install_airline_fonts;
     debian_install_bat;
     build_config;
-    neovim_install_plug_manager;
+    neovim_install_paq_manager;
     neovim_install_plugins;
     debian_install_php_env;
     debian_install_rust_env;
@@ -398,7 +412,7 @@ function debian_install_on_stretch {
     debian_install_airline_fonts;
     debian_install_bat;
     build_config;
-    neovim_install_plug_manager;
+    neovim_install_paq_manager;
     neovim_install_plugins;
     debian_install_php_env;
     debian_install_rust_env;
@@ -419,7 +433,7 @@ function debian_install_on_trusty {
     debian_install_airline_fonts;
     debian_install_bat;
     build_config;
-    neovim_install_plug_manager;
+    neovim_install_paq_manager;
     neovim_install_plugins;
     debian_install_php_env;
     debian_install_rust_env;
@@ -440,7 +454,7 @@ function debian_install_on_xenial {
     debian_install_airline_fonts;
     debian_install_bat;
     build_config;
-    neovim_install_plug_manager;
+    neovim_install_paq_manager;
     neovim_install_plugins;
     debian_replace_vim;
     debian_install_php_env;
@@ -463,7 +477,7 @@ function deepin_install_on_stable {
     debian_install_nodejs_env;
     debian_install_haskell_env;
     build_config;
-    neovim_install_plug_manager;
+    neovim_install_paq_manager;
     neovim_install_plugins;
     deepin_replace_vim;
 }
@@ -483,7 +497,7 @@ function deepin_install_on_unstable {
     debian_install_airline_fonts;
     debian_install_bat;
     build_config;
-    neovim_install_plug_manager;
+    neovim_install_paq_manager;
     neovim_install_plugins;
     debian_replace_vim;
 }
@@ -564,10 +578,11 @@ function install_on_macos() {
     macos_install_bat;
     macos_install_neovim;
     build_config;
-    neovim_install_plug_manager;
+    neovim_install_paq_manager;
     neovim_install_plugins;
     macos_install_rust_env;
-    macos_install_nodejs_env;   
+    macos_install_nodejs_env;
+    config_global_gitignore;
 }
 function arch_install_bat() {
     run_command_as_root "pacman -S --noconfirm bat"
@@ -618,10 +633,11 @@ function arch_install_on_arch() {
     arch_install_bat;
     arch_install_neovim;
     build_config;
-    neovim_install_plug_manager;
+    neovim_install_paq_manager;
     neovim_install_plugins;
     arch_install_rust_env;
-    arch_install_nodejs_env; 
+    arch_install_nodejs_env;
+    config_global_gitignore;
 }
 function throw_unsupported_distribution() {
 echo "Unsupported distribution version/codename";
