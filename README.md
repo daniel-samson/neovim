@@ -28,20 +28,11 @@ A distribution of nvim, configured as an "Integrated" Development Environment (I
 The install script will only let you install on these distribution of linux using premade recipes.
 
 - Arch Linux
-- Debian Stretch
-- Debian Jessie
-- Mac OS
-- Ubuntu 20.04
-- Ubuntu 19.04
-- Ubuntu 18.04
-- Ubuntu 16.04
-- Ubuntu 14.04
-- KDE Neon 16.04
-- KDE Neon 14.04
-- Deepin (Unstable)
-- Deepin (Stable)
-
-
+- Debian Stretch, Jessie
+- MacOSX
+- Ubuntu 20.04, 19.04, 18.04, 16.04, 14.04
+- KDE Neon 16.04, 14.04
+- Deepin Unstable, Stable
 
 ## Installation:
 Installs the latest version of NeoVim and configures NeoVim to used as an IDE. You can install using git. Simply copy the following into your terminal.
