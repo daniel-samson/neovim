@@ -58,7 +58,9 @@ fi
 }
 function neovim_install_paq_manager {
 h=$HOME;
+if [ ! -d $h/.local/share/nvim/site/pack/paqs/start/paq-nvim ]; then
 run_command "git clone --depth=1 https://github.com/savq/paq-nvim.git $h/.local/share/nvim/site/pack/paqs/start/paq-nvim";
+fi
 }
 function neovim_install_plug_manager {
 h=$HOME;
@@ -541,6 +543,7 @@ function macos_install_xcode() {
     fi;
 }
 function macos_install_nodejs_env () {
+    
     read -p "Would you like to install the nodejs environment (y/n)?" choice
     case "$choice" in
     y|Y)

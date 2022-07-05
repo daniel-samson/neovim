@@ -1,4 +1,5 @@
 function macos_install_nodejs_env () {
+    
     read -p "Would you like to install the nodejs environment (y/n)?" choice
     case "$choice" in
     y|Y)
