@@ -2,18 +2,33 @@
 command! IDEversion echom "IDE Version: 0.2.0"
 " Plugins
 call plug#begin('~/.local/share/nvim/plugged')
-"
 " Sensible defaults
 Plug 'tpope/vim-sensible'
 
-" Toggle Comments
+" Editing Files:
+Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
-
-" Fix repeat last command
 Plug 'tpope/vim-repeat'
+
+" Airline bar:
+Plug 'bling/vim-airline'
+
+" Display git branch in airline bar
+Plug 'renyard/vim-git-flow-format'
+Plug 'tpope/vim-fugitive'
 
 " Theming:
 Plug 'morhetz/gruvbox'
+
+" Fast Searching
+Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
+
+" Programming Language support
+Plug 'sheerun/vim-polyglot'
+
+" Syntax
+Plug 'scrooloose/syntastic'
 
 " Auto saving
 Plug '907th/vim-auto-save'
@@ -24,30 +39,106 @@ Plug 'djoshea/vim-autoread'
 " Undo tree navigation
 Plug 'sjl/gundo.vim'
 
-" Syntax Highlighting
-Plug 'sheerun/vim-polyglot'
+" Show changes in gutter
+Plug 'airblade/vim-gitgutter'
 
-" Fast Fuzzy Find
+" Debugger support
+Plug 'joonty/vdebug'
+
+" List tags in a file
+Plug 'vim-scripts/taglist.vim'
+
+" Project Tree
+Plug 'daniel-samson/project-tree.vim'
+
+" Auto close characters
+Plug 'townk/vim-autoclose'
+" Sensible defaults
+Plug 'tpope/vim-sensible'
+
+" Editing Files:
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-repeat'
+
+" Airline bar:
+Plug 'bling/vim-airline'
+
+" Display git branch in airline bar
+Plug 'renyard/vim-git-flow-format'
+Plug 'tpope/vim-fugitive'
+
+" Theming:
+Plug 'morhetz/gruvbox'
+
+" Fast Searching
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 
-" Configure vim per project
-Plug 'daniel-samson/dirvimrc'
-" Database Client
-Plug 'tpope/vim-dadbod'
-"
-Plug 'blueshirts/darcula'
-" rest client
-Plug 'diepm/vim-rest-console'
-"
+" Programming Language support
+Plug 'sheerun/vim-polyglot'
+
+" Syntax
+Plug 'scrooloose/syntastic'
+
+" Auto saving
+Plug '907th/vim-auto-save'
+
+" Auto reloading
+Plug 'djoshea/vim-autoread'
+
+" Undo tree navigation
+Plug 'sjl/gundo.vim'
+
+" Show changes in gutter
+Plug 'airblade/vim-gitgutter'
+
+" Debugger support
+Plug 'joonty/vdebug'
+
+" List tags in a file
+Plug 'vim-scripts/taglist.vim'
+
+" Project Tree
+Plug 'daniel-samson/project-tree.vim'
+
+" Auto close characters
+Plug 'townk/vim-autoclose'
+
+" Auto completion
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
+Plug 'roxma/LanguageServer-php-neovim',  {'do': 'composer install && composer run-script parse-stubs'}
+
+if executable('npm')
+    Plug 'roxma/nvim-cm-tern',  {'do': 'npm install'}
+    Plug 'mhartington/nvim-typescript'
+endif
+
+if executable('php')
+Plug 'phpactor/phpactor' ,  {'do': 'composer install'}
+Plug 'roxma/ncm-phpactor'
+Plug 'alvan/vim-php-manual'
+endif
+
+Plug 'othree/csscomplete.vim'
+Plug 'calebeby/ncm-css'
+
+if executable('racer')
+" rust
+Plug 'rust-lang/rust.vim'
+Plug 'racer-rust/vim-racer'
+Plug 'roxma/nvim-cm-racer'
+endif
+
+Plug 'roxma/nvim-completion-manager'
 call plug#end()
-"
+
 " Theme
-" if &rtp =~ 'gruvbox'
-"     colorscheme gruvbox
-"     set background=dark 
-" endif
-colorscheme darcula
+colorscheme gruvbox
+set background=dark
 
 " Turn off swap files
 set noswapfile
@@ -62,123 +153,42 @@ endif
 let mapleader='\'
 
 " Show Line Numbers
-" set number
+set number
 
 " Use System Clipboard as the default register
 if has('clipboard')
     set clipboard^=unnamedplus
 endif
-
 " Set path to recusively search all directories for :find
 set path^=**
 
 " Displays all files when we press tab
 set wildmenu
 
-"" File Editing
-""
-" Toggle Comment
-nmap <A-/>  gcc
-vmap <A-/>  gcc
-imap <A-/>  <ESC>gcc
-" Duplicate Line
-vnoremap <A-d> Yp
-inoremap <A-d> <Esc>yypi
-nnoremap <A-d> <Esc>yyp
-" MakeInstall
-map <A-m> :!ctags -R .<cr>
-" Move line up
-imap <C-A-k> <Esc>ddkkpi
-" Move line down
-imap <C-A-j> <Esc>ddpi
-" Create new line
-nmap <Enter> i<Enter>
-" Delete current line
-nmap <BS> i<BS>
-""
-" Remap indentation to Tab
-nnoremap <TAB> >>
-nnoremap <S-TAB> <<
-vnoremap <TAB> >gv
-vnoremap <S-TAB> <gv
+"Set gutter
+set foldcolumn=1
 
-" Emulate Shift Selection
-nnoremap <S-Up> <S-v>k
-inoremap <S-Up> <S-v>k
-vnoremap <S-Up> k
-nnoremap <S-Down> <S-v>j
-inoremap <S-Down> <S-v>j
-vnoremap <S-Down> j
-nnoremap <S-Left> <C-v>h
-inoremap <S-Left> <C-v>h
-vnoremap <S-Left> h
-nnoremap <C-S-Left> <C-v>b
-inoremap <C-S-Left> <C-v>b
-vnoremap <C-S-Left> b
-nnoremap <S-Right> <C-v>l
-inoremap <S-Right> <C-v>l
-vnoremap <S-Right> l
-nnoremap <C-S-Right> <C-v>e
-inoremap <C-S-Right> <C-v>e
-vnoremap <C-S-Right> e
-
-""
 " Fast Fuzzy Find
 set rtp+=~/.fzf
+nmap <leader>ff :Files<CR>
+nmap <leader>fw :Tags<CR>
+nmap <leader>fg :Commits<CR>
+nmap <leader>fb :Buffers<CR>
 
-command! -bang -nargs=* Rg
-  \ call fzf#vim#grep(
-  \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1, fzf#vim#with_preview('right:60%'))
-  " \   'echo '.shellescape(<q-args>), 1, fzf#vim#with_preview('right:60%'))
-  " \   'rgtags '.shellescape(<q-args>), 1, fzf#vim#with_preview('right:60%'))
-"" Lines
-nmap <A-f> :Lines<cr>
-imap <A-f> <ESC>:Lines<cr>
-vmap <A-f> <ESC>:Lines<cr>
-"" Files
-nmap <A-e> :call fzf#run({'sink': 'e', 'options': '-m --preview "bat --color always {}"','down': '90%' })<cr>
-imap <A-e> <ESC>:call fzf#run({'sink': 'e', 'options': '-m --preview "bat --color always {}"','down': '90%' })<cr>
-vmap <A-e> <ESC>:call fzf#run({'sink': 'e', 'options': '-m --preview "bat --color always {}"','down': '90%' })<cr>
-"" Words / tags
-nmap <A-F> :Rg<CR>
-vmap <A-F> <ESC>:Rg<CR>
-imap <A-F> <ESC>:Rg<CR>
-"" Git commits
-nmap <A-g> :Commits<CR>
-vmap <A-g> <ESC>:Commits<CR>
-imap <A-g> <ESC>:Commits<CR>
-"" Opened files
-nmap <A-o> :Buffers<CR>
-vmap <A-o> <ESC>:Buffers<CR>
-imap <A-o> <ESC>:Buffers<CR>
-
-""
-""
 " Default File Encoding
 set encoding=utf-8
 
 " Allow plugin based indentation
 filetype plugin indent on
 
-" Set soft limit
-set textwidth=79
-set colorcolumn=+1
-
-""File types
-autocmd FileType php setlocal expandtab shiftwidth=4 softtabstop=4 textwidth=119 number
-autocmd FileType json setlocal expandtab shiftwidth=2 softtabstop=2 number
-autocmd FileType js setlocal expandtab shiftwidth=2 softtabstop=2 number
-autocmd FileType html setlocal expandtab shiftwidth=2 softtabstop=2 textwidth=119 number
-autocmd FileType css setlocal expandtab shiftwidth=2 softtabstop=2 number
-autocmd FileType sass setlocal expandtab shiftwidth=2 softtabstop=2 number
-autocmd FileType scss setlocal expandtab shiftwidth=2 softtabstop=2 number
-autocmd FileType csv setlocal number
-autocmd FileType sql setlocal number
-autocmd FileType py setlocal number
-autocmd FileType rb setlocal number
-autocmd FileType xml setlocal number
-autocmd FileType vim setlocal number
-autocmd FileType sh setlocal number
+" Indentation
+autocmd FileType php setlocal expandtab shiftwidth=4 softtabstop=4
+autocmd FileType json setlocal expandtab shiftwidth=2 softtabstop=2
+autocmd FileType js setlocal expandtab shiftwidth=2 softtabstop=2
+autocmd FileType html setlocal expandtab shiftwidth=2 softtabstop=2
+autocmd FileType css setlocal expandtab shiftwidth=2 softtabstop=2
+autocmd FileType sass setlocal expandtab shiftwidth=2 softtabstop=2
+autocmd FileType scss setlocal expandtab shiftwidth=2 softtabstop=2
 
 " Default Indentation
 set expandtab
@@ -192,39 +202,65 @@ highlight SpecialKey term=standout ctermbg=DarkRed guibg=#aaddcc
 highlight RedundantSpaces term=standout ctermbg=DarkRed guibg=#aaddcc    
 call matchadd('RedundantSpaces', '\(\s\+$\| \+\ze\t\|\t\zs \+\)\(\%#\)\@!')
 
-let vim_dir = getcwd()
-let &runtimepath.=','. vim_dir
-
-" Project File
-let my_project_dir = expand(vim_dir . '/.vim')
-call system('mkdir ' . my_project_dir)
-let g:fzf_tags_command = 'ctags -R .'
-call system('mkdir '. my_project_dir . '/fzf-history')
-let g:fzf_history_dir = my_project_dir.'/fzf-history'
-
 " Keep undo history across sessions by storing it in a file
+let vimHistoryDir = '/home/daniel/.vimhistory'
+let &runtimepath.=','.vimHistoryDir
 if has('persistent_undo')
+    let myUndoDir = expand(vimHistoryDir . '/undodir')
     " Create dirs
-    call system('mkdir ' . my_project_dir)
-    let undo_dir = expand(my_project_dir . '/undodir')
-    call system('mkdir ' . undo_dir)
-    let &undodir = undo_dir
+    call system('mkdir ' . vimHistoryDir)
+    call system('mkdir ' . myUndoDir)
+    let &undodir = myUndoDir
     set undofile
 endif
-
-
-
 
 " Auto saving
 let g:auto_save = 1
 let g:auto_save_silent = 1
 
+" Syntax checking
+let g:syntastic_always_populate_loc_list = 0
+let g:syntastic_auto_loc_list = 0
+let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_wq = 0
+let g:syntastic_php_checkers = ['php']
+
 " Auto reload
 :autocmd FileChangedShell * :e!
 
 " Undo tree navigation
-nmap <A-u> :GundoToggle<cr>
+nmap <leader>u :GundoToggle<cr>
 
+" Tree structure
+map <leader>p :ToggleProjectTree<cr>
+
+" MakeInstall
+map <leader>m :!ctags -R .<cr>
+
+nmap <leader>l :TlistToggle<CR>
+
+" Move line up
+imap <C-k> <Esc>ddkkpi
+
+" Move line down
+imap <C-j> <Esc>ddpi
+
+" Create new line
+nmap <Enter> i<Enter>
+
+" Delete current line
+nmap <BS> i<BS>
+
+set textwidth=80
+set colorcolumn=+1
+
+" Autocompletion
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS noci
+
+" Terminal Emulator Settings
+autocmd BufWinEnter,WinEnter term://* startinsert
+
+tnoremap <Esc> <C-\><C-n>
 
 " Window Navigation
 tnoremap <A-h> <C-\><C-N><C-w>h
@@ -240,29 +276,22 @@ nnoremap <A-j> <C-w>j
 nnoremap <A-k> <C-w>k
 nnoremap <A-l> <C-w>l
 
-" Jump to normal mode
-inoremap <A-n> <Esc><Esc><Esc>
-vnoremap <A-n> <Esc><Esc><Esc>
-vnoremap <A-n> <Esc><Esc><Esc>
-
-" Project Browsing
-nnoremap <A-P> :e .<cr>
-inoremap <A-P> <Esc>:e .<cr>
-vnoremap <A-P> <Esc>:e .<cr>
-
-" Project Browsing (Folder of current file)
-nnoremap <A-p> :Explore!<cr>
-inoremap <A-p> <Esc>:Explore!<cr>
-vnoremap <A-p> <Esc>:Explore!<cr>
-
 " Start terminal
-inoremap <A-t> <esc>:belowright split term://bash <cr>
-vnoremap <A-t> <esc>:belowright split term://bash <cr>
-nnoremap <A-t> :belowright split term://bash <cr>
-let g:terminal_scrollback_buffer_size = 100000
+"split term://bash
+inoremap <leader>t :split term://bash <cr>
+noremap <leader>t :split term://bash <cr>
 
-
-" Terminal Emulator Settings
-autocmd BufWinEnter,WinEnter term://* startinsert
-tnoremap <Esc> <C-\><C-n>:q<cr>
-
+" Debugging
+let g:vdebug_keymap = {
+    \    "run" : "<F5>",
+    \    "run_to_cursor" : "<F9>",
+    \    "step_over" : "<F8>",
+    \    "step_into" : "<F7>",
+    \    "step_out" : "<S-F8>",
+    \    "close" : "<F6>",
+    \    "detach" : "<F4>",
+    \    "set_breakpoint" : "<F10>",
+    \    "get_context" : "<F11>",
+    \    "eval_under_cursor" : "<F12>",
+    \    "eval_visual" : "<Leader>e",
+    \}
