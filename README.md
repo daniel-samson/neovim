@@ -1,41 +1,38 @@
+# NeoVim IDE
 
-# NeoVim IDE (Version 0.2.1)
-
-A distribution of nvim, configured as an "Integrated" Development Environment (IDE).
+A distribution of nvim, configured as an "Integrated" Development Environment (IDE). The commands in this project are kept behind the `g` key, so that it doesn't override the key bindings you expect, including your leader key bindings.
 
 ## Project Status
 [![build](https://github.com/daniel-samson/neovim/actions/workflows/build.yml/badge.svg)](https://github.com/daniel-samson/neovim/actions/workflows/build.yml)
 
 ## Features:
 
-- Project Tree view
+- Easy Project Nagivation
+- Project Explorer
 - Syntax Highting
 - Auto Completion
-- Search Project files, tags, and github history
+- Auto save / reload
+- Search Project files, commands, tags, and github history
 - Debug your code
 - Mouse support
-- Database client
-- REST Console
 
 ## Requirements
 - Stable internet connection
-- Bash
-- Sudo
 - Supported OS
 
 ## Supported OS
 
 The install script will only let you install on these distribution of linux using premade recipes.
 
+- MacOS
 - Arch Linux
 - Debian Stretch, Jessie
-- MacOSX
 - Ubuntu 20.04, 19.04, 18.04, 16.04, 14.04
 - KDE Neon 16.04, 14.04
 - Deepin Unstable, Stable
 
 ## Installation:
-Installs the latest version of NeoVim and configures NeoVim to used as an IDE. You can install using git. Simply copy the following into your terminal.
+Installs the latest version of NeoVim and configures NeoVim to used as an IDE. If you have already set up neovim before, then this will overwrite your init.lua file.
 
 **Using git:**
 <pre>
@@ -49,3 +46,12 @@ chmod u+x ./install.sh
 - cd /path/to/project/
 - nvim 
 
+## Documentation
+- [Keyboard Shortcuts/Bindings](KEYBINDING.md)
+
+## Hot Reloading Configuration
+You can reload your config file by using the `:ReloadConfig` command.
+
+## Customization
+
+Please edit the `.config/nvim/lua/init.user.lua` instead of `init.lua`, so that you can keep you customizations during upgrades.

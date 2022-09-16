@@ -4,6 +4,7 @@ function install_on_macos() {
     macos_install_ripgrep;
     macos_install_bat;
     macos_install_neovim;
+    macos_install_python3;
     build_config;
     neovim_install_paq_manager;
     neovim_install_plugins;

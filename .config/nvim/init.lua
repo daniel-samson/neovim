@@ -1,101 +1,212 @@
-vim.g.mapleader = "\\"
-require("neovim-modern-text-editing")
+-- aliases
+local opt  = vim.opt     -- global
+local g  = vim.g     -- global for let options
+local wo = vim.wo    -- window local
+local bo = vim.bo    -- buffer local
+local fn = vim.fn    -- access vim functions
+local cmd = vim.cmd  -- vim commands
 
--- package manager
+-- Package Manager (paq)
+-- Install on Unix:
+-- git clone --depth=5 https://github.com/savq/paq-nvim.git "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/pack/paqs/start/paq-nvim
+-- 
+-- Install on Windows:
+-- git clone https://github.com/savq/paq-nvim.git "$env:LOCALAPPDATA\nvim-data\site\pack\paqs\start\paq-nvim"
+--
 require "paq" {
-    "savq/paq-nvim";                  -- Let Paq manage itself
+--
+"savq/paq-nvim";                  -- Let Paq manage itself
+-- Code of completion
+{ "neoclide/coc.nvim", branch = "release" };
 
-    "neovim/nvim-lspconfig";          -- Mind the semi-colons
-    "hrsh7th/cmp-nvim-lsp";
-    "hrsh7th/cmp-buffer";
-    "hrsh7th/cmp-path";
-    "hrsh7th/cmp-cmdline";
-    "hrsh7th/nvim-cmp";
-
-    -- For vsnip users
-    "hrsh7th/cmp-vsnip";
-    "hrsh7th/vim-vsnip";
-
-    -- For ultisnips users.
-    --"SirVer/ultisnips";
-    --"quangnguyen30192/cmp-nvim-ultisnips";
-
-    -- For snippy users.
-    --"dcampos/nvim-snippy";
-    --"dcampos/cmp-snippy";
-
+-- Powerfull character pair tool
+"windwp/nvim-autopairs";
+-- Surround
+"tpope/vim-surround";
+-- Repeat `.` command support
+"tpope/vim-repeat";
+-- Easy comment out code `gcc`
+"tpope/vim-commentary";
+-- Auto Save
+"pocco85/auto-save.nvim";
+-- Auto reload
+"djoshea/vim-autoread";
+-- Fuzzy Find
+"junegunn/fzf";
+"junegunn/fzf.vim";
+-- Format Support
+"mhartington/formatter.nvim";
+-- Linter Support
+"mfussenegger/nvim-lint";
+-- Status line
+"ojroques/nvim-hardline";
 }
 
-require("neovim-lsp-autoconfig")
+--[
+-- Custom Commands
+-- ]
+-- Reload config (with out restarting nvim)
+vim.api.nvim_create_user_command('ReloadConfig', 'source $MYVIMRC', {nargs = 0}) 
 
--- Setup autocomplete
-vim.api.nvim_command('set completeopt=menu,menuone,noselect')
+--[
+-- Editor
+--]
+vim.cmd [[set mouse=a]]
+-- use the systems clipboard as the default clipboard
+vim.cmd [[ set clipboard+=unnamedplus ]]
+vim.api.nvim_set_option('encoding', 'utf-8')
+vim.wo.number = true
+vim.api.nvim_command('filetype plugin indent on')
+vim.api.nvim_create_autocmd(
+    { "FileType" },
+    { 
+	    pattern = { 
+		    "*.json",
+		    "*.js",
+		    "*.jsx",
+		    "*.ts",
+		    "*.tsx",
+		    "*.html",
+		    "*.css",
+		    "*.scss" 
+	    },
+	    command = "setlocal expandtab shiftwidth=6 softtabstop=2"
+    }
+)
+vim.api.nvim_set_option('expandtab', true)
+vim.api.nvim_set_option('shiftwidth', 4)
+vim.api.nvim_set_option('softtabstop', 4)
 
--- Setup nvim-cmp
-local cmp = require'cmp'
-
-cmp.setup({
-snippet = {
-    -- REQUIRED - you must specify a snippet engine
-    expand = function(args)
-    vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
-    -- require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
-    -- require('snippy').expand_snippet(args.body) -- For `snippy` users.
-    -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
-    end,
-},
-window = {
-    -- completion = cmp.config.window.bordered(),
-    -- documentation = cmp.config.window.bordered(),
-},
-mapping = cmp.mapping.preset.insert({
-    ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-    ['<C-f>'] = cmp.mapping.scroll_docs(4),
-    ['<C-Space>'] = cmp.mapping.complete(),
-    ['<C-e>'] = cmp.mapping.abort(),
-    ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-}),
-sources = cmp.config.sources({
-    { name = 'nvim_lsp' },
-    { name = 'vsnip' }, -- For vsnip users.
-    -- { name = 'luasnip' }, -- For luasnip users.
-    -- { name = 'ultisnips' }, -- For ultisnips users.
-    -- { name = 'snippy' }, -- For snippy users.
-}, {
-    { name = 'buffer' },
-})
-})
-
--- Set configuration for specific filetype.
-cmp.setup.filetype('gitcommit', {
-sources = cmp.config.sources({
-    { name = 'cmp_git' }, -- You can specify the `cmp_git` source if you were installed it.
-}, {
-    { name = 'buffer' },
-})
-})
-
--- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
-cmp.setup.cmdline('/', {
-mapping = cmp.mapping.preset.cmdline(),
-sources = {
-    { name = 'buffer' }
+-- Code of Completion
+-- auto-install extensions
+vim.g.coc_global_extensions = {
+"coc-css",
+"coc-eslint",
+-- "coc-graphql",
+"coc-html",
+"coc-json",
+"coc-prettier",
+-- "coc-rust-analyzer",
+"coc-sh",
+"coc-tsserver",
+"coc-xml",
+"coc-yaml",
 }
-})
 
--- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
-cmp.setup.cmdline(':', {
-mapping = cmp.mapping.preset.cmdline(),
-sources = cmp.config.sources({
-    { name = 'path' }
-}, {
-    { name = 'cmdline' }
-})
-})
+vim.cmd [[
+command! -nargs=0 Format :call CocActionAsync('format')
+]]
 
--- Setup lspconfig.
-local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
--- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
-require('lspconfig')['<YOUR_LSP_SERVER>'].setup {
-capabilities = capabilities
-}
+vim.api.nvim_set_keymap('n', 'gtd', '<Plug>(coc-type-definition)', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', 'gti', '<Plug>(coc-implementation)', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', 'gtt', '<Plug>(coc-type-definition)', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', 'gtr', '<Plug>(coc-references)', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', 'ga', '<Plug>(coc-codeaction)', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', 'gr', '<Plug>(coc-rename)', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '=', ":Format<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap('v', '=', "<Plug>(coc-format-selected", { noremap = true, silent = true })
+
+-- Tab Completion
+-- use <tab> for trigger completion and navigate to the next complete item
+vim.cmd [[
+function! CheckBackspace() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+inoremap <silent><expr> <Tab>
+      \ coc#pum#visible() ? coc#pum#next(1) :
+      \ CheckBackspace() ? "\<Tab>" :
+      \ coc#refresh()
+]]
+
+-- use <CR> to select the first or currently selected
+vim.cmd([[inoremap <expr> <cr> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"]])
+
+vim.cmd [[
+function! CheckBackspace() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+inoremap <silent><expr> <c-space> coc#refresh()
+]]
+
+vim.cmd [[
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call ShowDocumentation()<CR>
+
+function! ShowDocumentation()
+  if CocAction('hasProvider', 'hover')
+    call CocActionAsync('doHover')
+  else
+    call feedkeys('K', 'in')
+  endif
+endfunction
+
+" Highlight the symbol and its references when holding the cursor.
+autocmd CursorHold * silent call CocActionAsync('highlight')
+]]
+-- Status Line
+require('hardline').setup {}
+
+-- [[
+-- Modern Text Editor Features
+--]]
+-- Selection
+vim.api.nvim_set_keymap('n', '<S-Up>', '<S-v>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<S-Down>', '<S-v>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<S-Left>', '<C-v>h', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<S-Right>', '<C-v>l', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('i', '<S-Up>', '<ESC><S-v>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('i', '<S-Down>', '<ESC><S-v>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('i', '<S-Left>', '<ESC><C-v>h', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('i', '<S-Right>', '<ESC><C-v>l', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('v', '<S-Up>', 'k', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('v', '<S-Down>', 'j', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('v', '<S-Left>', 'h', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('v', '<S-Right>', 'l', { noremap = true, silent = true })
+-- Select All
+vim.api.nvim_set_keymap('n', 'gA', 'ggVG', { noremap = true, silent = true })
+-- Deselect All
+vim.api.nvim_set_keymap('n', '\\\\', '<ESC>:noh<cr>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('v', '\\\\', '<ESC>:noh<cr>', { noremap = true, silent = true })
+-- Indentation
+vim.api.nvim_set_keymap('n', '<TAB>', '>>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<S-TAB>', '<<', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('v', '<TAB>', '>gv', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('v', '<S-TAB>', '<gv', { noremap = true, silent = true })
+-- Duplicate Line
+vim.api.nvim_set_keymap('n', 'gd', 'Yp', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('v', 'gd', '<Esc>Yp', { noremap = true, silent = true })
+-- Move Line
+vim.api.nvim_set_keymap('n', 'gk', 'ddkkp', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', 'gj', 'ddp', { noremap = true, silent = true })
+-- Create New Line when press return
+vim.api.nvim_set_keymap('n', '<Enter>', 'i<Enter>', { noremap = true, silent = true })
+-- Delete character from normal mode
+vim.api.nvim_set_keymap('n', '<BS>', 'i<BS>', { noremap = true, silent = true })
+-- Fuzzy Find
+-- Command bar
+vim.api.nvim_set_keymap('n', 'gP', ':Command<cr>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('v', 'gP', ':Command<cr>', { noremap = true, silent = true })
+-- File bar
+vim.api.nvim_set_keymap('n', 'gp', ':Files<cr>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('v', 'gp', ':Files<cr>', { noremap = true, silent = true })
+-- Open Explorer
+vim.api.nvim_set_keymap('n', 'go', ':Explore<cr>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('v', 'go', ':Explore<cr>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', 'gO', ':Explore .<cr>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('v', 'gO', ':Explore .<cr>', { noremap = true, silent = true })
+-- Open Project File search
+vim.api.nvim_set_keymap('n', 'gf', ':BLines<cr>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('v', 'gf', ':BLines<cr>', { noremap = true, silent = true })
+-- Open Current File search
+vim.api.nvim_set_keymap('n', 'gF', ':Rg<cr>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('v', 'gF', ':Rg<cr>', { noremap = true, silent = true })
+-- List Opened Files (buffers in vim speak)
+vim.api.nvim_set_keymap('n', 'gl', ':Buffers<cr>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('v', 'gl', ':Buffers<cr>', { noremap = true, silent = true })
+
+-- Load user customisations
+require('init-user')
+

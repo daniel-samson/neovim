@@ -5,7 +5,11 @@ set -e
 function build_config {
 h=$HOME
 run_command "mkdir -p $h/.config/nvim/"
-run_command "cp -r .config/nvim/ $HOME/.config/nvim/"
+run_command "cp .config/nvim/init.lua $HOME/.config/nvim/"
+if [ ! -d "$h/.config/nvim/lua" ]; then
+run_command "mkdir -p $h/.config/nvim/lua"
+run_command "cp .config/nvim/lua/init-user.lua $h/.config/nvim/lua/"
+fi
 }
 function config_global_gitignore {
     read -p "Would you like to setup global git ignore (y/n)?" choice
@@ -531,6 +535,17 @@ function macos_install_homebrew() {
 function macos_install_neovim() {
     run_command "brew install neovim";
 }
+function macos_install_python3() {
+    if command -v python3;
+    then
+        echo "Found python3 is installed";
+        echo "Found python3 is installed";
+    else
+        run_command "brew install python3";
+        run_command "python3 -m pip install setuptools";
+        run_command "python3 -m pip install upgrade pynvim";
+    fi;
+}
 function macos_install_ripgrep() {
     run_command "brew install ripgrep";
 }
@@ -580,6 +595,7 @@ function install_on_macos() {
     macos_install_ripgrep;
     macos_install_bat;
     macos_install_neovim;
+    macos_install_python3;
     build_config;
     neovim_install_paq_manager;
     neovim_install_plugins;
