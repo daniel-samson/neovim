@@ -2,8 +2,7 @@
 
 A distribution of nvim, configured as an "Integrated" Development Environment (IDE). The commands in this project are kept behind the `g` key, so that it doesn't override the key bindings you expect, including your leader key bindings.
 
-![neovim-demo](https://user-images.githubusercontent.com/12231216/190848962-1fe609e9-e258-4524-9e74-0e12a1312b8c.gif)
-
+![neovim-demo (1)](https://user-images.githubusercontent.com/12231216/190850023-939e183c-be90-4039-b29e-5c9519a404b2.gif)
 
 ## Project Status
 [![build](https://github.com/daniel-samson/neovim/actions/workflows/build.yml/badge.svg)](https://github.com/daniel-samson/neovim/actions/workflows/build.yml)
