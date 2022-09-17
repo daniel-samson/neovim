@@ -10,7 +10,7 @@ function debian_install_on_focal {
     debian_install_airline_fonts;
     debian_install_bat;
     build_config;
-    neovim_install_plug_manager;
+    neovim_install_paq_manager;
     neovim_install_plugins;
     debian_replace_vim;
     debian_install_php_env_bionic;
