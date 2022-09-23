@@ -53,7 +53,7 @@ pressing `BACKSPACE` will remove the last character and put you into **INSERT** 
 CoC will present you with a menu as you are typing. Use the `CARRIAGE RETURN` key to select the first selection or the next selection. Use the `TAB` key to change the selection. You can also press `CTRL + SPACE` to bring up the menu.
 
 ## Toggle Comments
-**INSERT** mode:
+**NORMAL** or **VISUAL** mode:
 
 Press `gcc` to toggle comment out code.
 
