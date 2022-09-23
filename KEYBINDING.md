@@ -4,6 +4,7 @@ Key Bindings
 This project by default defines the LEADER key as `\`. All key binds start with `g`, so that it doesn't override any actions/commands.
 
 ## Navigating your project
+
 **NORMAL** mode:
 
 Pressing `gp` will let you find file in your project.
@@ -64,6 +65,7 @@ Position the cursor at the start of the identifier you wish to rename, Press `gr
 
 
 ## Go To
+
 **NORMAL** mode:
 
 - Press `gtd` go to definition
@@ -71,17 +73,23 @@ Position the cursor at the start of the identifier you wish to rename, Press `gr
 - Press `gtt` go to type definition
 - Press `gti` go to implementation
 
-## Code Action
+### Code Action
+
 **NORMAL** mode:
 
 Coc tries to lint you code. To fix the issues Press `ga`
 
+![Recording 2022-09-23 at 11 56 15](https://user-images.githubusercontent.com/12231216/191946263-6b1bad30-70f9-45da-83a7-9d74250b8773.gif)
+
+
 ## Format Code
+
 **NORMAL** mode:
 
 Press `=` to format the file. This requires the LSP to support formatting.
 
 ## Getting Help
+
 **NORMAL** mode:
 Press `SHIFT + K`.
 
