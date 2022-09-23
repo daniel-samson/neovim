@@ -31,8 +31,7 @@ The install script will only let you install on the following OS using premade r
 **Linux**:
 - Arch Linux
 - Debian Stretch, Jessie
-- Ubuntu 20.04, 19.04, 18.04, 16.04, 14.04
-- KDE Neon 16.04, 14.04
+- Ubuntu 20.04, 19.04, 18.04, 16.04, 14.04 and derive distrobutions (eg Pop!, KDE Neon ect)
 - Deepin Unstable, Stable
 
 ## Installation:
