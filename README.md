@@ -34,7 +34,7 @@ The install script will only let you install on these distribution of linux usin
 - Deepin Unstable, Stable
 
 ## Installation:
-Installs the latest version of NeoVim and configures NeoVim to used as an IDE. If you have already set up neovim before, then this will overwrite your init.lua file.
+NeoVim IDE installs the latest version of NeoVim and configures NeoVim to used as an IDE. If you have already set up neovim before, then this will overwrite your init.lua file.
 
 **Using git:**
 <pre>
