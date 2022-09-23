@@ -1,9 +1,11 @@
 Key Bindings
 ====
 
-This project tries to use the g key instead of the leader key. 
+This project by default defines the LEADER key as `\`. All key binds start with `g`, so that it doesn't override any actions/commands.
 
 ## Navigating your project
+**NORMAL** mode:
+
 Inspired by vscode. Pressing `gp` will let you find file in your project. Pressing `g SHIFT + P` will let you find commands.
 
 Press `gf` to find text in your opened file/buffer. Press `gF` To fuzzy find text in your project files.
@@ -14,7 +16,7 @@ Press 'go' to open the project explorer relative to the opened file/buffer. Pres
 
 ## Text Editing
 
-*While in NORMAL mode or VISUAL mode*:
+**NORMAL** or **VISUAL** mode:
 
 Selection is done via `SHIFT + Arrow Key`. To select all you can use `g SHIFT + A`. This helps to reduce the frustration for new vim users.
 
@@ -28,22 +30,26 @@ To move a line down use `gj`.
 
 To move a line up use `gk`.
 
-pressing `CARRIAGE RETURN` will create a new line at the point of the cursor and put you into INSERT MODE.
+pressing `CARRIAGE RETURN` will create a new line at the point of the cursor and put you into **INSERT** MODE.
 
-pressing `BACKSPACE` will remove the last character and put you into INSERT MODE.
+pressing `BACKSPACE` will remove the last character and put you into **INSERT** MODE.
 
 ## Auto completion
+**INSERT** mode:
 
-While in INSERT mode CoC will present you with a menu as you are typing. Use the `CARRIAGE RETURN` key to select the first selection or the next selection. Use the `TAB` key to change the selection. You can also press `CTRL + SPACE` to bring up the menu.
+CoC will present you with a menu as you are typing. Use the `CARRIAGE RETURN` key to select the first selection or the next selection. Use the `TAB` key to change the selection. You can also press `CTRL + SPACE` to bring up the menu.
 
 ## Toggle Comments
-While in INSERT mode, Press `gcc` to toggle comment out code.
+**INSERT** mode:
+
+Press `gcc` to toggle comment out code.
 
 ## Renaming indentifier
-While in NORMAL mode, Press `gr` to rename a symbol.
+**NORMAL* mode: 
+Position the cursor at the start of the identifier you wish to rename, Press `gr` to rename a symbol. Enter the new name and Press `CARRIAGE RETURN`.
 
 ## Go To
-While in NORMAL mode:
+**NORMAL** mode:
 
 - Press `gtd` go to definition
 - Press `gtr` go to reference
@@ -51,13 +57,20 @@ While in NORMAL mode:
 - Press `gti` go to implementation
 
 ## Code Action
-In NORMAL mode, Coc tries to lint you code. To fix the issues Press `ga`
+**NORMAL** mode:
+
+Coc tries to lint you code. To fix the issues Press `ga`
 
 ## Format Code
-In NORMAL mode, Press `=` to format your code
+**NORMAL** mode:
+
+Press `=` to format the file. This requires the LSP to support formatting.
 
 ## Getting Help
-In NORMAL mode, Press `SHIFT + K`.
+**NORMAL** mode:
+Press `SHIFT + K`.
 
 ## Copy Path
+**NORMAL** Mode:
+
 To copy the path of the current file (file), press `gs` to copy the relative path, press `g SHIFT + S` to get the full path.
