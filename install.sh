@@ -195,7 +195,7 @@ else
     echo "source $PYENV/test_env" >> ~/.bash_aliases;
 fi
 }
-function focal_install_python_support {
+function jammy_install_python_support {
 run_command_as_root "apt install -y python3-pip";
 run_command_as_root "apt install -y build-essential libssl-dev libffi-dev";
 run_command_as_root "apt install -y python3-dev python3-venv";
@@ -405,7 +405,6 @@ function debian_install_on_jammy {
     echo "Preparing to install on Ubuntu Jammy";
     debian_apt_update;
     debian_install_exuberant_ctags;
-    debian_install_git;
     jammy_install_python_support;
     debian_install_neovim_disco;
     debian_install_curl;
