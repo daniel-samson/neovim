@@ -385,6 +385,27 @@ function debian_install_on_focal {
     debian_install_haskell_env;
     neovim_install_plugins;
 }
+function debian_install_on_jammy {
+    echo "Preparing to install on Ubuntu Jammy";
+    debian_apt_update;
+    debian_install_exuberant_ctags;
+    debian_install_git;
+    focal_install_python_support;
+    debian_install_neovim_disco;
+    debian_install_curl;
+    debian_install_clipboard;
+    debian_install_airline_fonts;
+    debian_install_bat;
+    build_config;
+    neovim_install_paq_manager;
+    neovim_install_plugins;
+    debian_replace_vim;
+    debian_install_php_env_bionic;
+    debian_install_rust_env;
+    debian_install_nodejs_env;
+    debian_install_haskell_env;
+    neovim_install_plugins;
+}
 function debian_install_on_jessie {
     echo "Preparing to install on Debian Jessie";
     debian_apt_update;
@@ -539,7 +560,6 @@ function macos_install_python3() {
     if command -v python3;
     then
         echo "Found python3 is installed";
-        echo "Found python3 is installed";
     else
         run_command "brew install python3";
         run_command "python3 -m pip install setuptools";
@@ -671,7 +691,8 @@ function detect_arch_release() {
 
 function detect_ubuntu_release() {
 case $(lsb_release -cs) in
-    focal) echo "Found Disco (Ubuntu 20.04)"; debian_install_on_focal;;
+    jammy) echo "Found Jammy (Ubuntu 22.04)"; debian_install_on_jammy;;
+    focal) echo "Found Focal (Ubuntu 20.04)"; debian_install_on_focal;;
     disco) echo "Found Disco (Ubuntu 19.04)"; debian_install_on_disco;;
     bionic) echo "Found Bionic (Ubuntu 18.04)"; debian_install_on_bionic;;
     xenial) echo "Found Xenial (Ubuntu 16.04)"; debian_install_on_xenial;;
