@@ -26,7 +26,7 @@ A distribution of nvim, configured as an "Integrated" Development Environment (I
 
 The install script will only let you install on the following OS using premade recipes.
 
-- MacOSX
+**MacOSX**
 
 **Linux**:
 - Arch Linux
