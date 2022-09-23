@@ -6,9 +6,21 @@ This project by default defines the LEADER key as `\`. All key binds start with 
 ## Navigating your project
 **NORMAL** mode:
 
-Inspired by vscode. Pressing `gp` will let you find file in your project. Pressing `g SHIFT + P` will let you find commands.
+Pressing `gp` will let you find file in your project.
 
-Press `gf` to find text in your opened file/buffer. Press `gF` To fuzzy find text in your project files.
+![Recording 2022-09-23 at 11 30 30](https://user-images.githubusercontent.com/12231216/191942376-df8377db-cbdd-4d36-84f4-ca3cfa2d8e19.gif)
+
+
+Pressing `g SHIFT + P` will let you find commands.
+
+![Recording 2022-09-23 at 11 32 23](https://user-images.githubusercontent.com/12231216/191942631-4195dbe2-1569-4672-a295-826cb345f444.gif)
+
+
+Press `gf` to find text in your opened file/buffer. 
+![Recording 2022-09-23 at 11 34 04](https://user-images.githubusercontent.com/12231216/191942888-f56ba8b9-2874-4d91-bb0a-f369efe8b8b1.gif)
+
+
+Press `gF` To fuzzy find text in your project files.
 
 Press `gl` to find or select currently opened files/buffers.
 
