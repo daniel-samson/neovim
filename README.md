@@ -54,6 +54,6 @@ chmod u+x ./install.sh
 ## Hot Reloading Configuration
 You can reload your config file by using the `:ReloadConfig` command.
 
-## Customization
+## Configuration
 
-Please edit the `.config/nvim/lua/init.user.lua` instead of `init.lua`, so that you can keep you customizations during upgrades.
+Please edit the `.config/nvim/lua/init.user.lua` instead of `init.lua` We recommend that any key binding you create should live behind the leader key. That way, so that you can keep you customizations during upgrades.
