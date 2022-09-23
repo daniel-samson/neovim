@@ -74,3 +74,5 @@ Press `SHIFT + K`.
 **NORMAL** Mode:
 
 To copy the path of the current file (file), press `gs` to copy the relative path, press `g SHIFT + S` to get the full path.
+
+Alternatively, you can run the commands from the command bar, **CopyRelativePath** / **CopyFullPath**.
