@@ -1,4 +1,4 @@
-function focal_install_python_support {
+function jammy_install_python_support {
 run_command_as_root "apt install -y python3-pip";
 run_command_as_root "apt install -y build-essential libssl-dev libffi-dev";
 run_command_as_root "apt install -y python3-dev python3-venv";
