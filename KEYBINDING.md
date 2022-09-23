@@ -77,7 +77,7 @@ Position the cursor at the start of the identifier you wish to rename, Press `gr
 
 **NORMAL** mode:
 
-Coc tries to lint you code. To fix the issues Press `ga`
+Coc tries to lint your code. To fix the issues Press `ga`
 
 ![Recording 2022-09-23 at 11 56 15](https://user-images.githubusercontent.com/12231216/191946263-6b1bad30-70f9-45da-83a7-9d74250b8773.gif)
 
