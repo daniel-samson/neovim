@@ -57,8 +57,11 @@ CoC will present you with a menu as you are typing. Use the `CARRIAGE RETURN` ke
 Press `gcc` to toggle comment out code.
 
 ## Renaming indentifier
-**NORMAL** mode: 
+**NORMAL** mode:
+
 Position the cursor at the start of the identifier you wish to rename, Press `gr` to rename a symbol. Enter the new name and Press `CARRIAGE RETURN`.
+![Recording 2022-09-23 at 11 51 55](https://user-images.githubusercontent.com/12231216/191945588-32bc02a2-6f94-4365-8cb3-52018be067fc.gif)
+
 
 ## Go To
 **NORMAL** mode:
