@@ -19,7 +19,8 @@ A distribution of nvim, configured as an "Integrated" Development Environment (I
 - Mouse support
 
 ## Requirements
-- Stable internet connection
+- Git
+- curl / wget
 - Supported OS
 
 ## Supported OS
