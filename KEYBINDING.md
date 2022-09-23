@@ -59,3 +59,5 @@ In NORMAL mode, Press `=` to format your code
 ## Getting Help
 In NORMAL mode, Press `SHIFT + K`.
 
+## Copy Path
+To copy the path of the current file (file), press `gs` to copy the relative path, press `g SHIFT + S` to get the full path.

@@ -206,7 +206,11 @@ vim.api.nvim_set_keymap('v', 'gF', ':Rg<cr>', { noremap = true, silent = true })
 -- List Opened Files (buffers in vim speak)
 vim.api.nvim_set_keymap('n', 'gl', ':Buffers<cr>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('v', 'gl', ':Buffers<cr>', { noremap = true, silent = true })
-
+-- Copy Path of current buffer
+vim.api.nvim_create_user_command('CopyRelativePath', 'let @+=expand("%")', {nargs = 0})
+vim.api.nvim_create_user_command('CopyFullPath', 'let @+=expand("%:p")', {nargs = 0})
+vim.api.nvim_set_keymap('n', 'gs', '<Cmd>CopyRelativePath<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', 'gS', '<Cmd>CopyFullPath<CR>', { noremap = true, silent = true })
 -- Load user customisations
 require('init-user')
 
