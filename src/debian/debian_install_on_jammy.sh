@@ -2,7 +2,6 @@ function debian_install_on_jammy {
     echo "Preparing to install on Ubuntu Jammy";
     debian_apt_update;
     debian_install_exuberant_ctags;
-    debian_install_git;
     jammy_install_python_support;
     debian_install_neovim_disco;
     debian_install_curl;
