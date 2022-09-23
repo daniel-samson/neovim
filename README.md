@@ -10,12 +10,12 @@ A distribution of nvim, configured as an "Integrated" Development Environment (I
 ## Features:
 
 - Easy Project Nagivation
-- Project Explorer
+- Easy Text Editing
 - Syntax Highting
 - Auto Completion
-- Auto save / reload
-- Search Project files, commands, tags, and github history
-- Debug your code
+- Auto Save
+- Auot Reload
+- Search Project files, commands, tags, github history, and more.
 - Mouse support
 
 ## Requirements
@@ -52,9 +52,10 @@ chmod u+x ./install.sh
 ## Documentation
 - [Keyboard Shortcuts/Bindings](KEYBINDING.md)
 
-## Hot Reloading Configuration
-You can reload your config file by using the `:ReloadConfig` command.
 
 ## Configuration
 
 Please edit the `.config/nvim/lua/init.user.lua` instead of `init.lua` We recommend that any key binding you create should live behind the leader key. That way, so that you can keep you customizations during upgrades.
+
+### Hot Reloading Configuration
+You can reload your config file by using the **ReloadConfig** command.
