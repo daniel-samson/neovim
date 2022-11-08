@@ -27,12 +27,12 @@ A distribution of nvim, configured as an "Integrated" Development Environment (I
 
 The install script will only let you install on the following OS using premade recipes.
 
-**MacOSX**
+**Mac OS**
 
 **Linux**:
 - Arch Linux
 - Debian Stretch, Jessie
-- Ubuntu 20.04, 19.04, 18.04, 16.04, 14.04 and Ubuntu distributions (eg Pop!, KDE Neon ect)
+- Ubuntu 22.04, 20.04, 19.04, 18.04, 16.04, 14.04 and Ubuntu distributions (eg Pop!, KDE Neon ect)
 - Deepin Unstable, Stable
 
 ## Installation:
@@ -56,7 +56,7 @@ chmod u+x ./install.sh
 
 ## Configuration
 
-Please edit the `.config/nvim/lua/init.user.lua` instead of `init.lua` We recommend that any key binding you create should live behind the leader key. That way, so that you can keep you customizations during upgrades.
+Please edit the `.config/nvim/lua/init.user.lua` instead of `init.lua` We recommend that any key binding you create should live behind the leader key. That way, you can keep you customizations during upgrades.
 
 ### Hot Reloading Configuration
 You can reload your config file by using the **ReloadConfig** command.
