@@ -32,7 +32,7 @@ The install script will only let you install on the following OS using premade r
 **Linux**:
 - Arch Linux
 - Debian Stretch, Jessie
-- Ubuntu 22.04, 20.04, 19.04, 18.04, 16.04, 14.04 and Ubuntu distributions (eg Pop!, KDE Neon ect)
+- Ubuntu 22.04, 20.04, 19.04, 18.04, 16.04, 14.04 and Ubuntu distributions (eg Pop!, KDE Neon etc...)
 - Deepin Unstable, Stable
 
 ## Installation:
