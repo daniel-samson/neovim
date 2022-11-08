@@ -9,7 +9,7 @@ A distribution of nvim, configured as an "Integrated" Development Environment (I
 
 ## Features:
 
-- Easy Project Nagivation
+- Easy Project Navigation
 - Easy Text Editing
 - Syntax Highting
 - Auto Completion
