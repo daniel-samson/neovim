@@ -47,6 +47,8 @@ pressing `CARRIAGE RETURN` will create a new line at the point of the cursor and
 
 pressing `BACKSPACE` will remove the last character and put you into **INSERT** MODE.
 
+> This configuration uses system clipboard by default
+
 ## Auto completion
 **INSERT** mode:
 
