@@ -11,6 +11,7 @@ A distribution of nvim, configured as an "Integrated" Development Environment (I
 
 - Easy Project Navigation
 - Easy Text Editing
+- Easy Cut, Copy and Paste
 - Syntax Highting
 - Auto Completion
 - Auto Save
