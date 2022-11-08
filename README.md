@@ -14,7 +14,7 @@ A distribution of nvim, configured as an "Integrated" Development Environment (I
 - Syntax Highting
 - Auto Completion
 - Auto Save
-- Auot Reload
+- Auto Reload
 - Search Project files, commands, tags, github history, and more.
 - Mouse support
 
