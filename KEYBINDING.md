@@ -12,7 +12,7 @@ Pressing `gp` will let you find file in your project.
 ![Recording 2022-09-23 at 11 30 30](https://user-images.githubusercontent.com/12231216/191942376-df8377db-cbdd-4d36-84f4-ca3cfa2d8e19.gif)
 
 
-Pressing `g SHIFT + P` will let you find commands.
+Pressing `g SHIFT + P` will let you find commands. Press CARRIAGE RETURN twice to to execute the command.
 
 ![Recording 2022-09-23 at 11 32 23](https://user-images.githubusercontent.com/12231216/191942631-4195dbe2-1569-4672-a295-826cb345f444.gif)
 
