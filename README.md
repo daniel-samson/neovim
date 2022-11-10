@@ -57,7 +57,7 @@ chmod u+x ./install.sh
 
 ## Configuration
 
-Please edit the `$HOME/.config/nvim/lua/init.user.lua` instead of `init.lua` We recommend that any key binding you create should live behind the leader key. That way, you can keep you customizations during upgrades.
+Please edit the `$HOME/.config/nvim/lua/init.user.lua` instead of `init.lua` We recommend that any key binding you create should live behind the leader key. That way, you can keep your customizations during upgrades.
 
 ### Hot Reloading Configuration
 You can reload your config file by using the **ReloadConfig** command.
