@@ -279,3 +279,5 @@ starter.setup({
       starter.gen_hook.padding(3, 2),
     },
 })
+
+vim.api.nvim_set_keymap('n', 'gn', ":lua require('mini.starter').open()<CR>", { noremap = true, silent = true })
