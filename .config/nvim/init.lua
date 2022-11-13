@@ -267,7 +267,7 @@ starter.setup({
       startup_actions(),
       -- starter.sections.builtin_actions(),
       -- starter.sections.recent_files(10, false),
-      starter.sections.recent_files(10, true),
+      starter.sections.recent_files(9, true),
       -- Use this if you set up 'mini.sessions'
       -- starter.sections.sessions(5, true)
     },
