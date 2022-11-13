@@ -271,7 +271,7 @@ starter.setup({
       -- Use this if you set up 'mini.sessions'
       -- starter.sections.sessions(5, true)
     },
-    header = 'Neovim IDE',
+    header = 'Neovim IDE v1.1.0',
     content_hooks = {
       -- starter.gen_hook.adding_bullet(),
       starter.gen_hook.aligning('center', 'center'),
