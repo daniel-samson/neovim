@@ -252,9 +252,12 @@ require('init-user')
 
 startup_actions = function()
     return {
-            { name = 'New file', action = 'enew', section = 'Builtin actions' },
-            { name = 'Open File Explorer', action = 'NvimTreeFocus', section = 'Builtin actions' },
-            { name = 'Find File', action = 'Files', section = 'Builtin actions' },
+            { name = 'New', action = 'enew', section = 'Builtin actions' },
+            { name = 'Open', action = 'NvimTreeFocus', section = 'Builtin actions' },
+            { name = 'Project Files', action = 'Files', section = 'Builtin actions' },
+            { name = 'Commands', action = 'Command', section = 'Builtin actions' },
+            { name = 'Search', action = 'Rg', section = 'Builtin actions' },
+            { name = 'View Opened Files', action = 'Buffers', section = 'Builtin actions' },
             { name = 'Quit Neovim', action = 'qall', section = 'Builtin actions' },
         }
 end
