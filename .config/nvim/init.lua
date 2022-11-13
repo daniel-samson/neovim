@@ -40,6 +40,11 @@ require "paq" {
 "mfussenegger/nvim-lint";
 -- Status line
 "ojroques/nvim-hardline";
+-- Nvim Tree
+"nvim-tree/nvim-web-devicons";
+"nvim-tree/nvim-tree.lua";
+-- Start up screen
+"echasnovski/mini.nvim";
 }
 
 --[
@@ -193,10 +198,11 @@ vim.api.nvim_set_keymap('v', 'gP', ':Command<cr>', { noremap = true, silent = tr
 vim.api.nvim_set_keymap('n', 'gp', ':Files<cr>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('v', 'gp', ':Files<cr>', { noremap = true, silent = true })
 -- Open Explorer
-vim.api.nvim_set_keymap('n', 'go', ':Explore<cr>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('v', 'go', ':Explore<cr>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', 'gO', ':Explore .<cr>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('v', 'gO', ':Explore .<cr>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', 'go', ':NvimTreeToggle<cr>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('v', 'go', ':NvimTreeToggle<cr>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', 'gO', ':NvimTreeOpen .<cr>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('v', 'gO', ':NvimTreeOpen .<cr>', { noremap = true, silent = true })
+
 -- Open Project File search
 vim.api.nvim_set_keymap('n', 'gf', ':BLines<cr>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('v', 'gf', ':BLines<cr>', { noremap = true, silent = true })
@@ -211,6 +217,65 @@ vim.api.nvim_create_user_command('CopyRelativePath', 'let @+=expand("%")', {narg
 vim.api.nvim_create_user_command('CopyFullPath', 'let @+=expand("%:p")', {nargs = 0})
 vim.api.nvim_set_keymap('n', 'gs', '<Cmd>CopyRelativePath<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', 'gS', '<Cmd>CopyFullPath<CR>', { noremap = true, silent = true })
+
+-- Nvim tree
+-- disable netrw at the very start of your init.lua (strongly advised)
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
+-- set termguicolors to enable highlight groups
+vim.opt.termguicolors = true
+
+-- empty setup using defaults
+require("nvim-tree").setup({
+  view = {
+    float = {
+      enable = true,
+      open_win_config = {
+        width = 80,
+      }
+    },
+    mappings = {
+        list = {
+            { key = "<ESC>", action = "close", mode = "n" }
+        }
+    }
+  },
+  update_focused_file = {
+      enable = false,
+  },
+})
+
 -- Load user customisations
 require('init-user')
 
+
+startup_actions = function()
+    return {
+            { name = 'New file', action = 'enew', section = 'Builtin actions' },
+            { name = 'Open File Explorer', action = 'NvimTreeFocus', section = 'Builtin actions' },
+            { name = 'Find File', action = 'Files', section = 'Builtin actions' },
+            { name = 'Quit Neovim', action = 'qall', section = 'Builtin actions' },
+        }
+end
+
+-- Start up
+local starter = require('mini.starter')
+starter.setup({
+    evaluate_single = true,
+    items = {
+      startup_actions(),
+      -- starter.sections.builtin_actions(),
+      -- starter.sections.recent_files(10, false),
+      starter.sections.recent_files(10, true),
+      -- Use this if you set up 'mini.sessions'
+      -- starter.sections.sessions(5, true)
+    },
+    header = 'Neovim IDE',
+    content_hooks = {
+      -- starter.gen_hook.adding_bullet(),
+      starter.gen_hook.aligning('center', 'center'),
+      starter.gen_hook.indexing('all', { 'Builtin actions'}),
+      starter.gen_hook.padding(3, 2),
+    },
+})
