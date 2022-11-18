@@ -217,6 +217,9 @@ vim.api.nvim_create_user_command('CopyRelativePath', 'let @+=expand("%")', {narg
 vim.api.nvim_create_user_command('CopyFullPath', 'let @+=expand("%:p")', {nargs = 0})
 vim.api.nvim_set_keymap('n', 'gs', '<Cmd>CopyRelativePath<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', 'gS', '<Cmd>CopyFullPath<CR>', { noremap = true, silent = true })
+-- Close/Delete buffer
+vim.api.nvim_set_keymap('n', 'gx', ':bdCR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('v', 'gx', ':bd<CR>', { noremap = true, silent = true })
 
 -- Nvim tree
 -- disable netrw at the very start of your init.lua (strongly advised)
