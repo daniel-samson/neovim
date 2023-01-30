@@ -160,14 +160,14 @@ require('hardline').setup {}
 -- Modern Text Editor Features
 --]]
 -- Selection
-vim.api.nvim_set_keymap('n', '<S-Up>', 'gh<Up>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<S-Down>', 'gh<Down>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<S-Left>', 'gh<Left>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<S-Right>', 'gh<Right>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('i', '<S-Up>', '<ESC>gh<Up>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('i', '<S-Down>', '<ESC>gh<Down>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('i', '<S-Left>', '<ESC>gh<Left>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('i', '<S-Right>', '<ESC>gh<Right>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<S-Up>', '<S-v>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<S-Down>', '<S-v>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<S-Left>', '<C-v>h', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<S-Right>', '<C-v>l', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('i', '<S-Up>', '<ESC><S-v>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('i', '<S-Down>', '<ESC><S-v>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('i', '<S-Left>', '<ESC><C-v>h', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('i', '<S-Right>', '<ESC><C-v>l', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('v', '<S-Up>', 'k', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('v', '<S-Down>', 'j', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('v', '<S-Left>', 'h', { noremap = true, silent = true })
@@ -219,6 +219,9 @@ vim.api.nvim_create_user_command('CopyRelativePath', 'let @+=expand("%")', {narg
 vim.api.nvim_create_user_command('CopyFullPath', 'let @+=expand("%:p")', {nargs = 0})
 vim.api.nvim_set_keymap('n', 'gs', '<Cmd>CopyRelativePath<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', 'gS', '<Cmd>CopyFullPath<CR>', { noremap = true, silent = true })
+-- Close/Delete buffer
+vim.api.nvim_set_keymap('n', 'gx', ':bdCR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('v', 'gx', ':bd<CR>', { noremap = true, silent = true })
 
 -- Nvim tree
 -- disable netrw at the very start of your init.lua (strongly advised)
