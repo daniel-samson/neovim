@@ -40,6 +40,11 @@ require "paq" {
 "mfussenegger/nvim-lint";
 -- Status line
 "ojroques/nvim-hardline";
+-- Nvim Tree
+"nvim-tree/nvim-web-devicons";
+"nvim-tree/nvim-tree.lua";
+-- Start up screen
+"echasnovski/mini.nvim";
 }
 
 --[
@@ -52,6 +57,8 @@ vim.api.nvim_create_user_command('ReloadConfig', 'source $MYVIMRC', {nargs = 0})
 -- Editor
 --]
 vim.cmd [[set mouse=a]]
+-- spelling
+vim.cmd [[set spell]]
 -- use the systems clipboard as the default clipboard
 vim.cmd [[ set clipboard+=unnamedplus ]]
 vim.api.nvim_set_option('encoding', 'utf-8')
@@ -193,10 +200,11 @@ vim.api.nvim_set_keymap('v', 'gP', ':Command<cr>', { noremap = true, silent = tr
 vim.api.nvim_set_keymap('n', 'gp', ':Files<cr>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('v', 'gp', ':Files<cr>', { noremap = true, silent = true })
 -- Open Explorer
-vim.api.nvim_set_keymap('n', 'go', ':Explore<cr>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('v', 'go', ':Explore<cr>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', 'gO', ':Explore .<cr>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('v', 'gO', ':Explore .<cr>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', 'go', ':NvimTreeToggle<cr>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('v', 'go', ':NvimTreeToggle<cr>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', 'gO', ':NvimTreeOpen .<cr>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('v', 'gO', ':NvimTreeOpen .<cr>', { noremap = true, silent = true })
+
 -- Open Project File search
 vim.api.nvim_set_keymap('n', 'gf', ':BLines<cr>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('v', 'gf', ':BLines<cr>', { noremap = true, silent = true })
@@ -211,6 +219,73 @@ vim.api.nvim_create_user_command('CopyRelativePath', 'let @+=expand("%")', {narg
 vim.api.nvim_create_user_command('CopyFullPath', 'let @+=expand("%:p")', {nargs = 0})
 vim.api.nvim_set_keymap('n', 'gs', '<Cmd>CopyRelativePath<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', 'gS', '<Cmd>CopyFullPath<CR>', { noremap = true, silent = true })
+-- Close/Delete buffer
+vim.api.nvim_set_keymap('n', 'gx', ':bdCR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('v', 'gx', ':bd<CR>', { noremap = true, silent = true })
+
+-- Nvim tree
+-- disable netrw at the very start of your init.lua (strongly advised)
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
+-- set termguicolors to enable highlight groups
+vim.opt.termguicolors = true
+
+-- empty setup using defaults
+require("nvim-tree").setup({
+  view = {
+    float = {
+      enable = true,
+      open_win_config = {
+        width = 80,
+      }
+    },
+    mappings = {
+        list = {
+            { key = "<ESC>", action = "close", mode = "n" }
+        }
+    }
+  },
+  update_focused_file = {
+      enable = true,
+  },
+})
+
 -- Load user customisations
 require('init-user')
 
+
+startup_actions = function()
+    return {
+            { name = 'New', action = 'enew', section = 'Builtin actions' },
+            { name = 'Open', action = 'NvimTreeFocus', section = 'Builtin actions' },
+            { name = 'Project Files', action = 'Files', section = 'Builtin actions' },
+            { name = 'Commands', action = 'Command', section = 'Builtin actions' },
+            { name = 'Search', action = 'Rg', section = 'Builtin actions' },
+            { name = 'View Opened Files', action = 'Buffers', section = 'Builtin actions' },
+            { name = 'Quit Neovim', action = 'qall', section = 'Builtin actions' },
+        }
+end
+
+-- Start up
+local starter = require('mini.starter')
+starter.setup({
+    evaluate_single = true,
+    items = {
+      startup_actions(),
+      -- starter.sections.builtin_actions(),
+      -- starter.sections.recent_files(10, false),
+      starter.sections.recent_files(9, true),
+      -- Use this if you set up 'mini.sessions'
+      -- starter.sections.sessions(5, true)
+    },
+    header = 'Neovim IDE v1.1.0',
+    content_hooks = {
+      -- starter.gen_hook.adding_bullet(),
+      starter.gen_hook.aligning('center', 'center'),
+      starter.gen_hook.indexing('all', { 'Builtin actions'}),
+      starter.gen_hook.padding(3, 2),
+    },
+})
+
+vim.api.nvim_set_keymap('n', 'gn', ":lua require('mini.starter').open()<CR>", { noremap = true, silent = true })
