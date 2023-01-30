@@ -57,6 +57,8 @@ vim.api.nvim_create_user_command('ReloadConfig', 'source $MYVIMRC', {nargs = 0})
 -- Editor
 --]
 vim.cmd [[set mouse=a]]
+-- spelling
+vim.cmd [[set spell]]
 -- use the systems clipboard as the default clipboard
 vim.cmd [[ set clipboard+=unnamedplus ]]
 vim.api.nvim_set_option('encoding', 'utf-8')
